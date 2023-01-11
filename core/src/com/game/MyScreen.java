@@ -1,5 +1,6 @@
 package com.game;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -7,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MyScreen extends ScreenAdapter {
+public class MyScreen extends ScreenAdapter  {
     SpriteBatch batch;
     Texture img;
     Texture imgHero;
@@ -15,6 +16,7 @@ public class MyScreen extends ScreenAdapter {
     Monster monster;
     Hero hero;
     Fight fight;
+    // stuff aus Spiel per instance holen
     public MyScreen() {
 
     }
@@ -33,7 +35,7 @@ public class MyScreen extends ScreenAdapter {
         imgHero = new Texture("Hero.png");
         imgMonster = new Texture("Monster.png");
     }
-    public void render () {
+    public void render (float delta) {
       ScreenUtils.clear(1, 0, 0, 1);
         batch.begin();
         batch.draw(img, 0, 0);

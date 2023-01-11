@@ -22,7 +22,7 @@ public class TitleScreen extends ScreenAdapter{
         batch.draw(img, 0, 0);
         batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             Spiel.INSTANCE.setScreen(new MyScreen());
 
 
