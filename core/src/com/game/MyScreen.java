@@ -1,10 +1,10 @@
 package com.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -14,6 +14,8 @@ public class MyScreen extends ScreenAdapter  {
     Texture imgHero;
     Texture imgMonster;
     Monster monster;
+    Sprite HeroSprite;
+    Sprite MonsterSprite;
     Hero hero;
     Fight fight;
     // stuff aus Spiel per instance holen
@@ -21,6 +23,7 @@ public class MyScreen extends ScreenAdapter  {
 create();
     }
     public void create() {
+    	
         monster = new Monster();
         hero = new Hero();
         monster.setATK(20);
@@ -34,19 +37,25 @@ create();
         img = new Texture("Background.png");
         imgHero = new Texture("Hero.png");
         imgMonster = new Texture("Monster.png");
+        HeroSprite = new Sprite(imgHero);
+    	MonsterSprite = new Sprite(imgMonster);
+    	HeroSprite.setPosition(300, 300);
+    	MonsterSprite.setPosition(500, 300);
     }
     public void render (float delta) {
       ScreenUtils.clear(1, 0, 0, 1);
         batch.begin();
         batch.draw(img, 0, 0);
-        batch.draw(imgHero, 100, 50);
-        batch.draw(imgMonster, 0, -100);
+        if(!Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        HeroSprite.draw(batch);
+        }
+        MonsterSprite.draw(batch);
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if(fight.fight(monster, hero).equals("Hero")) {
-                imgMonster.dispose();
+               
             } else if(fight.fight(monster, hero).equals("Monster")){
-                imgHero.dispose();
+                
 
             }
         }
