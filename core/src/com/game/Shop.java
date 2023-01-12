@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TitleScreen extends ScreenAdapter {
+public class Shop extends ScreenAdapter {
+
     SpriteBatch batch;
     Texture img;
 
-    public TitleScreen() {
+    public Shop() {
         batch = new SpriteBatch();
-        img = new Texture("e.png");
-
+        img = new Texture("Albedo.png");
     }
 
     public void render(float delta) {
@@ -28,20 +28,6 @@ public class TitleScreen extends ScreenAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             Spiel.INSTANCE.setScreen(new MyScreen());
         }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Spiel.INSTANCE.setScreen(new Shop());
-        }
-
-
     }
 
-    public void dispose() {
-        batch.dispose();
-        img.dispose();
-    }
-
-    public void hide() {
-        this.dispose();
-    }
 }
