@@ -53,9 +53,9 @@ create();
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if(fight.fight(monster, hero).equals("Hero")) {
-               
+               HeroSprite.setAlpha(0);
             } else if(fight.fight(monster, hero).equals("Monster")){
-                
+                HeroSprite.setAlpha(0);
 
             }
         }
