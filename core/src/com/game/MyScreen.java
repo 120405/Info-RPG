@@ -18,7 +18,7 @@ public class MyScreen extends ScreenAdapter  {
     Fight fight;
     // stuff aus Spiel per instance holen
     public MyScreen() {
-
+create();
     }
     public void create() {
         monster = new Monster();
