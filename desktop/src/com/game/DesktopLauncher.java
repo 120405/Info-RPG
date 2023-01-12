@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(30);
 		config.setTitle("RPG");
 		config.setWindowedMode(928, 793);
-		new Lwjgl3Application(new Game(), config);
+		new Lwjgl3Application(new Spiel(), config);
 	}
 }
