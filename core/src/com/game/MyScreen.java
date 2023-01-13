@@ -21,10 +21,10 @@ public class MyScreen extends ScreenAdapter  {
     Fight fight;
     // stuff aus Spiel per instance holen
     public MyScreen() {
-create();
+        create();
     }
     public void create() {
-    	
+
         monster = new Monster();
         hero = new Hero();
         monster.setATK(20);
@@ -39,23 +39,23 @@ create();
         imgHero = new Texture("Hero.png");
         imgMonster = new Texture("Monster.png");
         HeroSprite = new Sprite(imgHero);
-    	MonsterSprite = new Sprite(imgMonster);
-    	HeroSprite.setPosition(300, 300);
-    	MonsterSprite.setPosition(500, 300);
+        MonsterSprite = new Sprite(imgMonster);
+        HeroSprite.setPosition(300, 300);
+        MonsterSprite.setPosition(500, 300);
     }
     public void render (float delta) {
-      ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
         batch.draw(img, 0, 0);
         if(!Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-        HeroSprite.draw(batch);
+            HeroSprite.draw(batch);
         }
         MonsterSprite.draw(batch);
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if(fight.fight(monster, hero).equals("Hero")) {
-               HeroSprite.setAlpha(0);
+                HeroSprite.setAlpha(0);
             } else if(fight.fight(monster, hero).equals("Monster")){
                 HeroSprite.setAlpha(0);
 

@@ -10,6 +10,7 @@ public class Spiel extends Game {
         if (INSTANCE == null) {
             INSTANCE = this;
         }
+
         money = 10;
     }
 
