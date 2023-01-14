@@ -12,34 +12,22 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class MyScreen extends ScreenAdapter  {
     SpriteBatch batch;
     Texture img;
-    Texture imgHero;
-    Texture imgMonster;
     Monster monster;
     Sprite HeroSprite;
     Sprite MonsterSprite;
     Hero hero;
     Fight fight;
-    // stuff aus Spiel per instance holen
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
         create();
     }
     public void create() {
-
-        monster = new Monster();
-        hero = new Hero();
-        monster.setATK(20);
-        monster.setFullLP(60);
-        monster.setLP(60);
-        hero.setATK(20);
-        hero.setFullLP(100);
-        hero.setLP(100);
+        monster = new Monster(60, 60, 20, "");
+        hero = new Hero(100, 100, 20, "");
         fight = new Fight();
         img = new Texture("Background.png");
-        imgHero = new Texture("Hero.png");
-        imgMonster = new Texture("Monster.png");
-        HeroSprite = new Sprite(imgHero);
-        MonsterSprite = new Sprite(imgMonster);
+        HeroSprite = new Sprite(new Texture("Hero.png"));
+        MonsterSprite = new Sprite(new Texture("Monster.png"));
         HeroSprite.setPosition(300, 300);
         MonsterSprite.setPosition(500, 300);
     }
@@ -58,14 +46,13 @@ public class MyScreen extends ScreenAdapter  {
                 HeroSprite.setAlpha(0);
             } else if(fight.fight(monster, hero).equals("Monster")){
                 HeroSprite.setAlpha(0);
-
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-  Spiel.INSTANCE.titleScreen();
+             Spiel.INSTANCE.titleScreen();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-  Spiel.INSTANCE.shopScreen();
+            Spiel.INSTANCE.shopScreen();
         }
 
     }
@@ -73,12 +60,7 @@ public class MyScreen extends ScreenAdapter  {
         batch.dispose();
         if(img != null) {
             img.dispose();
-        }
-        if(imgHero != null) {
-            imgHero.dispose();
-        }
-        if(imgMonster != null) {
-            imgMonster.dispose();
+
         }
     }
 }

@@ -11,8 +11,11 @@ public class Monster {
     String name = "";
     boolean alive = true;
 
-    public Monster() {
-
+    public Monster(int LP, int fullLP, int ATK, String name) {
+    this.LP = LP;
+    this.fullLP = fullLP;
+    this.ATK = ATK;
+    this.name = name;
     }
 
     public int attack() {
