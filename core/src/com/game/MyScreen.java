@@ -17,6 +17,8 @@ public class MyScreen extends ScreenAdapter  {
     Sprite MonsterSprite;
     Hero hero;
     Fight fight;
+    //Animator animator;
+    // stuff aus Spiel per instance holen
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
         create();
@@ -24,6 +26,7 @@ public class MyScreen extends ScreenAdapter  {
     public void create() {
         monster = new Monster(60, 60, 20, "");
         hero = new Hero(100, 100, 20, "");
+        animator = new Animator();
         fight = new Fight();
         img = new Texture("Background.png");
         HeroSprite = new Sprite(new Texture("Hero.png"));
@@ -36,6 +39,7 @@ public class MyScreen extends ScreenAdapter  {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
         batch.draw(img, 0, 0);
+
         if(!Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             HeroSprite.draw(batch);
         }
@@ -54,7 +58,7 @@ public class MyScreen extends ScreenAdapter  {
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             Spiel.INSTANCE.shopScreen();
         }
-
+        animator.render();
     }
     public void dispose () {
         batch.dispose();
