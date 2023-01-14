@@ -28,14 +28,10 @@ public TitleScreen(SpriteBatch batch) {
         batch.begin();
         batch.draw(img, 0, 0);
         font.draw(batch, "Press Space to start Game!", 200, 200);
-
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Spiel.INSTANCE.gameScreen();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Spiel.INSTANCE.shopScreen();
         }
     }
 

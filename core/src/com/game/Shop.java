@@ -25,11 +25,8 @@ public class Shop extends ScreenAdapter {
         batch.draw(img, 0, 0);
         batch.end();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Spiel.INSTANCE.gameScreen();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Spiel.INSTANCE.titleScreen();
         }
     }
     public void dispose() {
