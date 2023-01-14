@@ -11,12 +11,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class TitleScreen extends ScreenAdapter {
     SpriteBatch batch;
     Texture img;
-
-    public TitleScreen() {
-        batch = new SpriteBatch();
-        img = new Texture("e.png");
-
-    }
+public TitleScreen(SpriteBatch batch) {
+    this.batch = batch;
+    img = new Texture("e.png");
+}
 
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -26,22 +24,22 @@ public class TitleScreen extends ScreenAdapter {
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            Spiel.INSTANCE.setScreen(new MyScreen());
+            Spiel.INSTANCE.gameScreen();
+
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Spiel.INSTANCE.setScreen(new Shop());
+            Spiel.INSTANCE.shopScreen();
+
         }
 
 
     }
 
     public void dispose() {
-        batch.dispose();
-        img.dispose();
+    if(batch != null) {batch.dispose();}
+    if(img != null) {img.dispose();}
     }
 
-    public void hide() {
-        this.dispose();
-    }
+
 }

@@ -13,8 +13,8 @@ public class Shop extends ScreenAdapter {
     SpriteBatch batch;
     Texture img;
 
-    public Shop() {
-        batch = new SpriteBatch();
+    public Shop(SpriteBatch batch) {
+        this.batch = batch;
         img = new Texture("Albedo.png");
     }
 
@@ -26,8 +26,15 @@ public class Shop extends ScreenAdapter {
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            Spiel.INSTANCE.setScreen(new MyScreen());
+            Spiel.INSTANCE.gameScreen();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Spiel.INSTANCE.titleScreen();
+        }
+    }
+    public void dispose() {
+        if(batch != null) {batch.dispose();}
+        if(img != null) {img.dispose();}
     }
 
 }

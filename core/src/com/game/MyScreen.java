@@ -20,7 +20,8 @@ public class MyScreen extends ScreenAdapter  {
     Hero hero;
     Fight fight;
     // stuff aus Spiel per instance holen
-    public MyScreen() {
+    public MyScreen(SpriteBatch batch) {
+        this.batch = batch;
         create();
     }
     public void create() {
@@ -34,7 +35,6 @@ public class MyScreen extends ScreenAdapter  {
         hero.setFullLP(100);
         hero.setLP(100);
         fight = new Fight();
-        batch = new SpriteBatch();
         img = new Texture("Background.png");
         imgHero = new Texture("Hero.png");
         imgMonster = new Texture("Monster.png");
@@ -61,7 +61,12 @@ public class MyScreen extends ScreenAdapter  {
 
             }
         }
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+  Spiel.INSTANCE.titleScreen();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+  Spiel.INSTANCE.shopScreen();
+        }
 
     }
     public void dispose () {
