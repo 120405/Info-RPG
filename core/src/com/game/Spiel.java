@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Spiel extends Game {
     public static Spiel INSTANCE;
-    public int money;
+    public Fight fight;
+    private int money;
     private  TitleScreen title;
     private MyScreen game;
     private Shop shop;
@@ -29,6 +30,7 @@ public class Spiel extends Game {
     }
 
     public void create() {
+        fight = new Fight(60, 60, 20, "", 100, 100, 20, "");
         batch = new SpriteBatch();
         title = new TitleScreen(batch);
         game = new MyScreen(batch);
