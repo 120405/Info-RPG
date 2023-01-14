@@ -12,10 +12,12 @@ public class Shop extends ScreenAdapter {
 
     SpriteBatch batch;
     Texture img;
+    Inventory inventory;
 
     public Shop(SpriteBatch batch) {
         this.batch = batch;
         img = new Texture("Albedo.png");
+        inventory = Spiel.INSTANCE.getInventory();
     }
 
     public void render(float delta) {

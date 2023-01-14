@@ -10,11 +10,13 @@ public class Spiel extends Game {
     private  TitleScreen title;
     private MyScreen game;
     private Shop shop;
+    private Inventory inventory;
     private SpriteBatch batch;
 
     public Spiel() {
             INSTANCE = this;
             money = 10;
+            inventory = new Inventory();
     }
 
     public int getMoney(){
@@ -27,6 +29,10 @@ public class Spiel extends Game {
 
     public void moneyDown(int x){
         money = money - x;
+    }
+
+    public Inventory getInventory(){
+        return inventory;
     }
 
     public void create() {
