@@ -10,9 +10,13 @@ public class Hero {
     String name = "";
     boolean alive = true;
 
-    public Hero() {
-
+    public Hero(int LP, int fullLP, int ATK, String name) {
+        this.LP = LP;
+        this.fullLP = fullLP;
+        this.ATK = ATK;
+        this.name = name;
     }
+
 
     public int attack() {
         return ATK;

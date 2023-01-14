@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.GdxNativesLoader;
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		GdxNativesLoader.load();
+		GdxNativesLoader.load(); // verhindert einen möglichen UnsatisfiedLink-Error
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(30);
 		config.setTitle("RPG");
