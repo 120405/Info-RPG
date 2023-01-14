@@ -50,6 +50,7 @@ public class Animator implements ApplicationListener {
         TextureRegion currentFrame = SRunAnim.getKeyFrame(stateTime, true);
         batch.begin();
         batch.draw(currentFrame, 300, 400);
+        batch.draw(currentFrame, 300, 300);
         batch.end();
     }
 
