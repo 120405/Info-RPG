@@ -10,17 +10,13 @@ int def;
 String effect;
 
 
-public Item() {
-	look = "";
-	name = "";
-	dur = 0;
-	atk = 0;
-	def = 0;
-	effect = "";
-}
-
-public void create() {
-	
+public Item(String look, String name, int dur, int atk, int def, String effect) {
+	this.look = look;
+	this.name = name;
+	this.dur = dur;
+	this.atk = atk;
+	this.def = def;
+	this.effect = effect;
 }
 
 public String getLook(){

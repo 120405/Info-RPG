@@ -8,13 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TitleScreen extends ScreenAdapter {
+public class Shop extends ScreenAdapter {
+
     SpriteBatch batch;
     Texture img;
-public TitleScreen(SpriteBatch batch) {
-    this.batch = batch;
-    img = new Texture("e.png");
-}
+
+    public Shop(SpriteBatch batch) {
+        this.batch = batch;
+        img = new Texture("Albedo.png");
+    }
 
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -25,21 +27,14 @@ public TitleScreen(SpriteBatch batch) {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             Spiel.INSTANCE.gameScreen();
-
         }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            Spiel.INSTANCE.shopScreen();
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Spiel.INSTANCE.titleScreen();
         }
-
-
     }
-
     public void dispose() {
-    if(batch != null) {batch.dispose();}
-    if(img != null) {img.dispose();}
+        if(batch != null) {batch.dispose();}
+        if(img != null) {img.dispose();}
     }
-
 
 }
