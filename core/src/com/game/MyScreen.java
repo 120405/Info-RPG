@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyScreen extends ScreenAdapter  {
     SpriteBatch batch;
+    Animator animator;
     Texture img;
     Monster monster;
     Sprite HeroSprite;
