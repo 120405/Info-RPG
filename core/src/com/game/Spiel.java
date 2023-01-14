@@ -12,6 +12,7 @@ public class Spiel extends Game {
     private Shop shop;
     private Inventory inventory;
     private SpriteBatch batch;
+    private FightScreen fightScreen;
 
     public Spiel() {
             INSTANCE = this;
@@ -41,6 +42,7 @@ public class Spiel extends Game {
         title = new TitleScreen(batch);
         game = new MyScreen(batch);
         shop = new Shop(batch);
+        fightScreen = new FightScreen(batch);
         setScreen(title);
     }
     public void gameScreen() {
@@ -51,6 +53,9 @@ public class Spiel extends Game {
     }
     public void titleScreen() {
     setScreen(title);
+    }
+    public void fightScreen() {
+        setScreen(fightScreen);
     }
 
 }
