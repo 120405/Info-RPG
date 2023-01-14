@@ -13,11 +13,8 @@ public class MyScreen extends ScreenAdapter  {
     SpriteBatch batch;
     Animator animator;
     Texture img;
-    Monster monster;
     Sprite HeroSprite;
     Sprite MonsterSprite;
-    Hero hero;
-    Fight fight;
     //Animator animator;
     // stuff aus Spiel per instance holen
     public MyScreen(SpriteBatch batch) {
@@ -25,10 +22,7 @@ public class MyScreen extends ScreenAdapter  {
         create();
     }
     public void create() {
-        monster = new Monster(60, 60, 20, "");
-        hero = new Hero(100, 100, 20, "");
         animator = new Animator();
-        fight = new Fight();
         img = new Texture("Background.png");
         HeroSprite = new Sprite(new Texture("Hero.png"));
         MonsterSprite = new Sprite(new Texture("Monster.png"));
@@ -47,9 +41,9 @@ public class MyScreen extends ScreenAdapter  {
         MonsterSprite.draw(batch);
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if(fight.fight(monster, hero).equals("Hero")) {
+            if(Spiel.INSTANCE.fight.fight().equals("Hero")) {
                 MonsterSprite.setAlpha(0);
-            } else if(fight.fight(monster, hero).equals("Monster")){
+            } else if(Spiel.INSTANCE.fight.fight().equals("Monster")){
                 HeroSprite.setAlpha(0);
             }
         }
