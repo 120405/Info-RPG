@@ -2,72 +2,68 @@ package com.game;
 
 public class Item {
 
-    String look;
-    String name;
-    int dur;
-    int atk;
-    int def;
-    String effect;
+String look;
+String name;
+int dur;
+int atk;
+int def;
+String effect;
 
 
-    public Item() {
-        look = "";
-        name = "";
-        dur = 0;
-        atk = 0;
-        def = 0;
-        effect = "";
-    }
+public Item(String look, String name, int dur, int atk, int def, String effect) {
+	this.look = look;
+	this.name = name;
+	this.dur = dur;
+	this.atk = atk;
+	this.def = def;
+	this.effect = effect;
+}
 
-    public void create() {
+public String getLook(){
+	return look;
+}
 
-    }
+public String getName(){
+	return name;
+}
 
-    public String getLook() {
-        return look;
-    }
+public String getEffect(){
+	return effect;
+}
 
-    public String getName() {
-        return name;
-    }
+public int getDur(){
+	return dur;
+}
 
-    public String getEffect() {
-        return effect;
-    }
+public int getAtk(){
+	return atk;
+}
 
-    public int getDur() {
-        return dur;
-    }
+public int getDef(){
+	return def;
+}
 
-    public int getAtk() {
-        return atk;
-    }
+public void setLook(String x) {
+	look=x;
+}
 
-    public int getDef() {
-        return def;
-    }
+public void setName(String x) {
+	name=x;
+}
 
-    public void setLook(String x) {
-        look = x;
-    }
+public void setEffect(String x) {
+	effect=x;
+}
 
-    public void setName(String x) {
-        name = x;
-    }
+public void setDur(int x) {
+	dur=x;
+}
 
-    public void setEffect(String x) {
-        effect = x;
-    }
+public void setAtk(int x) {
+	atk=x;
+}
 
-    public void setDur(int x) {
-        dur = x;
-    }
-
-    public void setAtk(int x) {
-        atk = x;
-    }
-
-    public void setDef(int x) {
-        def = x;
-    }
+public void setDef(int x) {
+	def=x;
+}
 }
