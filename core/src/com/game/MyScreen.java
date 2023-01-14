@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyScreen extends ScreenAdapter  {
     SpriteBatch batch;
+    Animator animator;
     Texture img;
     Monster monster;
     Sprite HeroSprite;
@@ -47,7 +48,7 @@ public class MyScreen extends ScreenAdapter  {
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if(fight.fight(monster, hero).equals("Hero")) {
-                HeroSprite.setAlpha(0);
+                MonsterSprite.setAlpha(0);
             } else if(fight.fight(monster, hero).equals("Monster")){
                 HeroSprite.setAlpha(0);
             }

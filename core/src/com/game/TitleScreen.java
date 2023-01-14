@@ -8,14 +8,22 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class TitleScreen extends ScreenAdapter {
     SpriteBatch batch;
+    Button quit;
+    Button start;
     Texture img;
+    Stage stage;
     BitmapFont font;
 public TitleScreen(SpriteBatch batch) {
+
     this.batch = batch;
+    stage = new Stage();
+    quit = new Button("Quit", stage, "quit", 600, 400);
+    start = new Button("Start", stage, "game", 300, 400);
     img = new Texture("e.png");
     font = new BitmapFont();
     font.setColor(Color.RED);
@@ -33,6 +41,8 @@ public TitleScreen(SpriteBatch batch) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Spiel.INSTANCE.gameScreen();
         }
+        stage.act(delta);
+        stage.draw();
     }
 
     public void dispose() {
