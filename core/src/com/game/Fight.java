@@ -25,4 +25,10 @@ public class Fight {
         }
         return winner;
     }
+    public Monster getMonster() {
+        return monster;
+    }
+    public Hero getHero() {
+        return hero;
+    }
 }
