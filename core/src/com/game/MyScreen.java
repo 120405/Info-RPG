@@ -19,9 +19,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyScreen extends ScreenAdapter {
     private final SpriteBatch batch;
-    Animator animator;
-    Texture img;
-    MapRender map;
+    private Animator animator;
+    private MapRender map;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -31,20 +30,17 @@ public class MyScreen extends ScreenAdapter {
 
     public void create() {
         animator = new Animator();
-        img = new Texture("Background.png");
-        map = new MapRender(batch);
-
+       map = new MapRender(batch);
     }
 
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
-        //Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
-
-
-        batch.begin();
-        // batch.draw(img, 0, 0);
-        batch.end();
-
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        handleInput();
+        animator.render();
+        map.render();
+    }
+    public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Spiel.INSTANCE.titleScreen();
         }
@@ -54,20 +50,12 @@ public class MyScreen extends ScreenAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             Spiel.INSTANCE.fightScreen();
         }
-        animator.render();
-        map.render();
-
-
     }
-
 
     public void dispose() {
         batch.dispose();
 
-        if (img != null) {
-            img.dispose();
-
-        }
+        animator.dispose();
     }
 
 }

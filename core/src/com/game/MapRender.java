@@ -29,13 +29,13 @@ public class MapRender {
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
     // Collisions zu erstellen
     public MapRender(SpriteBatch batch) {
-        this.batch = batch;
+        this.batch = new SpriteBatch();
         tiledmap = new TmxMapLoader().load("1.tmx");
         float unitScale = 1 / 16f;
         tmr = new OrthogonalTiledMapRenderer(tiledmap, unitScale);
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        cam = new OrthographicCamera(20, 20 * (h / w));
+       cam = new OrthographicCamera(20, 20 * (h / w));
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
     }
@@ -114,10 +114,14 @@ public class MapRender {
 
     public void render() {
         handleInput();
-        batch.setProjectionMatrix(cam.combined);
+       batch.setProjectionMatrix(cam.combined);
         cam.update();
         tmr.setView(cam);
         tmr.render();
+    }
+    public void dispose() {
+        tmr.dispose();
+        batch.dispose();
     }
 
 }
