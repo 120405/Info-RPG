@@ -24,12 +24,14 @@ public class FightScreen extends ScreenAdapter {
     private int healthMonster, healthHero;
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
+    private Texture img;
 
         public FightScreen(SpriteBatch batch) {
             this.batch = batch;
             create();
         }
         public void create() {
+            img = new Texture("Background.png");
             font = new BitmapFont();
             font.setColor(Color.WHITE);
             r = new Random();
@@ -47,6 +49,9 @@ public class FightScreen extends ScreenAdapter {
         public void render(float delta) {
             ScreenUtils.clear(0, 0, 0, 1);
             Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+            batch.begin();
+            batch.draw(img, 0, 0);
+            batch.end();
             if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
                 hero.setRandom(r.nextInt(21));
             }
@@ -67,10 +72,10 @@ public class FightScreen extends ScreenAdapter {
             font.draw(batch, hero.getName(), (int)(hero.getFullLP()/2), 61);
             font.draw(batch, monster.getName(), 480+((int)(monster.getFullLP()/2)), 61);
             batch.end();
-
         }
         public void dispose() {
             batch.dispose();
+            img.dispose();
             font.dispose();
             shapeRenderer.dispose();
          }
