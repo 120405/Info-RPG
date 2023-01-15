@@ -14,7 +14,7 @@ public class Fight {
         if (monster.getStatus() && hero.getStatus()) {
             monster.getAttacked(hero.attack());
             hero.getAttacked(hero.attack());
-        } else {
+        }
             if (!monster.getStatus()) {
                 winner = "Hero";
 
@@ -22,7 +22,7 @@ public class Fight {
                 winner = "Monster";
 
             }
-        }
+
         return winner;
     }
     public Monster getMonster() {
