@@ -4,21 +4,119 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Added Animator">
-      <change afterPath="$PROJECT_DIR$/core/src/com/game/MapColider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Animator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Animator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Tiledmap Added">
+      <change afterPath="$PROJECT_DIR$/assets/1.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira1_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira2_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Door Animation/tobira3_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Effect/map_effect1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Effect/map_effect2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Effect/map_effect3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Effect/map_effect4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Fog/fog7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Tilesets/Dirt.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt1-Dirt2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt1-Dirt3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt1-Dirt4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Dirt4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Flower_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Dirt1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Dirt2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Dirt3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Dirt4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Grass2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Grass3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1-Grass4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Grass4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Ice1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Ice2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Lava_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]LongGrass_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Moss_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Snow_Dirt2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Snow_Dirt4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Snow_Grass1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Snow_Grass4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Snow_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Dungeon1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Dungeon2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Forest1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Forest2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Wall-Up_Snow_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water6_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]Water7_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]WaterFall1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]WaterFall2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/[A]WaterFall3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Lava_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_Cave1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_Cave2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_Cave3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_Cave4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_Cave5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water4_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water5_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water6_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]Water7_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]WaterFall1_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]WaterFall2_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[A]_type3/not_animation/[A]WaterFall3_pipo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/[Base]BaseChip_pipo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673464264877</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Tiledmap Added">
+      <created>1673730786880</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1673730786880</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +243,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="i" />
-    <option name="LAST_COMMIT_MESSAGE" value="i" />
+    <MESSAGE value="Tiledmap Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tiledmap Added" />
   </component>
 </project>
