@@ -12,12 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class TitleScreen extends ScreenAdapter {
-    SpriteBatch batch;
-    Button quit;
-    Button start;
-    Texture img;
-    Stage stage;
-    BitmapFont font;
+    private SpriteBatch batch;
+    private Button quit;
+    private Button start;
+    private Texture img;
+    private Stage stage;
+
 public TitleScreen(SpriteBatch batch) {
 
     this.batch = batch;
@@ -25,17 +25,12 @@ public TitleScreen(SpriteBatch batch) {
     quit = new Button("Quit", stage, "quit", 600, 400);
     start = new Button("Start", stage, "game", 300, 400);
     img = new Texture("e.png");
-    font = new BitmapFont();
-    font.setColor(Color.RED);
-
 }
-
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
         batch.draw(img, 0, 0);
-        font.draw(batch, "Press Space to start Game!", 200, 200);
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

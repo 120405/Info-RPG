@@ -1,14 +1,12 @@
 package com.game;
 
 public class Hero {
-    int LP = 0;
-    int random = 0;
-    int fullLP = 0;
-    int ATK = 0;
-    int x = 0;
-    int y = 0;
-    String name = "";
-    boolean alive = true;
+    private int LP = 0;
+    private int random = 0;
+    private int fullLP = 0;
+    private int ATK = 0;
+    private String name = "";
+    private boolean alive = true;
 
     public Hero(int LP, int fullLP, int ATK, String name) {
         this.LP = LP;
@@ -19,7 +17,7 @@ public class Hero {
 
 
     public int attack() {
-        return ATK;
+        return ATK +  random;
     }
 
     public void getAttacked(int strength) {
@@ -82,16 +80,4 @@ public class Hero {
         return random;
     }
 
-    public void setXY(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 }

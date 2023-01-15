@@ -13,8 +13,8 @@ public class Fight {
     public String fight() {
         if (monster.getStatus() && hero.getStatus()) {
             monster.getAttacked(hero.attack());
-            hero.getAttacked(hero.attack());
-        } else {
+            hero.getAttacked(monster.attack());
+        }
             if (!monster.getStatus()) {
                 winner = "Hero";
 
@@ -22,7 +22,7 @@ public class Fight {
                 winner = "Monster";
 
             }
-        }
+
         return winner;
     }
     public Monster getMonster() {
