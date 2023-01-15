@@ -22,8 +22,9 @@ public TitleScreen(SpriteBatch batch) {
 
     this.batch = batch;
     stage = new Stage();
-    quit = new Button("Quit", stage, "quit", 600, 400);
-    start = new Button("Start", stage, "game", 300, 400);
+    quit = new Button("Quit", stage, "quit", 450, 400);
+    start = new Button("Start", stage, "game", 150, 400);
+    start = new Button("Options", stage, "game", 750, 400);
     img = new Texture("e.png");
 }
     public void render(float delta) {

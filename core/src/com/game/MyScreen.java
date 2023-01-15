@@ -19,8 +19,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyScreen extends ScreenAdapter {
     private final SpriteBatch batch;
-    Animator animator;
-    MapRender map;
+    private Animator animator;
+    private MapRender map;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -39,8 +39,6 @@ public class MyScreen extends ScreenAdapter {
         handleInput();
         animator.render();
         map.render();
-
-
     }
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {

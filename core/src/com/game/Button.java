@@ -39,6 +39,12 @@ public class Button {
                     case "quit":
                         System.exit(0);
                         break;
+                    case "options":
+                        Spiel.INSTANCE.optionsScreen();
+                        break;
+                    default:
+                        System.exit(0);
+                        break;
                 }
 
             }
