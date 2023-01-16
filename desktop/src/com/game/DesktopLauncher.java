@@ -7,11 +7,13 @@ import com.badlogic.gdx.utils.GdxNativesLoader;
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		String name = "Game";
 		GdxNativesLoader.load(); // verhindert einen möglichen UnsatisfiedLink-Error
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(30);
-		config.setTitle("RPG");
+		config.setTitle(name);
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-		new Lwjgl3Application(new Spiel(), config);
+		config.setIdleFPS(1);
+		new Lwjgl3Application(new Spiel(name), config);
 	}
 }

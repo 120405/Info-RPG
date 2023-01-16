@@ -55,8 +55,8 @@ public TitleScreen(SpriteBatch batch, String name) {
     }
     public void show() {
         Buttons quit = new Buttons("Quit", stage, "quit", 2.5, 2.5);
-       // Buttons start = new Buttons("Start", stage, "game", 3.5, 2.5);
-        Buttons start = new Buttons("Start", stage, "fight", 3.5, 2.5);
+        Buttons start = new Buttons("Start", stage, "game", 3.5, 2.5);
+
         Buttons options = new Buttons("Options", stage, "options", 1.5, 2.5);
     }
 }
