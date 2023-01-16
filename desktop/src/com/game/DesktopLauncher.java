@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		String name = "Game";
 		GdxNativesLoader.load(); // verhindert einen möglichen UnsatisfiedLink-Error
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(30);
+		config.setForegroundFPS(60);
 		config.setTitle(name);
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		config.setIdleFPS(1);
