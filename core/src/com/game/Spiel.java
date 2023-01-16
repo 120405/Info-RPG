@@ -1,9 +1,8 @@
 package com.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Spiel extends Game {
     public static Spiel INSTANCE;
@@ -15,8 +14,9 @@ public class Spiel extends Game {
     private Inventory inventory;
     private FightScreen fightScreen;
     private Options options;
-
-    public Spiel() {
+    private final String name;
+    public Spiel(String name) {
+        this.name = name;
             INSTANCE = this;
             money = 10;
     }
@@ -41,10 +41,10 @@ public class Spiel extends Game {
         inventory = new Inventory();
         fight = new Fight(80, 80, 20, "Monster", 100, 100, 20, "Hero");
         SpriteBatch batch = new SpriteBatch();
-        options = new Options(batch);
-        title = new TitleScreen(batch);
         game = new MyScreen(batch);
         shop = new Shop(batch);
+        options = new Options(batch);
+        title = new TitleScreen(batch, name);
         fightScreen = new FightScreen(batch);
         setScreen(title);
     }
@@ -63,5 +63,4 @@ public class Spiel extends Game {
     public void optionsScreen() {
         setScreen(options);
     }
-
 }

@@ -5,18 +5,24 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Options extends ScreenAdapter {
-    private SpriteBatch batch;
+    private final SpriteBatch batch;
     private Texture img;
+    private Stage stage;
 
     public Options(SpriteBatch batch) {
         this.batch = batch;
         create();
     }
     public void create() {
+        stage = new Stage();
+        stage.clear();
         img = new Texture("Background.png");
+        show();
+
     }
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -24,8 +30,16 @@ public class Options extends ScreenAdapter {
         batch.begin();
         batch.draw(img, 0, 0, 1920, 1080);
         batch.end();
+        stage.act(delta);
+        stage.draw();
     }
     public void dispose() {
         batch.dispose();
+    }
+    public void hide() {
+        stage.clear();
+    }
+    public void show() {
+        Buttons options = new Buttons("Back", stage, "title", 2, 2.5);
     }
 }

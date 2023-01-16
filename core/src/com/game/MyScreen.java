@@ -54,8 +54,10 @@ public class MyScreen extends ScreenAdapter {
 
     public void dispose() {
         batch.dispose();
-
+        map.dispose();
         animator.dispose();
+
+
     }
 
 }
