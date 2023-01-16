@@ -100,6 +100,15 @@ public class MyScreen extends ScreenAdapter {
         }
         player.setLinearVelocity(horizontalForce * 5, player.getLinearVelocity().y);
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Spiel.INSTANCE.titleScreen();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            Spiel.INSTANCE.fightScreen();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+            Spiel.INSTANCE.shopScreen();
+        }
     }
 
     public MapRender getMap(){
