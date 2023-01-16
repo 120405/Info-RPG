@@ -8,12 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
-public class Button {
+public class Buttons {
     TextButton button;
     TextButton.TextButtonStyle s;
     BitmapFont font;
 
-    public Button(String displayedText, Stage stage, final String screen, int x, int y) {
+    public Buttons(String displayedText, Stage stage, final String screen, double x, double y) {
         font = new BitmapFont();
         s = new TextButton.TextButtonStyle();
         s.font = font;
@@ -22,7 +22,7 @@ public class Button {
         button.getLabel().setFontScale(5F);
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
-        button.setPosition(x, y);
+        button.setPosition((int)(Gdx.graphics.getWidth()/x), (int)(Gdx.graphics.getHeight()/y));
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -42,8 +42,10 @@ public class Button {
                     case "options":
                         Spiel.INSTANCE.optionsScreen();
                         break;
+                    case "fight":
+                        Spiel.INSTANCE.fightScreen();
+                        break;
                     default:
-                        System.exit(0);
                         break;
                 }
 
