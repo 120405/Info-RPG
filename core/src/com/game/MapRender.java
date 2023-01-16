@@ -2,6 +2,7 @@ package com.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -10,40 +11,42 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.ChainShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class MapRender {
     static TiledMapTileLayer layer;
     static float tileSize;
     static ChainShape cs;
     static TiledMap tiledmap;
-    public static World world;
+    public World world;
     private OrthogonalTiledMapRenderer tmr;
-    private OrthographicCamera cam;
+    private final OrthographicCamera cam;
     private final SpriteBatch batch;
+
 
 
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
     // Collisions zu erstellen
     public MapRender(SpriteBatch batch) {
+
+        world = new World(new Vector2(0, 0), false);
         this.batch = new SpriteBatch();
         tiledmap = new TmxMapLoader().load("1.tmx");
-        float unitScale = 1 / 16f;
+        float unitScale = 1 / 8f;
         tmr = new OrthogonalTiledMapRenderer(tiledmap, unitScale);
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-       cam = new OrthographicCamera(20, 20 * (h / w));
+       cam = new OrthographicCamera(60, 60 * (h / w));
+
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
+
     }
 
-    public static void b2dPlats() {
+    public void b2dPlats() {
 
         layer = (TiledMapTileLayer) tiledmap.getLayers().get(0);
-        tileSize = layer.getTileWidth() / 16f;
+        tileSize = layer.getTileWidth() / 8f;
 
 
         // layers durchgehen
@@ -85,6 +88,7 @@ public class MapRender {
         }
     }
 
+
     private void handleInput() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -112,12 +116,22 @@ public class MapRender {
         cam.position.y = MathUtils.clamp(cam.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
     }
 
+    public OrthographicCamera getCam(){
+        return cam;
+
+    }
+
     public void render() {
-        handleInput();
+
+        //handleInput();
        batch.setProjectionMatrix(cam.combined);
         cam.update();
         tmr.setView(cam);
         tmr.render();
+        Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+        debugRenderer.render(world, cam.combined);
+
+
     }
     public void dispose() {
         tmr.dispose();
