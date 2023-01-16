@@ -84,7 +84,7 @@ public class FightScreen extends ScreenAdapter {
             shapeRenderer.end();
     }
     public void handleInput() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R) && hero.getRandom() == 0) {
             hero.setRandom(r.nextInt(21));
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
