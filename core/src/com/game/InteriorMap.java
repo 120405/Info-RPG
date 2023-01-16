@@ -22,7 +22,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MyScreen extends ScreenAdapter {
+public class InteriorMap extends ScreenAdapter {
     private final SpriteBatch batch;
     private Animator animator;
     private MapRender map;
@@ -30,7 +30,7 @@ public class MyScreen extends ScreenAdapter {
     private PlayerMap pm;
 
 
-    public MyScreen(SpriteBatch batch) {
+    public InteriorMap(SpriteBatch batch) {
         this.batch = batch;
         create();
     }
@@ -38,8 +38,8 @@ public class MyScreen extends ScreenAdapter {
     public void create() {
         pm = new PlayerMap();
         animator = new Animator();
-       map = new MapRender(batch);
-       player = createPlayer();
+        map = new MapRender(batch);
+        player = createPlayer();
 
 
         map.b2dPlats();
@@ -50,9 +50,6 @@ public class MyScreen extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         handleInput();
         cameraUpdate(delta);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
-            map.NoC();
-        }
 
         animator.render();
         map.render();

@@ -10,6 +10,7 @@ public class Spiel extends Game {
     public Fight fight;
     private int money;
     private  TitleScreen title;
+    private InteriorMap IM;
     private MyScreen game;
     private Shop shop;
     private Inventory inventory;
@@ -40,6 +41,7 @@ public class Spiel extends Game {
         fight = new Fight(80, 80, 20, "Monster", 100, 100, 20, "Hero");
         SpriteBatch batch = new SpriteBatch();
         game = new MyScreen(batch);
+        IM = new InteriorMap(batch);
         shop = new Shop(batch);
         options = new Options(batch);
         title = new TitleScreen(batch, name);
@@ -66,4 +68,5 @@ public class Spiel extends Game {
     public void optionsScreen() {
         setScreen(options);
     }
+    public void InteriorScreen(){setScreen(IM);}
 }
