@@ -24,15 +24,12 @@ public class Spiel extends Game {
     public int getMoney(){
         return money;
     }
-
     public void moneyUp(int x){
         money = money + x;
     }
-
     public void moneyDown(int x){
         money = money - x;
     }
-
     public Inventory getInventory(){
         return inventory;
     }

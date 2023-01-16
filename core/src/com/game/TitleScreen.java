@@ -14,15 +14,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class TitleScreen extends ScreenAdapter {
     private final SpriteBatch batch;
     private final Texture img;
-    private Stage stage;
-    private String name;
-    private BitmapFont font;
+    private final Stage stage;
+    private final String name;
+    private final BitmapFont font;
 
 public TitleScreen(SpriteBatch batch, String name) {
     this.name = name;
     stage = new Stage();
     font = new BitmapFont();
-    font.setColor(Color.RED);
+    font.setColor(Color.OLIVE);
     font.getData().setScale(20f);
     stage.clear();
     this.batch = batch;
@@ -36,11 +36,9 @@ public TitleScreen(SpriteBatch batch, String name) {
         batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         font.draw(batch, name, (int)(Gdx.graphics.getWidth()/2)-font.getData().padRight*15, (int)(Gdx.graphics.getHeight()/2)+250);
         batch.end();
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Spiel.INSTANCE.gameScreen();
         }
-
         stage.act(delta);
         stage.draw();
     }
@@ -54,9 +52,8 @@ public TitleScreen(SpriteBatch batch, String name) {
     stage.clear();
     }
     public void show() {
-        Buttons quit = new Buttons("Quit", stage, "quit", 2.5, 2.5);
-        Buttons start = new Buttons("Start", stage, "game", 3.5, 2.5);
-
-        Buttons options = new Buttons("Options", stage, "options", 1.5, 2.5);
+        Buttons start = new Buttons("Start", stage, "game", 2.21, 2.5, Color.OLIVE);
+        Buttons options = new Buttons("Options", stage, "options", 2.21, 3, Color.OLIVE);
+        Buttons quit = new Buttons("Quit", stage, "quit", 2.21, 3.7, Color.OLIVE);
     }
 }

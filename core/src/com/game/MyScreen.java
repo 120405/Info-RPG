@@ -39,6 +39,7 @@ public class MyScreen extends ScreenAdapter {
         handleInput();
         animator.render();
         map.render();
+
     }
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
@@ -56,8 +57,6 @@ public class MyScreen extends ScreenAdapter {
         batch.dispose();
         map.dispose();
         animator.dispose();
-
-
     }
 
 }

@@ -60,7 +60,8 @@ public class FightScreen extends ScreenAdapter {
             HeroSprite.draw(batch);
             MonsterSprite.draw(batch);
             font.draw(batch, hero.getName(), (int)(hero.getFullLP()/2), 61);
-            font.draw(batch, monster.getName(), 300+((int)(monster.getFullLP()/2)), 61);
+            font.draw(batch, monster.getName(), Gdx.graphics.getWidth()-(45+(int)(monster.getFullLP()/2)), 61);
+            animate();
             batch.end();
         }
         public void dispose() {
@@ -74,12 +75,12 @@ public class FightScreen extends ScreenAdapter {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             shapeRenderer.setColor(Color.RED);
             shapeRenderer.rect(20, 20, healthHero, 20);
-            shapeRenderer.rect(320, 20, healthMonster, 20);
+            shapeRenderer.rect(Gdx.graphics.getWidth()-(20+monster.getFullLP()), 20, healthMonster, 20);
             shapeRenderer.end();
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.WHITE);
             shapeRenderer.rect(19, 19, hero.getFullLP()+1, 21);
-            shapeRenderer.rect(319, 19, monster.getFullLP()+1, 21);
+            shapeRenderer.rect(Gdx.graphics.getWidth()-(19+monster.getFullLP()), 19, monster.getFullLP()+1, 21);
             shapeRenderer.end();
     }
     public void handleInput() {
@@ -98,7 +99,13 @@ public class FightScreen extends ScreenAdapter {
             } else if(winner.equals("Monster")){
                 HeroSprite.setAlpha(0);
             }
+            hero.setRandom(0);
         }
+    }
+    public void animate() {
+            //TODO wait:seconds & animation
+        font.draw(batch,"-"+ monster.attack(), 200, 500);
+        font.draw(batch,"-"+ hero.attack(), 500, 500);
     }
 
 }

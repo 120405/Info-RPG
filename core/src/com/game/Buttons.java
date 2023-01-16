@@ -13,11 +13,11 @@ public class Buttons {
     TextButton.TextButtonStyle s;
     BitmapFont font;
 
-    public Buttons(String displayedText, Stage stage, final String screen, double x, double y) {
+    public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
         s = new TextButton.TextButtonStyle();
         s.font = font;
-        s.fontColor = Color.BLACK;
+        s.fontColor = color;
         button = new TextButton(displayedText, s);
         button.getLabel().setFontScale(5F);
         stage.addActor(button);
@@ -26,7 +26,7 @@ public class Buttons {
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-                switch (screen) {
+                switch (action) {
                     case "game":
                         Spiel.INSTANCE.gameScreen();
                         break;
