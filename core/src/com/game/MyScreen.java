@@ -61,7 +61,7 @@ public class MyScreen extends ScreenAdapter {
         Body pBody;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(0, 0);
+        def.position.set(73, 73);
         def.fixedRotation = true;
         pBody = map.world.createBody(def);
 
