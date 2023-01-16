@@ -49,8 +49,9 @@ public class Animator implements ApplicationListener {
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = SRunAnim.getKeyFrame(stateTime, true);
         batch.begin();
-        batch.draw(currentFrame, 300, 400);
-        batch.draw(currentFrame, 300, 300);
+        batch.draw(currentFrame,Gdx.graphics.getWidth()/2,
+                Gdx.graphics.getHeight()/2);
+
         batch.end();
     }
 
