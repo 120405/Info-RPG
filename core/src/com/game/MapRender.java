@@ -22,7 +22,7 @@ public class MapRender {
     private OrthogonalTiledMapRenderer tmr;
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
-
+    public Body b1[][];
 
 
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
@@ -32,20 +32,24 @@ public class MapRender {
         world = new World(new Vector2(0, 0), false);
         this.batch = new SpriteBatch();
         tiledmap = new TmxMapLoader().load("1.tmx");
+
         float unitScale = 1 / 8f;
         tmr = new OrthogonalTiledMapRenderer(tiledmap, unitScale);
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-       cam = new OrthographicCamera(60, 60 * (h / w));
+        cam = new OrthographicCamera(60, 60 * (h / w));
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
+        layer = (TiledMapTileLayer) tiledmap.getLayers().get(0);
+        b1 = new Body[layer.getHeight()][layer.getWidth()];
+
 
     }
 
     public void b2dPlats() {
 
-        layer = (TiledMapTileLayer) tiledmap.getLayers().get(0);
+
         tileSize = layer.getTileWidth() / 8f;
 
 
@@ -81,11 +85,37 @@ public class MapRender {
                 fdef.friction = 0f;
                 fdef.shape = cs;
 
-                world.createBody(bdef).createFixture(fdef).setUserData("collision");
+               // world.createBody(bdef).createFixture(fdef).setUserData("collision");
+                b1[row][col] = world.createBody(bdef);
+                b1[row][col].createFixture(fdef).setUserData("collision");
 
             }
 
         }
+    }
+
+    public void NoC() {
+
+        layer = (TiledMapTileLayer) tiledmap.getLayers().get(0);
+        tileSize = layer.getTileWidth() / 8f;
+
+
+        // layers durchgehen
+        for (int row = 0; row < layer.getHeight(); row++) {
+            for (int col = 0; col < layer.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+
+                if (cell == null) {
+                    continue;
+                }
+                if (cell.getTile() == null) {
+                    continue;
+                }
+                world.destroyBody(b1[row][col]);
+            }
+
+        }
+
     }
 
 
@@ -116,7 +146,7 @@ public class MapRender {
         cam.position.y = MathUtils.clamp(cam.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
     }
 
-    public OrthographicCamera getCam(){
+    public OrthographicCamera getCam() {
         return cam;
 
     }
@@ -124,7 +154,7 @@ public class MapRender {
     public void render() {
 
         //handleInput();
-       batch.setProjectionMatrix(cam.combined);
+        batch.setProjectionMatrix(cam.combined);
         cam.update();
         tmr.setView(cam);
         tmr.render();
@@ -133,6 +163,7 @@ public class MapRender {
 
 
     }
+
     public void dispose() {
         tmr.dispose();
         batch.dispose();

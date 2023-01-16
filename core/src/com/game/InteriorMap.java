@@ -22,7 +22,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MyScreen extends ScreenAdapter {
+public class InteriorMap extends ScreenAdapter {
     private final SpriteBatch batch;
     private Animator animator;
     private MapRender map;
@@ -30,7 +30,7 @@ public class MyScreen extends ScreenAdapter {
     private PlayerMap pm;
 
 
-    public MyScreen(SpriteBatch batch) {
+    public InteriorMap(SpriteBatch batch) {
         this.batch = batch;
         create();
     }
@@ -38,8 +38,8 @@ public class MyScreen extends ScreenAdapter {
     public void create() {
         pm = new PlayerMap();
         animator = new Animator();
-       map = new MapRender(batch);
-       player = createPlayer();
+        map = new MapRender(batch);
+        player = createPlayer();
 
 
         map.b2dPlats();
@@ -50,9 +50,6 @@ public class MyScreen extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         handleInput();
         cameraUpdate(delta);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
-            map.NoC();
-        }
 
         animator.render();
         map.render();
@@ -104,22 +101,8 @@ public class MyScreen extends ScreenAdapter {
             verticalForce += 3;
 
         }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.I)) {
-            Spiel.INSTANCE.shopScreen();
-
-        }
         player.setLinearVelocity(horizontalForce * 5, player.getLinearVelocity().y);
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Spiel.INSTANCE.titleScreen();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-            Spiel.INSTANCE.fightScreen();
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            Spiel.INSTANCE.shopScreen();
-        }
     }
 
     public MapRender getMap(){
