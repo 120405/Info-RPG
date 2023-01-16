@@ -98,6 +98,11 @@ public class MyScreen extends ScreenAdapter {
             verticalForce += 3;
 
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+            Spiel.INSTANCE.shopScreen();
+
+        }
         player.setLinearVelocity(horizontalForce * 5, player.getLinearVelocity().y);
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
     }

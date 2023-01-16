@@ -4,21 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Moved Map to own class">
-      <change afterPath="$PROJECT_DIR$/core/src/com/game/PlayerMap.java" afterDir="false" />
+    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Inventory and Items">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Hero.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Animator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Animator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/MapRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MapRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Buttons.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Buttons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/game/Spiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Spiel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desktop/build/classes/java/main/com/game/DesktopLauncher.class" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/classes/java/main/com/game/DesktopLauncher.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
@@ -59,13 +63,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
@@ -76,7 +92,7 @@
     </option>
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="6f3cced1-e12d-45bb-b531-2b74d3ba67eb" />
+        <option name="accountId" value="c129d875-fdc3-4c70-8435-255817c0aa06" />
         <option name="url" value="https://github.com/120405/Info-RPG.git" />
       </UrlAndAccount>
     </option>
@@ -98,15 +114,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Anwender/Downloads/Informatik Projekt 2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anwender/IdeaProjects/Info-RPG&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DesktopLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.game.DesktopLauncher" />
@@ -164,14 +180,7 @@
       <option name="project" value="LOCAL" />
       <updated>1673798523603</updated>
     </task>
-    <task id="LOCAL-00005" summary="Moved Map to own class">
-      <created>1673800242297</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1673800242297</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

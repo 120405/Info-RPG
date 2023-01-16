@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import sun.security.provider.ConfigFile;
 
 public class Buttons {
     TextButton button;
@@ -38,6 +39,26 @@ public class Buttons {
                         break;
                     case "quit":
                         System.exit(0);
+                        break;
+                    case "buySword":
+                        Item x = Spiel.INSTANCE.getInventory().getSword();
+                        int wx = x.getWorth();
+                        if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
+                            if (Spiel.INSTANCE.getMoney() >= 50) {
+                                Spiel.INSTANCE.buyItem(x, "weapon");
+                                Spiel.INSTANCE.moneyDown(50);
+                            }
+                        }
+                        break;
+                    case "buyShield":
+                        Item y = Spiel.INSTANCE.getInventory().getShield();
+                        int wy = y.getWorth();
+                        if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
+                            if (Spiel.INSTANCE.getMoney() >= wy){
+                                Spiel.INSTANCE.buyItem(y, "shield");
+                            Spiel.INSTANCE.moneyDown(wy);
+                        }
+                        }
                         break;
                     case "options":
                         Spiel.INSTANCE.optionsScreen();
