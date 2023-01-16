@@ -137,5 +137,4 @@ public class MapRender {
         tmr.dispose();
         batch.dispose();
     }
-
 }

@@ -52,6 +52,7 @@ public class MyScreen extends ScreenAdapter {
 
         animator.render();
         map.render();
+
         map.world.step(1/60f, 6, 2);
 
     }
@@ -71,6 +72,7 @@ public class MyScreen extends ScreenAdapter {
         shape.dispose();
 
         return pBody;
+
     }
     public void handleInput() {
 
@@ -120,8 +122,6 @@ public class MyScreen extends ScreenAdapter {
         batch.dispose();
         map.dispose();
         animator.dispose();
-
-
     }
 
 }
