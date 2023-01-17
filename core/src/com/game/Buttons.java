@@ -1,6 +1,7 @@
 package com.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +14,7 @@ public class Buttons {
     TextButton button;
     TextButton.TextButtonStyle s;
     BitmapFont font;
+    Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
@@ -44,9 +46,10 @@ public class Buttons {
                         Item x = Spiel.INSTANCE.getInventory().getSword();
                         int wx = x.getWorth();
                         if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= 50) {
+                            if (Spiel.INSTANCE.getMoney() >= wx) {
                                 Spiel.INSTANCE.buyItem(x, "weapon");
-                                Spiel.INSTANCE.moneyDown(50);
+                                Spiel.INSTANCE.moneyDown(wx);
+                                accepted.play();
                             }
                         }
                         break;
@@ -56,7 +59,8 @@ public class Buttons {
                         if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
                             if (Spiel.INSTANCE.getMoney() >= wy){
                                 Spiel.INSTANCE.buyItem(y, "shield");
-                            Spiel.INSTANCE.moneyDown(wy);
+                                Spiel.INSTANCE.moneyDown(wy);
+                                accepted.play();
                         }
                         }
                         break;
