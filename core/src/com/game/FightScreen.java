@@ -36,6 +36,7 @@ public class FightScreen extends ScreenAdapter {
         public void create() {
             stage = new Stage();
             inventory =  new GUI();
+            inventory.addComponent(new Buttons("Close", stage, "hideInv", 2.21, 2.5, Color.OLIVE));
             img = new Texture("Background.png");
             font = new BitmapFont();
             font.setColor(Color.WHITE);
