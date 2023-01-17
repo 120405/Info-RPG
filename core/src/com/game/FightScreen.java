@@ -35,21 +35,21 @@ public class FightScreen extends ScreenAdapter {
         }
         public void create() {
             stage = new Stage();
+            r = new Random();
             inventory =  new GUI();
             img = new Texture("Background.png");
             font = new BitmapFont();
             font.setColor(Color.WHITE);
-            r = new Random();
             hero =  Spiel.INSTANCE.fight.getHero();
             monster = Spiel.INSTANCE.fight.getMonster();
             healthHero = hero.getFullLP();
             healthMonster = monster.getFullLP();
             shapeRenderer = new ShapeRenderer();
             HeroSprite = new Sprite(new Texture("Hero.png"));
-            MonsterSprite = new Sprite(new Texture("Monster.png"));
             HeroSprite.setScale(2f);
-            MonsterSprite.setScale(0.5f);
             HeroSprite.setPosition(100, 90);
+            MonsterSprite = new Sprite(new Texture("Monster.png"));
+            MonsterSprite.setScale(0.5f);
             MonsterSprite.setPosition(100, -140);
             MonsterSprite.flip(true, false);
             show();
