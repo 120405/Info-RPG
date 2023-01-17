@@ -10,6 +10,7 @@ public class Spiel extends Game {
     public Fight fight;
     private int money;
     private  TitleScreen title;
+
     private MyScreen game;
     private Shop shop;
     private Inventory inventory;
@@ -19,7 +20,7 @@ public class Spiel extends Game {
     public Spiel(String name) {
         this.name = name;
             INSTANCE = this;
-            money = 10;
+            money = 1000;
     }
 
     public int getMoney(){
@@ -35,11 +36,27 @@ public class Spiel extends Game {
         return inventory;
     }
 
+    public void buyItem(Item item, String type){
+        if(type.equals("weapon")) {
+            if (fight.getHero().getWeapon() != null) {
+                moneyUp(fight.getHero().getWeapon().getWorth());
+            }
+            fight.getHero().setWeapon(item);
+        }
+        if(type.equals("shield")) {
+            if (fight.getHero().getWeapon() != null) {
+                moneyUp(fight.getHero().getShield().getWorth());
+            }
+                fight.getHero().setShield(item);
+        }
+    }
+
     public void create() {
         inventory = new Inventory();
         fight = new Fight(80, 80, 20, "Monster", 100, 100, 20, "Hero");
         SpriteBatch batch = new SpriteBatch();
         game = new MyScreen(batch);
+
         shop = new Shop(batch);
         options = new Options(batch);
         title = new TitleScreen(batch, name);
@@ -69,4 +86,5 @@ public class Spiel extends Game {
     public FightScreen getFightScreen() {
         return fightScreen;
     }
+
 }
