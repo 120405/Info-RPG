@@ -28,6 +28,8 @@ public class MyScreen extends ScreenAdapter {
     private MapRender map;
     private Body player;
     private PlayerMap pm;
+    private Body[][] body;
+    private boolean Interior;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -36,13 +38,14 @@ public class MyScreen extends ScreenAdapter {
     }
 
     public void create() {
+        Interior = false;
         pm = new PlayerMap();
         animator = new Animator();
        map = new MapRender(batch);
        player = createPlayer();
 
 
-        map.b2dPlats();
+        body = map.b2dPlats(MapRender.layer1);
     }
 
     public void render(float delta) {
@@ -51,8 +54,21 @@ public class MyScreen extends ScreenAdapter {
         handleInput();
         cameraUpdate(delta);
         if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
-            map.NoC();
+
+            if(!Interior){
+                map.NoC(body,MapRender.layer1);
+                body = map.b2dPlats(MapRender.layer2);
+                Interior = true;
+            }
+            else{
+                map.NoC(body,MapRender.layer2);
+                body = map.b2dPlats(MapRender.layer1);
+                Interior = false;
+            }
+
         }
+
+
 
         animator.render();
         map.render();
@@ -106,6 +122,9 @@ public class MyScreen extends ScreenAdapter {
         }
         player.setLinearVelocity(horizontalForce * 5, player.getLinearVelocity().y);
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
+    }
+    public boolean getInterior(){
+    return Interior;
     }
 
     public MapRender getMap(){
