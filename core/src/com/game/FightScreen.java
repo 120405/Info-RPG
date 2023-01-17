@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import java.util.Random;
 
@@ -25,12 +26,16 @@ public class FightScreen extends ScreenAdapter {
     private BitmapFont font;
     private ShapeRenderer shapeRenderer;
     private Texture img;
+    private Stage stage;
+    public GUI inventory;
 
         public FightScreen(SpriteBatch batch) {
             this.batch = batch;
             create();
         }
         public void create() {
+            stage = new Stage();
+            inventory =  new GUI();
             img = new Texture("Background.png");
             font = new BitmapFont();
             font.setColor(Color.WHITE);
@@ -47,6 +52,7 @@ public class FightScreen extends ScreenAdapter {
             HeroSprite.setPosition(100, 90);
             MonsterSprite.setPosition(100, -140);
             MonsterSprite.flip(true, false);
+            show();
         }
         public void render(float delta) {
             ScreenUtils.clear(0, 0, 0, 1);
@@ -63,6 +69,8 @@ public class FightScreen extends ScreenAdapter {
             font.draw(batch, monster.getName(), Gdx.graphics.getWidth()-(45+(int)(monster.getFullLP()/2)), 61);
             animate();
             batch.end();
+            stage.act(delta);
+            stage.draw();
         }
         public void dispose() {
             batch.dispose();
@@ -90,7 +98,7 @@ public class FightScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Spiel.INSTANCE.gameScreen();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && hero.getStatus() &&monster.getStatus()) {
             String winner = Spiel.INSTANCE.fight.fight();
             healthMonster = monster.getLP();
             healthHero = hero.getLP();
@@ -107,5 +115,13 @@ public class FightScreen extends ScreenAdapter {
         font.draw(batch,"-"+ monster.attack(), 200, 500);
         font.draw(batch,"-"+ hero.attack(), 500, 500);
     }
+    public void show() {
+    Buttons inv = new Buttons("Inventory", stage, "showInv", 2.21, 2.5, Color.OLIVE);
+    stage.addActor(inventory.getInventory());
+    }
+    public void hide() {
+            stage.clear();
+    }
+
 
 }
