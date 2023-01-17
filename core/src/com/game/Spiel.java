@@ -83,5 +83,8 @@ public class Spiel extends Game {
     public void optionsScreen() {
         setScreen(options);
     }
+    public FightScreen getFightScreen() {
+        return fightScreen;
+    }
 
 }

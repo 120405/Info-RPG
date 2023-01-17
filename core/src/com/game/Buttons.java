@@ -1,25 +1,28 @@
 package com.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import sun.security.provider.ConfigFile;
 
 public class Buttons {
-    TextButton button;
-    TextButton.TextButtonStyle s;
-    BitmapFont font;
+
+    private TextButton button;
+    private TextButton.TextButtonStyle style;
+    private BitmapFont font;
+    private boolean isOpen = false;
+    private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
-        s = new TextButton.TextButtonStyle();
-        s.font = font;
-        s.fontColor = color;
-        button = new TextButton(displayedText, s);
+        style = new TextButton.TextButtonStyle();
+        style.font = font;
+        style.fontColor = color;
+        button = new TextButton(displayedText, style);
         button.getLabel().setFontScale(5F);
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
@@ -44,9 +47,10 @@ public class Buttons {
                         Item x = Spiel.INSTANCE.getInventory().getSword();
                         int wx = x.getWorth();
                         if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= 50) {
+                            if (Spiel.INSTANCE.getMoney() >= wx) {
                                 Spiel.INSTANCE.buyItem(x, "weapon");
-                                Spiel.INSTANCE.moneyDown(50);
+                                Spiel.INSTANCE.moneyDown(wx);
+                                accepted.play();
                             }
                         }
                         break;
@@ -56,7 +60,8 @@ public class Buttons {
                         if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
                             if (Spiel.INSTANCE.getMoney() >= wy){
                                 Spiel.INSTANCE.buyItem(y, "shield");
-                            Spiel.INSTANCE.moneyDown(wy);
+                                Spiel.INSTANCE.moneyDown(wy);
+                                accepted.play();
                         }
                         }
                         break;
@@ -66,11 +71,24 @@ public class Buttons {
                     case "fight":
                         Spiel.INSTANCE.fightScreen();
                         break;
+                    case "showInv":
+                        if(!isOpen) {
+                            Spiel.INSTANCE.getFightScreen().inventory.show();
+                            isOpen = true;
+                        } else {
+                            Spiel.INSTANCE.getFightScreen().inventory.hide();
+                            isOpen = false;
+                        }
+
+                       break;
                     default:
                         break;
                 }
 
             }
         });
+    }
+    public TextButton getButton() {
+        return button;
     }
 }
