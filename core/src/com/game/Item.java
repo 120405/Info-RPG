@@ -7,15 +7,17 @@ String name;
 int dur;
 int atk;
 int def;
+int worth;
 String effect;
 
 
-public Item(String look, String name, int dur, int atk, int def, String effect) {
+public Item(String look, String name, int dur, int atk, int def, int worth, String effect) {
 	this.look = look;
 	this.name = name;
 	this.dur = dur;
 	this.atk = atk;
 	this.def = def;
+	this.worth = worth;
 	this.effect = effect;
 }
 
@@ -66,4 +68,12 @@ public void setAtk(int x) {
 public void setDef(int x) {
 	def=x;
 }
+
+	public int getWorth() {
+		return worth;
+	}
+
+	public void setWorth(int worth) {
+		this.worth = worth;
+	}
 }

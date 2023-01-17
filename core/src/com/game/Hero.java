@@ -5,6 +5,8 @@ public class Hero {
     private int random = 0;
     private int fullLP = 0;
     private int ATK = 0;
+    private Item weapon;
+    private Item shield;
     private String name = "";
     private boolean alive = true;
 
@@ -17,14 +19,23 @@ public class Hero {
 
 
     public int attack() {
-        return ATK +  random;
+        if(weapon == null) {
+            return ATK + random;
+        }else{
+            return ATK + random + weapon.getAtk();
+        }
     }
 
     public void getAttacked(int strength) {
-        LP = LP - strength;
-        if (LP < strength) {
-            LP = 0;
-            die();
+        if(shield != null) {
+            strength = strength - shield.getDef();
+        }
+        if (strength >= 0){
+            LP = LP - strength;
+            if (LP < strength) {
+                LP = 0;
+                die();
+            }
         }
     }
 
@@ -80,4 +91,19 @@ public class Hero {
         return random;
     }
 
+    public void setWeapon(Item x){
+        weapon = x;
+    }
+
+    public Item getWeapon() {
+        return weapon;
+    }
+
+    public void setShield(Item x){
+        shield = x;
+    }
+
+    public Item getShield() {
+        return shield;
+    }
 }

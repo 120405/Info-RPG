@@ -19,7 +19,7 @@ public class Spiel extends Game {
     public Spiel(String name) {
         this.name = name;
             INSTANCE = this;
-            money = 10;
+            money = 1000;
     }
 
     public int getMoney(){
@@ -33,6 +33,21 @@ public class Spiel extends Game {
     }
     public Inventory getInventory(){
         return inventory;
+    }
+
+    public void buyItem(Item item, String type){
+        if(type.equals("weapon")) {
+            if (fight.getHero().getWeapon() != null) {
+                moneyUp(fight.getHero().getWeapon().getWorth());
+            }
+            fight.getHero().setWeapon(item);
+        }
+        if(type.equals("shield")) {
+            if (fight.getHero().getWeapon() != null) {
+                moneyUp(fight.getHero().getShield().getWorth());
+            }
+                fight.getHero().setShield(item);
+        }
     }
 
     public void create() {

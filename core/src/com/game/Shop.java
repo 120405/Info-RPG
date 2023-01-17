@@ -3,21 +3,25 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Shop extends ScreenAdapter {
 
     SpriteBatch batch;
     Texture img;
     Inventory inventory;
+    private Stage stage;
 
     public Shop(SpriteBatch batch) {
         this.batch = batch;
         img = new Texture("Albedo.png");
         inventory = Spiel.INSTANCE.getInventory();
+        stage = new Stage();
     }
 
     public void render(float delta) {
@@ -30,10 +34,21 @@ public class Shop extends ScreenAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             Spiel.INSTANCE.gameScreen();
         }
+
+        stage.act(delta);
+        stage.draw();
     }
     public void dispose() {
         if(batch != null) {batch.dispose();}
         if(img != null) {img.dispose();}
+    }
+
+    public void hide() {
+        stage.clear();
+    }
+    public void show() {
+        Buttons quit = new Buttons("Sword", stage, "buySword", 2.5, 2.5, Color.WHITE);
+        Buttons start = new Buttons("Shield", stage, "buyShield", 3.5, 2.5, Color.WHITE);
     }
 
 }
