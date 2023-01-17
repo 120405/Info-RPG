@@ -61,7 +61,7 @@ public class MyScreen extends ScreenAdapter {
         Body pBody;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(0, 0);
+        def.position.set(73, 73);
         def.fixedRotation = true;
         pBody = map.world.createBody(def);
 
@@ -105,6 +105,15 @@ public class MyScreen extends ScreenAdapter {
         }
         player.setLinearVelocity(horizontalForce * 5, player.getLinearVelocity().y);
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            Spiel.INSTANCE.titleScreen();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            Spiel.INSTANCE.fightScreen();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+            Spiel.INSTANCE.shopScreen();
+        }
     }
 
     public MapRender getMap(){
