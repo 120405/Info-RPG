@@ -68,11 +68,18 @@ public class Buttons {
                         break;
                     case "showInv":
                        Spiel.INSTANCE.getFightScreen().inventory.getInventory().setVisible(true);
+                       break;
+                    case "hideInv":
+                        Spiel.INSTANCE.getFightScreen().inventory.getInventory().setVisible(false);
+                        break;
                     default:
                         break;
                 }
 
             }
         });
+    }
+    public TextButton getButton() {
+        return button;
     }
 }
