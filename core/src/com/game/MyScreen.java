@@ -140,6 +140,9 @@ public class MyScreen extends ScreenAdapter {
     public boolean getInterior(){
     return Interior;
     }
+    public boolean getInterior(){
+    return Interior;
+    }
 
     public MapRender getMap(){
         return map;
