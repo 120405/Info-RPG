@@ -19,7 +19,7 @@ public class Shop extends ScreenAdapter {
 
     public Shop(SpriteBatch batch) {
         this.batch = batch;
-        img = new Texture("Albedo.png");
+        img = new Texture(Gdx.files.internal("Albedo.png"));
         inventory = Spiel.INSTANCE.getInventory();
         stage = new Stage();
     }
@@ -47,8 +47,8 @@ public class Shop extends ScreenAdapter {
         stage.clear();
     }
     public void show() {
-        Buttons quit = new Buttons("Sword", stage, "buySword", 2.5, 2.5, Color.WHITE);
-        Buttons start = new Buttons("Shield", stage, "buyShield", 3.5, 2.5, Color.WHITE);
+        Buttons sword = new Buttons("Sword", stage, "buySword", 1.5, 1.5, Color.WHITE);
+        Buttons shield = new Buttons("Shield", stage, "buyShield", 3.5, 1.5, Color.WHITE);
     }
 
 }
