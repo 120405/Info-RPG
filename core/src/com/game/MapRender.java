@@ -50,8 +50,8 @@ public class MapRender {
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
-        layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get(0);
-        layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get(0);
+        layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
+        layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
 
 
     }

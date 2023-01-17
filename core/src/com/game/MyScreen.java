@@ -69,7 +69,7 @@ public class MyScreen extends ScreenAdapter {
         Body pBody;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(73, 73);
+        def.position.set(80, 80);
         def.fixedRotation = true;
 
         pBody = map.world.createBody(def);
@@ -150,6 +150,7 @@ public class MyScreen extends ScreenAdapter {
         if(!Interior){
         if((player.getPosition().x>80 && player.getPosition().x<82) && (player.getPosition().y>91 && player.getPosition().y<92 ) ) {
             switchMap();
+            player.setTransform(55,75,0);
         }
 
         }
