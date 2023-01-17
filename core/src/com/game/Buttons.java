@@ -8,20 +8,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import sun.security.provider.ConfigFile;
 
 public class Buttons {
-    TextButton button;
-    TextButton.TextButtonStyle s;
-    BitmapFont font;
-    Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
+
+    private TextButton button;
+    private TextButton.TextButtonStyle style;
+    private BitmapFont font;
+    private boolean isOpen = false;
+    private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
-        s = new TextButton.TextButtonStyle();
-        s.font = font;
-        s.fontColor = color;
-        button = new TextButton(displayedText, s);
+        style = new TextButton.TextButtonStyle();
+        style.font = font;
+        style.fontColor = color;
+        button = new TextButton(displayedText, style);
         button.getLabel().setFontScale(5F);
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
@@ -71,12 +72,23 @@ public class Buttons {
                         Spiel.INSTANCE.fightScreen();
                         break;
                     case "showInv":
-                       Spiel.INSTANCE.getFightScreen().inventory.getInventory().setVisible(true);
+                        if(!isOpen) {
+                            Spiel.INSTANCE.getFightScreen().inventory.show();
+                            isOpen = true;
+                        } else {
+                            Spiel.INSTANCE.getFightScreen().inventory.hide();
+                            isOpen = false;
+                        }
+
+                       break;
                     default:
                         break;
                 }
 
             }
         });
+    }
+    public TextButton getButton() {
+        return button;
     }
 }
