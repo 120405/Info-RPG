@@ -10,12 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class Buttons {
+
     private TextButton button;
     private TextButton.TextButtonStyle style;
     private BitmapFont font;
     private boolean isOpen = false;
     private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
-
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
