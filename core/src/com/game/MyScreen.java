@@ -28,6 +28,8 @@ public class MyScreen extends ScreenAdapter {
     private MapRender map;
     private Body player;
     private PlayerMap pm;
+    private Body[][] body;
+    private boolean Interior;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -36,12 +38,14 @@ public class MyScreen extends ScreenAdapter {
     }
 
     public void create() {
+        Interior = false;
         pm = new PlayerMap();
         animator = new Animator();
        map = new MapRender(batch);
        player = createPlayer();
 
-        map.b2dPlats();
+
+        body = map.b2dPlats(MapRender.layer1);
     }
 
     public void render(float delta) {
@@ -49,11 +53,28 @@ public class MyScreen extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         handleInput();
         cameraUpdate(delta);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
+
+            if(!Interior){
+                map.NoC(body,MapRender.layer1);
+                body = map.b2dPlats(MapRender.layer2);
+                Interior = true;
+            }
+            else{
+                map.NoC(body,MapRender.layer2);
+                body = map.b2dPlats(MapRender.layer1);
+                Interior = false;
+            }
+
+        }
+
+
 
         animator.render();
         map.render();
 
         map.world.step(1/60f, 6, 2);
+
 
     }
     public Body createPlayer() {
@@ -63,6 +84,7 @@ public class MyScreen extends ScreenAdapter {
         def.type = BodyDef.BodyType.DynamicBody;
         def.position.set(73, 73);
         def.fixedRotation = true;
+
         pBody = map.world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
@@ -114,6 +136,12 @@ public class MyScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             Spiel.INSTANCE.shopScreen();
         }
+    }
+    public boolean getInterior(){
+    return Interior;
+    }
+    public boolean getInterior(){
+    return Interior;
     }
 
     public MapRender getMap(){

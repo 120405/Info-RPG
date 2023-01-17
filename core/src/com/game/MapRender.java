@@ -3,8 +3,12 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -14,15 +18,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class MapRender {
-    static TiledMapTileLayer layer;
+    static TiledMapTileLayer layer1;
+    static TiledMapTileLayer layer2;
     static float tileSize;
     static ChainShape cs;
-    static TiledMap tiledmap;
+    static TiledMap tiledmap1;
+    static TiledMap tiledmap2;
     public World world;
     private OrthogonalTiledMapRenderer tmr;
+    private OrthogonalTiledMapRenderer tmr2;
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
-
+    public Body b1[][];
 
 
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
@@ -31,21 +38,27 @@ public class MapRender {
 
         world = new World(new Vector2(0, 0), false);
         this.batch = new SpriteBatch();
-        tiledmap = new TmxMapLoader().load("1.tmx");
+        tiledmap1 = new TmxMapLoader().load("1.tmx");
+        tiledmap2 = new TmxMapLoader().load("2.tmx");
+
         float unitScale = 1 / 8f;
-        tmr = new OrthogonalTiledMapRenderer(tiledmap, unitScale);
+        tmr = new OrthogonalTiledMapRenderer(tiledmap1, unitScale);
+        tmr2 = new OrthogonalTiledMapRenderer(tiledmap2, unitScale);
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-       cam = new OrthographicCamera(60, 60 * (h / w));
+        cam = new OrthographicCamera(60, 60 * (h / w));
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
+        layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get(0);
+        layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get(0);
+
 
     }
 
-    public void b2dPlats() {
+    public Body[][] b2dPlats(TiledMapTileLayer layer) {
 
-        layer = (TiledMapTileLayer) tiledmap.getLayers().get(0);
+        b1 = new Body[layer.getHeight()][layer.getWidth()];
         tileSize = layer.getTileWidth() / 8f;
 
 
@@ -81,11 +94,36 @@ public class MapRender {
                 fdef.friction = 0f;
                 fdef.shape = cs;
 
-                world.createBody(bdef).createFixture(fdef).setUserData("collision");
+                // world.createBody(bdef).createFixture(fdef).setUserData("collision");
+                b1[row][col] = world.createBody(bdef);
+                b1[row][col].createFixture(fdef).setUserData("collision");
+
 
             }
 
         }
+        return b1;
+    }
+
+    public void NoC(Body[][] b, TiledMapTileLayer layer) {
+        tileSize = layer.getTileWidth() / 8f;
+
+        // layers durchgehen
+        for (int row = 0; row < layer.getHeight(); row++) {
+            for (int col = 0; col < layer.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+
+                if (cell == null) {
+                    continue;
+                }
+                if (cell.getTile() == null) {
+                    continue;
+                }
+                world.destroyBody(b[row][col]);
+            }
+
+        }
+
     }
 
 
@@ -116,7 +154,7 @@ public class MapRender {
         cam.position.y = MathUtils.clamp(cam.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
     }
 
-    public OrthographicCamera getCam(){
+    public OrthographicCamera getCam() {
         return cam;
 
     }
@@ -124,15 +162,22 @@ public class MapRender {
     public void render() {
 
         //handleInput();
-       batch.setProjectionMatrix(cam.combined);
+        batch.setProjectionMatrix(cam.combined);
         cam.update();
-        tmr.setView(cam);
-        tmr.render();
+        if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
+            tmr.setView(cam);
+            tmr.render();
+        } else {
+            tmr2.setView(cam);
+            tmr2.render();
+        }
+
         Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
         debugRenderer.render(world, cam.combined);
 
 
     }
+
     public void dispose() {
         tmr.dispose();
         batch.dispose();
