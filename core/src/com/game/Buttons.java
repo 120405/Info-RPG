@@ -66,6 +66,8 @@ public class Buttons {
                     case "fight":
                         Spiel.INSTANCE.fightScreen();
                         break;
+                    case "showInv":
+                       Spiel.INSTANCE.getFightScreen().inventory.getInventory().setVisible(true);
                     default:
                         break;
                 }
