@@ -53,26 +53,13 @@ public class MyScreen extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         handleInput();
         cameraUpdate(delta);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
 
-            if(!Interior){
-                map.NoC(body,MapRender.layer1);
-                body = map.b2dPlats(MapRender.layer2);
-                Interior = true;
-            }
-            else{
-                map.NoC(body,MapRender.layer2);
-                body = map.b2dPlats(MapRender.layer1);
-                Interior = false;
-            }
-
-        }
 
 
 
         animator.render();
         map.render();
-
+        mapCheck();
         map.world.step(1/60f, 6, 2);
 
 
@@ -88,7 +75,7 @@ public class MyScreen extends ScreenAdapter {
         pBody = map.world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1, 1);
+        shape.setAsBox(0.9F, 0.9f);
 
         pBody.createFixture(shape, 1.0f);
         shape.dispose();
@@ -96,7 +83,28 @@ public class MyScreen extends ScreenAdapter {
         return pBody;
 
     }
+    public void switchMap(){
+        if(!Interior){
+            map.NoC(body,MapRender.layer1);
+            body = map.b2dPlats(MapRender.layer2);
+            Interior = true;
+        }
+        else{
+            map.NoC(body,MapRender.layer2);
+            body = map.b2dPlats(MapRender.layer1);
+            Interior = false;
+        }
+    }
     public void handleInput() {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
+
+            switchMap();
+
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.O)){
+            System.out.println(player.getPosition().x);
+            System.out.println(player.getPosition().y);
+        }
 
         int horizontalForce = 0;
         int verticalForce = 0;
@@ -137,6 +145,16 @@ public class MyScreen extends ScreenAdapter {
             Spiel.INSTANCE.shopScreen();
         }
     }
+
+    public void mapCheck(){
+        if(!Interior){
+        if((player.getPosition().x>80 && player.getPosition().x<82) && (player.getPosition().y>91 && player.getPosition().y<92 ) ) {
+            switchMap();
+        }
+
+        }
+    }
+
     public boolean getInterior(){
     return Interior;
     }
