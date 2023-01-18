@@ -55,9 +55,6 @@ public class MyScreen extends ScreenAdapter {
         cameraUpdate(delta);
 
 
-
-
-
         map.render();
         animator.render();
         mapCheck();
@@ -148,7 +145,10 @@ public class MyScreen extends ScreenAdapter {
     public void mapCheck() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             if (!Interior) {
+
+                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 91 && player.getPosition().y < 92)) {
                 if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 90 && player.getPosition().y < 92)) {
+
                     switchMap();
                     player.setTransform(55, 75, 0);
                 }

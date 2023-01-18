@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class GUI {
-    private Window window;
+    private final Window window;
     private Texture img;
     public GUI()
 
@@ -17,7 +17,7 @@ public class GUI {
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         window = new Window("", windowStyle);
         window.setSize(img.getWidth(), img.getHeight());
-        window.setPosition(200, 200);
+        window.setPosition(400, 400);
         window.setScale(3f);
         //window.pack();
         window.setVisible(false);
@@ -27,7 +27,7 @@ public class GUI {
         return window;
     }
    /* public void addComponent() {
-        window.add(); für spätere weitere Komponenten
+        window.add(); for later added components
     }*/
     public void addComponent(Buttons b) {
         window.add(b.getButton()).pad(10, 0, 10, 0).row();

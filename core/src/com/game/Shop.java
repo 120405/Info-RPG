@@ -20,6 +20,7 @@ public class Shop extends ScreenAdapter {
     public Shop(SpriteBatch batch) {
         this.batch = batch;
         img = new Texture(Gdx.files.internal("Albedo.png"));
+
         inventory = Spiel.INSTANCE.getInventory();
         stage = new Stage();
     }
@@ -28,7 +29,7 @@ public class Shop extends ScreenAdapter {
         ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
-        batch.draw(img, 0, 0);
+        batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
