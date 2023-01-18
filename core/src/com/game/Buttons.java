@@ -52,7 +52,7 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wx) {
                                 Spiel.INSTANCE.buyItem(x, "weapon");
                                 Spiel.INSTANCE.moneyDown(wx);
-                                accepted.play();
+                                accepted.play(0.5f);
                             }
                         }
                         break;
