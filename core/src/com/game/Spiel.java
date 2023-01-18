@@ -10,7 +10,6 @@ public class Spiel extends Game {
     public Fight fight;
     private int money;
     private  TitleScreen title;
-
     private MyScreen game;
     private Shop shop;
     private Inventory inventory;
