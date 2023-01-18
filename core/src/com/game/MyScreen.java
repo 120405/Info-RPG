@@ -55,10 +55,8 @@ public class MyScreen extends ScreenAdapter {
         cameraUpdate(delta);
 
 
-
-
-        animator.render();
         map.render();
+        animator.render();
         mapCheck();
         map.world.step(1/60f, 6, 2);
 
@@ -71,12 +69,9 @@ public class MyScreen extends ScreenAdapter {
         def.type = BodyDef.BodyType.DynamicBody;
         def.position.set(80, 80);
         def.fixedRotation = true;
-
         pBody = map.world.createBody(def);
-
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(0.9F, 0.9f);
-
         pBody.createFixture(shape, 1.0f);
         shape.dispose();
 
@@ -110,22 +105,23 @@ public class MyScreen extends ScreenAdapter {
         int verticalForce = 0;
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            horizontalForce -= 3;
+            horizontalForce -= 1.5;
+
 
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            horizontalForce += 3;
+            horizontalForce += 1.5;
 
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            verticalForce -= 3;
+            verticalForce -= 1.5;
 
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            verticalForce += 3;
+            verticalForce += 1.5;
 
         }
 
@@ -149,7 +145,10 @@ public class MyScreen extends ScreenAdapter {
     public void mapCheck() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             if (!Interior) {
+
                 if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 91 && player.getPosition().y < 92)) {
+                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 90 && player.getPosition().y < 92)) {
+
                     switchMap();
                     player.setTransform(55, 75, 0);
                 }
