@@ -7,9 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 
 public class DragandDrop {
-    public   void DragandDrop(final Stage stage, final Window window, final Image img) {
+    public void DragandDrop(final Stage stage, final Window window, final Image img) {
     final DragAndDrop dragdrop = new DragAndDrop();
     window.add(img);
+    img.setPosition(500, 500);
     img.setUserObject(window);
     dragdrop.addSource(new DragAndDrop.Source(img) {
         @Override
@@ -25,6 +26,7 @@ public class DragandDrop {
     public void dragStop(InputEvent event, float x, float y, int pointer, DragAndDrop.Payload payload, DragAndDrop.Target target)     {
             if(target == null) {
                 ((Window)img.getUserObject()).add(img);
+               System.out.println("test");
             }
     }
     });
@@ -36,6 +38,7 @@ public class DragandDrop {
 
         @Override
         public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+            ((Image)(payload.getDragActor())).setPosition(x, y);
             window.add((Image)(payload.getDragActor()));
             img.setUserObject(window);
         }
@@ -48,6 +51,7 @@ public class DragandDrop {
 
         @Override
         public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+            ((Image)(payload.getDragActor())).setPosition(x, y);
                 window.add((Image)(payload.getDragActor()));
                 img.setUserObject(window);
         }
