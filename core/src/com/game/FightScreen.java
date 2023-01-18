@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ScreenUtils;
 import java.util.Random;
 
@@ -28,30 +29,33 @@ public class FightScreen extends ScreenAdapter {
     private Texture img;
     private Stage stage;
     public GUI inventory;
+    private DragandDrop dragdrop;
 
         public FightScreen(SpriteBatch batch) {
             this.batch = batch;
             create();
         }
         public void create() {
+            dragdrop = new DragandDrop();
             stage = new Stage();
+            r = new Random();
             inventory =  new GUI();
             img = new Texture("Background.png");
             font = new BitmapFont();
             font.setColor(Color.WHITE);
-            r = new Random();
             hero =  Spiel.INSTANCE.fight.getHero();
             monster = Spiel.INSTANCE.fight.getMonster();
             healthHero = hero.getFullLP();
             healthMonster = monster.getFullLP();
             shapeRenderer = new ShapeRenderer();
             HeroSprite = new Sprite(new Texture("Hero.png"));
-            MonsterSprite = new Sprite(new Texture("Monster.png"));
             HeroSprite.setScale(2f);
-            MonsterSprite.setScale(0.5f);
             HeroSprite.setPosition(100, 90);
+            MonsterSprite = new Sprite(new Texture("Monster.png"));
+            MonsterSprite.setScale(0.5f);
             MonsterSprite.setPosition(100, -140);
             MonsterSprite.flip(true, false);
+            dragdrop.DragandDrop(stage, inventory.getInventory(), new Image(new Texture("crystal.png")));
             show();
         }
         public void render(float delta) {
@@ -116,7 +120,8 @@ public class FightScreen extends ScreenAdapter {
         font.draw(batch,"-"+ hero.attack(), 500, 500);
     }
     public void show() {
-    Buttons inv = new Buttons("Inventory", stage, "showInv", 2.21, 2.5, Color.OLIVE);
+
+    Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
     stage.addActor(inventory.getInventory());
     }
     public void hide() {

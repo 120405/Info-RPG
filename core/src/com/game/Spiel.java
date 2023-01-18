@@ -2,15 +2,12 @@ package com.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Spiel extends Game {
     public static Spiel INSTANCE;
     public Fight fight;
     private int money;
     private  TitleScreen title;
-
     private MyScreen game;
     private Shop shop;
     private Inventory inventory;
