@@ -116,7 +116,7 @@ public class FightScreen extends ScreenAdapter {
         font.draw(batch,"-"+ hero.attack(), 500, 500);
     }
     public void show() {
-    Buttons inv = new Buttons("Inventory", stage, "showInv", 2.21, 2.5, Color.OLIVE);
+    Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
     stage.addActor(inventory.getInventory());
     }
     public void hide() {

@@ -17,7 +17,7 @@ public class GUI {
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         window = new Window("", windowStyle);
         window.setSize(img.getWidth(), img.getHeight());
-        window.setPosition(200, 200);
+        window.setPosition(400, 400);
         window.setScale(3f);
         //window.pack();
         window.setVisible(false);
