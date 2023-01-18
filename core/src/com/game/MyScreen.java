@@ -103,6 +103,10 @@ public class MyScreen extends ScreenAdapter {
 
         int horizontalForce = 0;
         int verticalForce = 0;
+        float speed = 1.5f;
+        if ((Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT))){
+        speed = 3f;
+        }
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             horizontalForce -= 1.5;
