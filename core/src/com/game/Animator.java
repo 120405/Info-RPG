@@ -33,15 +33,14 @@ public class Animator implements ApplicationListener {
         stateTime = 0f;
 
         knightWalk = new Texture(Gdx.files.internal("Soldier Walk-Sheet.png"));
-        RunDownAnim = CreateAnimRow(knightWalk, 5, 6,0.2f,0);
-        RunUpAnim = CreateAnimRow(knightWalk, 5, 6,0.2f,1);
-        RunRightAnim = CreateAnimRow(knightWalk, 5, 6,0.2f,2);
-        RunLeftAnim = CreateAnimRow(knightWalk, 5, 6,0.2f,3);
+        RunDownAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 0);
+        RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
+        RunRightAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 2);
+        RunLeftAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 3);
     }
 
 
-
-    public Animation<TextureRegion> CreateAnim(Texture t, int row, int col,float frameTime) {
+    public Animation<TextureRegion> CreateAnim(Texture t, int row, int col, float frameTime) {
         Animation<TextureRegion> Anim = null;
         TextureRegion[][] tmp = TextureRegion.split(t, t.getWidth() / col, t.getHeight() / row);
         TextureRegion[] TR = new TextureRegion[col * row];
@@ -55,7 +54,7 @@ public class Animator implements ApplicationListener {
         return Anim;
     }
 
-    public Animation<TextureRegion> CreateAnimRow(Texture t, int row, int col,float frameTime,int col1) {
+    public Animation<TextureRegion> CreateAnimRow(Texture t, int row, int col, float frameTime, int col1) {
         Animation<TextureRegion> Anim = null;
         TextureRegion[][] tmp = TextureRegion.split(t, t.getWidth() / col, t.getHeight() / row);
         TextureRegion[] TR = new TextureRegion[col * row];
@@ -68,21 +67,18 @@ public class Animator implements ApplicationListener {
         }
         return Anim;
     }
-    public void moveUpdate(){
-         currentFrame = RunUpAnim.getKeyFrame(stateTime, true);
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
-           currentFrame = RunLeftAnim.getKeyFrame(stateTime, true);
-        }
-       else if(Gdx.input.isKeyPressed(Input.Keys.D)){
+
+    public void moveUpdate() {
+        currentFrame = RunUpAnim.getKeyFrame(stateTime, true);
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            currentFrame = RunLeftAnim.getKeyFrame(stateTime, true);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             currentFrame = RunRightAnim.getKeyFrame(stateTime, true);
-        }
-       else if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             currentFrame = RunUpAnim.getKeyFrame(stateTime, true);
-        }
-       else if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             currentFrame = RunDownAnim.getKeyFrame(stateTime, true);
-        }
-        else {
+        } else {
             TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
             currentFrame = tmp[4][0];
         }
@@ -94,9 +90,9 @@ public class Animator implements ApplicationListener {
         stateTime += Gdx.graphics.getDeltaTime();
         moveUpdate();
         knight = new Sprite(currentFrame);
-        knight.setCenter(currentFrame.getRegionWidth()/2f,currentFrame.getRegionHeight()/2f);
-        knight.setOrigin(currentFrame.getRegionWidth()/2f,currentFrame.getRegionHeight()/2f);
-        knight.setPosition(Gdx.graphics.getWidth()/2f-15f,Gdx.graphics.getHeight()/2f+30f);
+        knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
+        knight.setOrigin(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
+        knight.setPosition(Gdx.graphics.getWidth() / 2f - 15f, Gdx.graphics.getHeight() / 2f + 30f);
         knight.scale(3.3f);
 
 
