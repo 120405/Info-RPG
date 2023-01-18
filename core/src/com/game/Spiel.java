@@ -2,8 +2,6 @@ package com.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Spiel extends Game {
     public static Spiel INSTANCE;
@@ -43,7 +41,7 @@ public class Spiel extends Game {
             fight.getHero().setWeapon(item);
         }
         if(type.equals("shield")) {
-            if (fight.getHero().getWeapon() != null) {
+            if (fight.getHero().getShield() != null) {
                 moneyUp(fight.getHero().getShield().getWorth());
             }
                 fight.getHero().setShield(item);
