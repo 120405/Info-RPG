@@ -53,12 +53,11 @@ public class MyScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         handleInput();
         cameraUpdate(delta);
-
-
         map.render();
         animator.render();
         mapCheck();
         map.world.step(1 / 60f, 6, 2);
+
 
 
     }
