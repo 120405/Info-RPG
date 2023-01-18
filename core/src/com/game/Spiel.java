@@ -84,4 +84,7 @@ public class Spiel extends Game {
         return fightScreen;
     }
 
+    public Shop getShop() {
+        return shop;
+    }
 }
