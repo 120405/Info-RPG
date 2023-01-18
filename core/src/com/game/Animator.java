@@ -92,8 +92,10 @@ public class Animator implements ApplicationListener {
         knight = new Sprite(currentFrame);
         knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
         knight.setOrigin(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
-        knight.setPosition(Gdx.graphics.getWidth() / 2f - 15f, Gdx.graphics.getHeight() / 2f + 30f);
-        knight.scale(3.3f);
+        knight.setPosition(Gdx.graphics.getWidth() / 2f - 60f, Gdx.graphics.getHeight() / 2f - 20f);
+        //knight.scale(3.3f);
+        knight.setSize(120f,120f);
+
 
 
         batch.begin();
