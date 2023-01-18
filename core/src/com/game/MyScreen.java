@@ -41,8 +41,8 @@ public class MyScreen extends ScreenAdapter {
         Interior = false;
         pm = new PlayerMap();
         animator = new Animator();
-       map = new MapRender(batch);
-       player = createPlayer();
+        map = new MapRender(batch);
+        player = createPlayer();
 
 
         body = map.b2dPlats(MapRender.layer1);
@@ -50,7 +50,7 @@ public class MyScreen extends ScreenAdapter {
 
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
-        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         handleInput();
         cameraUpdate(delta);
 
@@ -58,10 +58,11 @@ public class MyScreen extends ScreenAdapter {
         map.render();
         animator.render();
         mapCheck();
-        map.world.step(1/60f, 6, 2);
+        map.world.step(1 / 60f, 6, 2);
 
 
     }
+
     public Body createPlayer() {
 
         Body pBody;
@@ -78,25 +79,26 @@ public class MyScreen extends ScreenAdapter {
         return pBody;
 
     }
-    public void switchMap(){
-        if(!Interior){
-            map.NoC(body,MapRender.layer1);
+
+    public void switchMap() {
+        if (!Interior) {
+            map.NoC(body, MapRender.layer1);
             body = map.b2dPlats(MapRender.layer2);
             Interior = true;
-        }
-        else{
-            map.NoC(body,MapRender.layer2);
+        } else {
+            map.NoC(body, MapRender.layer2);
             body = map.b2dPlats(MapRender.layer1);
             Interior = false;
         }
     }
+
     public void handleInput() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.L)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
 
             switchMap();
 
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.O)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
             System.out.println(player.getPosition().x);
             System.out.println(player.getPosition().y);
         }
@@ -104,8 +106,8 @@ public class MyScreen extends ScreenAdapter {
         int horizontalForce = 0;
         int verticalForce = 0;
         float speed = 1.5f;
-        if ((Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))){
-        speed = 2f;
+        if ((Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))) {
+            speed = 2f;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
@@ -138,10 +140,10 @@ public class MyScreen extends ScreenAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Spiel.INSTANCE.titleScreen();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             Spiel.INSTANCE.fightScreen();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             Spiel.INSTANCE.shopScreen();
         }
     }
@@ -150,28 +152,29 @@ public class MyScreen extends ScreenAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             if (!Interior) {
 
-                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 91 && player.getPosition().y < 92)) {
-                    if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 90 && player.getPosition().y < 92)) {
 
-                        switchMap();
-                        player.setTransform(55, 75, 0);
-                    }
+                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 90 && player.getPosition().y < 92)) {
 
-                } else {
-                    if ((player.getPosition().x > 54 && player.getPosition().x < 56) && (player.getPosition().y > 74 && player.getPosition().y < 76)) {
-                        switchMap();
-                        player.setTransform(81, 91, 0);
-                    }
-
+                    switchMap();
+                    player.setTransform(55, 75, 0);
                 }
+
+            } else {
+                if ((player.getPosition().x > 54 && player.getPosition().x < 56) && (player.getPosition().y > 74 && player.getPosition().y < 76)) {
+                    switchMap();
+                    player.setTransform(81, 91, 0);
+                }
+
             }
         }
     }
-    public boolean getInterior(){
-    return Interior;
+
+
+    public boolean getInterior() {
+        return Interior;
     }
 
-    public MapRender getMap(){
+    public MapRender getMap() {
         return map;
 
     }
