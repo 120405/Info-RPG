@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="New Map">
-      <change afterPath="$PROJECT_DIR$/assets/Cave Wall.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/Grass.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/Path.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/MapRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MapRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Buttons.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Buttons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Spiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Spiel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,5 +242,19 @@
     <MESSAGE value="Cave" />
     <MESSAGE value="New Map" />
     <option name="LAST_COMMIT_MESSAGE" value="New Map" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

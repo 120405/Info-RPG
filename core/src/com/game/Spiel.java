@@ -44,7 +44,7 @@ public class Spiel extends Game {
             fight.getHero().setWeapon(item);
         }
         if(type.equals("shield")) {
-            if (fight.getHero().getWeapon() != null) {
+            if (fight.getHero().getShield() != null) {
                 moneyUp(fight.getHero().getShield().getWorth());
             }
                 fight.getHero().setShield(item);
@@ -87,4 +87,7 @@ public class Spiel extends Game {
         return fightScreen;
     }
 
+    public Shop getShop() {
+        return shop;
+    }
 }

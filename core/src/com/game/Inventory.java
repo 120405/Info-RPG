@@ -1,12 +1,14 @@
 package com.game;
 
 public class Inventory {
-    public Item sword;
-    public Item shield;
+    private Item sword;
+    private Item shield;
+    private Item dagger;
 
     public Inventory(){
-        sword = new Item("", "Sword", 100, 20, 5, 50, "");
-        shield = new Item("", "Shield", 100, 5, 20, 80, "");
+        sword = new Item("", "Sword", 100, 20, 0, 50, "");
+        shield = new Item("", "Shield", 100, 0, 20, 80, "");
+        dagger = new Item("", "Dagger", 200, 15, 0, 100, "");
     }
 
     public Item getSword() {
@@ -15,5 +17,9 @@ public class Inventory {
 
     public Item getShield() {
         return shield;
+    }
+
+    public Item getDagger() {
+        return dagger;
     }
 }
