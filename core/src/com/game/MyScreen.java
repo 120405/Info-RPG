@@ -146,13 +146,23 @@ public class MyScreen extends ScreenAdapter {
         }
     }
 
-    public void mapCheck(){
-        if(!Interior){
-        if((player.getPosition().x>80 && player.getPosition().x<82) && (player.getPosition().y>91 && player.getPosition().y<92 ) ) {
-            switchMap();
-            player.setTransform(55,75,0);
-        }
+    public void mapCheck() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            if (!Interior) {
+                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 91 && player.getPosition().y < 92)) {
+                    switchMap();
+                    player.setTransform(55, 75, 0);
+                }
 
+            }
+
+            else {
+                if ((player.getPosition().x > 54 && player.getPosition().x < 56) && (player.getPosition().y > 74 && player.getPosition().y < 76)) {
+                    switchMap();
+                    player.setTransform(81, 91, 0);
+                }
+
+            }
         }
     }
 
