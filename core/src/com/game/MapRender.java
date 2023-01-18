@@ -127,6 +127,7 @@ public class MapRender {
     }
 
 
+
     private void handleInput() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
