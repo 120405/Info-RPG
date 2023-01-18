@@ -2,13 +2,13 @@ package com.game;
 
 public class Item {
 
-String look;
-String name;
-int dur;
-int atk;
-int def;
-int worth;
-String effect;
+private String look;
+private String name;
+private int dur;
+private int atk;
+private int def;
+private int worth;
+private String effect;
 
 
 public Item(String look, String name, int dur, int atk, int def, int worth, String effect) {

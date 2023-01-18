@@ -16,12 +16,14 @@ public class Buttons {
     private BitmapFont font;
     private boolean isOpen = false;
     private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
+    private Color color1;
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
         font = new BitmapFont();
         style = new TextButton.TextButtonStyle();
         style.font = font;
-        style.fontColor = color;
+        color1 = color;
+        style.fontColor = color1;
         button = new TextButton(displayedText, style);
         button.getLabel().setFontScale(5F);
         stage.addActor(button);
@@ -50,7 +52,7 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wx) {
                                 Spiel.INSTANCE.buyItem(x, "weapon");
                                 Spiel.INSTANCE.moneyDown(wx);
-                                accepted.play();
+                                accepted.play(0.5f);
                             }
                         }
                         break;
@@ -61,8 +63,19 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wy){
                                 Spiel.INSTANCE.buyItem(y, "shield");
                                 Spiel.INSTANCE.moneyDown(wy);
-                                accepted.play();
+                                accepted.play(0.5f);
                         }
+                        }
+                        break;
+                    case "buyDagger":
+                        Item z = Spiel.INSTANCE.getInventory().getDagger();
+                        int wz = z.getWorth();
+                        if (z != Spiel.INSTANCE.fight.getHero().getWeapon()) {
+                            if (Spiel.INSTANCE.getMoney() >= wz){
+                                Spiel.INSTANCE.buyItem(z, "weapon");
+                                Spiel.INSTANCE.moneyDown(wz);
+                                accepted.play(0.5f);
+                            }
                         }
                         break;
                     case "options":
@@ -90,5 +103,8 @@ public class Buttons {
     }
     public TextButton getButton() {
         return button;
+    }
+    public  void setColor1(Color color){
+        color1 = color;
     }
 }
