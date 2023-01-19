@@ -30,6 +30,10 @@ public class MapRender {
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
     public Body b1[][];
+    private int[] foregroundOverworld= {3};
+    private int[] backgroundOverworld= {0,1,2};
+    private int[] foregroundInterior= {3};
+    private int[] backgroundInterior= {0,1,2};
 
 
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
@@ -52,6 +56,7 @@ public class MapRender {
         cam.update();
         layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
         layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
+
 
 
     }
@@ -159,17 +164,17 @@ public class MapRender {
 
     }
 
-    public void render() {
+    public void renderForeground() {
 
         //handleInput();
         batch.setProjectionMatrix(cam.combined);
         cam.update();
         if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
             tmr.setView(cam);
-            tmr.render();
+            tmr.render(foregroundOverworld);
         } else {
             tmr2.setView(cam);
-            tmr2.render();
+            tmr2.render(foregroundInterior);
         }
 
         Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
@@ -177,6 +182,18 @@ public class MapRender {
 
 
     }
+    public void renderBackground() {
+        batch.setProjectionMatrix(cam.combined);
+        cam.update();
+        if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
+            tmr.setView(cam);
+            tmr.render(backgroundOverworld);
+        } else {
+            tmr2.setView(cam);
+            tmr2.render(backgroundInterior);
+        }
+    }
+
 
     public void dispose() {
         tmr.dispose();
