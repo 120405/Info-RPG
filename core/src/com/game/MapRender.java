@@ -30,12 +30,23 @@ public class MapRender {
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
     public Body b1[][];
+    private int[] foregroundOverworld= {5};
+    private int[] backgroundOverworld= {0,1,4};
+    private int[] backgroundOverworld2= {4};
+    private int[] foregroundInterior= {3};
+    private int[] backgroundInterior= {0,1,2};
+    private int[] water1 = {3};
+    private int[] water2 = {2};
+    private float elapsedSinceAnimation;
+    private boolean waterframe;
+    Box2DDebugRenderer debugRenderer;
 
 
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
     // Collisions zu erstellen
     public MapRender(SpriteBatch batch) {
-
+        waterframe = true;
+        elapsedSinceAnimation = 0f;
         world = new World(new Vector2(0, 0), false);
         this.batch = new SpriteBatch();
         tiledmap1 = new TmxMapLoader().load("1.tmx");
@@ -52,6 +63,8 @@ public class MapRender {
         cam.update();
         layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
         layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
+        debugRenderer = new Box2DDebugRenderer();
+
 
 
     }
@@ -159,24 +172,56 @@ public class MapRender {
 
     }
 
-    public void render() {
+    public void renderForeground() {
 
         //handleInput();
         batch.setProjectionMatrix(cam.combined);
         cam.update();
         if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
             tmr.setView(cam);
-            tmr.render();
+            tmr.render(foregroundOverworld);
         } else {
             tmr2.setView(cam);
-            tmr2.render();
+            tmr2.render(foregroundInterior);
         }
 
-        Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+       // Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
         debugRenderer.render(world, cam.combined);
 
 
     }
+    public void renderBackground() {
+        batch.setProjectionMatrix(cam.combined);
+        cam.update();
+        if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
+
+            tmr.setView(cam);
+            tmr.render(backgroundOverworld);
+            renderWater();
+            tmr.render(backgroundOverworld2);
+
+
+        } else {
+            tmr2.setView(cam);
+            tmr2.render(backgroundInterior);
+        }
+    }
+    public void renderWater() {
+        elapsedSinceAnimation += Gdx.graphics.getDeltaTime();
+
+        if (elapsedSinceAnimation > 0.5f) {
+            waterframe = !waterframe;
+            elapsedSinceAnimation = 0.0f;
+        }
+        if(waterframe){
+            tmr.render(water1);
+        }
+        else {
+            tmr.render(water2);
+        }
+    }
+
+
 
     public void dispose() {
         tmr.dispose();
