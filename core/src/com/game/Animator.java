@@ -18,6 +18,7 @@ public class Animator implements ApplicationListener {
     Animation<TextureRegion> RunLeftAnim;
     Animation<TextureRegion> RunRightAnim;
     TextureRegion currentFrame;
+    String orientation;
 
 
     Sprite knight;
@@ -31,7 +32,7 @@ public class Animator implements ApplicationListener {
     public void create() {
         batch = new SpriteBatch();
         stateTime = 0f;
-
+        orientation = "down";
         knightWalk = new Texture(Gdx.files.internal("Soldier Walk-Sheet.png"));
         RunDownAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 0);
         RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
@@ -69,18 +70,43 @@ public class Animator implements ApplicationListener {
     }
 
     public void moveUpdate() {
+
         currentFrame = RunUpAnim.getKeyFrame(stateTime, true);
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             currentFrame = RunLeftAnim.getKeyFrame(stateTime, true);
+            orientation = "left";
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             currentFrame = RunRightAnim.getKeyFrame(stateTime, true);
+            orientation = "right";
         } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             currentFrame = RunUpAnim.getKeyFrame(stateTime, true);
+            orientation = "up";
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             currentFrame = RunDownAnim.getKeyFrame(stateTime, true);
+            orientation = "down";
         } else {
-            TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
-            currentFrame = tmp[4][0];
+            switch (orientation) {
+                case "down": {
+                    TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
+                    currentFrame = tmp[4][0];
+                    break;
+                }
+                case "up": {
+                    TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
+                    currentFrame = tmp[4][1];
+                    break;
+                }
+                case "left": {
+                    TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
+                    currentFrame = tmp[4][3];
+                    break;
+                }
+                case "right": {
+                    TextureRegion[][] tmp = TextureRegion.split(knightWalk, knightWalk.getWidth() / 6, knightWalk.getHeight() / 5);
+                    currentFrame = tmp[4][2];
+                    break;
+                }
+            }
         }
     }
 
@@ -92,8 +118,10 @@ public class Animator implements ApplicationListener {
         knight = new Sprite(currentFrame);
         knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
         knight.setOrigin(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
-        knight.setPosition(Gdx.graphics.getWidth() / 2f - 15f, Gdx.graphics.getHeight() / 2f + 30f);
-        knight.scale(3.3f);
+        knight.setPosition(Gdx.graphics.getWidth() / 2f - 60f, Gdx.graphics.getHeight() / 2f - 20f);
+        //knight.scale(3.3f);
+        knight.setSize(120f,120f);
+
 
 
         batch.begin();
