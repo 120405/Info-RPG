@@ -15,7 +15,6 @@ public class Spiel extends Game {
     private Options options;
     private final String name;
     private Npc npc;
-    private Player player;
 
     public Spiel(String name) {
         this.name = name;
@@ -104,8 +103,5 @@ public class Spiel extends Game {
 
     public Npc getNpc() {
         return npc;
-    }
-    public Player getPlayer(){
-        return player;
     }
 }
