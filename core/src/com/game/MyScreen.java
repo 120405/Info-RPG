@@ -66,10 +66,13 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         handleInput();
         cameraUpdate(delta);
-        map.render();
+
+        map.renderBackground();
         animator.render();
+        map.renderForeground();
         mapCheck();
         map.world.step(1 / 60f, 6, 2);
+
 
 
 
