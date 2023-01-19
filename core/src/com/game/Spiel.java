@@ -14,6 +14,8 @@ public class Spiel extends Game {
     private FightScreen fightScreen;
     private Options options;
     private final String name;
+    private Npc npc;
+    private Player player;
 
     public Spiel(String name) {
         this.name = name;
@@ -57,6 +59,8 @@ public class Spiel extends Game {
         fight = new Fight(80, 80, 20, "Monster", 100, 100, 20, "Hero");
         SpriteBatch batch = new SpriteBatch();
         game = new MyScreen(batch);
+        npc = new Npc(1f);
+        //player= new Player();
 
         shop = new Shop(batch);
         options = new Options(batch);
@@ -96,5 +100,12 @@ public class Spiel extends Game {
 
     public Shop getShop() {
         return shop;
+    }
+
+    public Npc getNpc() {
+        return npc;
+    }
+    public Player getPlayer(){
+        return player;
     }
 }
