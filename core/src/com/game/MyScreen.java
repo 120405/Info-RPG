@@ -58,7 +58,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         pm = new PlayerMap();
         animator = new Animator();
         map = new MapRender(batch);
-        viewport = new FitViewport(2560/60f,1440/60f);
+        viewport = new FitViewport(Gdx.graphics.getWidth()/60f,Gdx.graphics.getHeight()/60f);
         stage = new Stage(viewport);
 
         player = createPlayer();
