@@ -116,14 +116,14 @@ public class Animator implements ApplicationListener {
         stateTime += Gdx.graphics.getDeltaTime();
         moveUpdate();
         knight = new Sprite(currentFrame);
-        knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
-        knight.setOrigin(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
-        knight.setPosition(Gdx.graphics.getWidth() / 2f - 60f, Gdx.graphics.getHeight() / 2f - 20f);
+       // knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
+        knight.setOrigin(0,0);
+        knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().x-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().y-0.8f);
         //knight.scale(3.3f);
-        knight.setSize(120f,120f);
+        knight.setSize(3f,3f);
 
 
-
+        batch.setProjectionMatrix(Spiel.INSTANCE.getMyScreen().getMap().getCam().combined);
         batch.begin();
 
         knight.draw(batch);

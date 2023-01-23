@@ -24,7 +24,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
 public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
     private final SpriteBatch batch;
@@ -36,8 +40,9 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
     private Body[][] body;
     private boolean Interior;
     float bR = 0;
-
+    private Viewport viewport;
     private boolean tagged;
+    private Stage stage;
 
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
@@ -53,8 +58,11 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         pm = new PlayerMap();
         animator = new Animator();
         map = new MapRender(batch);
+        viewport = new FitViewport(2560/60f,1440/60f);
+        stage = new Stage(viewport);
 
         player = createPlayer();
+
         //npc = createNpc();
 
 
