@@ -61,7 +61,7 @@ public class MapRender {
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
-        cam.setToOrtho(false,2560/60f,1440/60f);
+        cam.setToOrtho(false,Gdx.graphics.getWidth()/60f,Gdx.graphics.getHeight()/60f);
         layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
         layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
         debugRenderer = new Box2DDebugRenderer();
