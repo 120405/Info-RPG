@@ -43,6 +43,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
     private Viewport viewport;
     private boolean tagged;
     private Stage stage;
+    private MapInteraction mi;
 
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
@@ -60,13 +61,15 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         map = new MapRender(batch);
         viewport = new FitViewport(Gdx.graphics.getWidth()/60f,Gdx.graphics.getHeight()/60f);
         stage = new Stage(viewport);
-
         player = createPlayer();
+
+
 
         //npc = createNpc();
 
 
         body = map.b2dPlats(MapRender.layer1);
+        mi = new MapInteraction(80,90,map.world);
     }
 
     public void render(float delta) {

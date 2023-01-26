@@ -30,11 +30,11 @@ public class MapRender {
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
     public Body b1[][];
-    private int[] foregroundOverworld= {5};
-    private int[] backgroundOverworld= {0,1,4};
-    private int[] backgroundOverworld2= {4};
-    private int[] foregroundInterior= {3};
-    private int[] backgroundInterior= {0,1,2};
+    private final int[] foregroundOverworld= {5};
+    private final int[] backgroundOverworld= {0,1,4};
+    private final int[] backgroundOverworld2= {4};
+    private final int[] foregroundInterior= {3};
+    private final int[] backgroundInterior= {0,1,2};
     private int[] water1 = {3};
     private int[] water2 = {2};
     private float elapsedSinceAnimation;
