@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.utils.Location;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,6 +27,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.graalvm.compiler.phases.common.NodeCounterPhase;
@@ -45,6 +47,8 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private Stage stage;
     private MapInteraction mi;
     private MapInteraction[] InteractionArray;
+    private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
+    //float delta;
 
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
@@ -63,6 +67,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage(viewport);
         player = createPlayer();
+        music.setVolume(0.1f);
 
         //npc = createNpc();
         body = map.b2dPlats(MapRender.layer1);
@@ -80,23 +85,61 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         //mapCheck();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
-
+        musicUpdate();
 
     }
-    private void createContactsOverworld(){
+
+    private void createContactsOverworld() {
         InteractionArray = new MapInteraction[1];
         InteractionArray[0] = new MapInteraction(81, 92, map.world, 55, 75);
     }
-    private void createContactsInterior(){
+
+    private void createContactsInterior() {
         InteractionArray = new MapInteraction[1];
         InteractionArray[0] = new MapInteraction(55, 75, map.world, 81, 91);
     }
-    private void deleteContacts(){
-        for (int i = 0;i < InteractionArray.length;i++) {
+
+    private void deleteContacts() {
+        for (int i = 0; i < InteractionArray.length; i++) {
             map.world.destroyBody(InteractionArray[i].pBody);
             InteractionArray[i] = null;
         }
     }
+
+    public void musicUpdate() {
+        if (!getInterior() && !music.isPlaying()) {
+            music.play();
+        }
+
+    }
+
+    public void musicFade() {
+        float delay = 0.2f;
+        for (int i = 0; i < 13; i++) {
+
+                // seconds
+
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        music.setVolume(music.getVolume() - 0.007f);
+                        System.out.println("EE");
+                    }
+                }, delay);
+                delay = delay + 0.2f;
+            }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                music.stop();
+            }
+        }, 2.6f);
+
+
+
+        }
+
+
 
     public Body createPlayer() {
 
@@ -150,8 +193,8 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
 
     public void enterCheck() {
         for (int i = 0; i < InteractionArray.length; i++) {
-            if (InteractionArray[i].isEntrance()&&Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                player.setTransform(InteractionArray[i].getTargetX(),InteractionArray[i].getTargetY(),0);
+            if (InteractionArray[i].isEntrance() && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                player.setTransform(InteractionArray[i].getTargetX(), InteractionArray[i].getTargetY(), 0);
                 switchMap();
             }
         }
@@ -213,6 +256,9 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             Spiel.INSTANCE.shopScreen();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            musicFade();
         }
     }
 

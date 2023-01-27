@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Animator implements ApplicationListener {
     SpriteBatch batch;
     Texture knightWalk;
+    Texture shipTexture;
+    Sprite ship;
     float stateTime;
     Animation<TextureRegion> RunUpAnim;
     Animation<TextureRegion> RunDownAnim;
@@ -34,6 +36,12 @@ public class Animator implements ApplicationListener {
         stateTime = 0f;
         orientation = "down";
         knightWalk = new Texture(Gdx.files.internal("Soldier Walk-Sheet.png"));
+        shipTexture = new Texture(Gdx.files.internal("Ship/shipDown.png"));
+
+        ship = new Sprite(shipTexture);
+        ship.setSize(10f,10f);
+        ship.setCenter(ship.getWidth()/2,ship.getHeight()/2);
+        ship.setPosition(54,85);
         RunDownAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 0);
         RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
         RunRightAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 2);
@@ -116,10 +124,8 @@ public class Animator implements ApplicationListener {
         stateTime += Gdx.graphics.getDeltaTime();
         moveUpdate();
         knight = new Sprite(currentFrame);
-       // knight.setCenter(currentFrame.getRegionWidth() / 2f, currentFrame.getRegionHeight() / 2f);
         knight.setOrigin(0,0);
         knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().x-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().y-0.8f);
-        //knight.scale(3.3f);
         knight.setSize(3f,3f);
 
 
@@ -127,6 +133,7 @@ public class Animator implements ApplicationListener {
         batch.begin();
 
         knight.draw(batch);
+        ship.draw(batch);
 
         batch.end();
     }
