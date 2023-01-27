@@ -39,6 +39,7 @@ public class MapRender {
     private int[] water2 = {2};
     private float elapsedSinceAnimation;
     private boolean waterframe;
+
     Box2DDebugRenderer debugRenderer;
 
 
@@ -48,6 +49,7 @@ public class MapRender {
         waterframe = true;
         elapsedSinceAnimation = 0f;
         world = new World(new Vector2(0, 0), false);
+        world.setContactListener(new ListenerClass());
         this.batch = new SpriteBatch();
         tiledmap1 = new TmxMapLoader().load("1.tmx");
         tiledmap2 = new TmxMapLoader().load("2.tmx");

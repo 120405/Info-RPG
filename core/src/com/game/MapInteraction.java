@@ -3,14 +3,27 @@ package com.game;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class MapInteraction {
-    public MapInteraction(int x,int y,World world){
+    private final int tX;
+    private final int tY;
+    private Fixture fixture;
+    private boolean entrance;
+    int x;
+    int y;
+    Body pBody;
+    World world;
+    public MapInteraction(int x,int y,World world,int targetX,int targetY){
         createBox(x,y,world);
+        tX = targetX;
+        tY = targetY;
+        entrance = false;
     }
+
     public void createBox(int x, int y, World world){
-        Body pBody;
+
+
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(80, 80);
+        def.position.set(x, y);
         def.fixedRotation = true;
         pBody = world.createBody(def);
         PolygonShape shape = new PolygonShape();
@@ -19,12 +32,34 @@ public class MapInteraction {
         FixtureDef fixDef = new FixtureDef();
         fixDef.shape = shape;
         fixDef.friction = 1f;
-        fixDef.restitution = 1f;
-        Fixture fixture = pBody.createFixture(fixDef);
+        //fixDef.restitution = 1f;
+        fixDef.isSensor = true;
+        fixture = pBody.createFixture(fixDef);
         //fixDef.isSensor = true;
         shape.dispose();
 
 
     }
+    public void showBox(){
+        createBox(x,y,world);
+    }
+    public void hideBox(){
+        world.destroyBody(pBody);
+    }
+    public int getTargetX(){
+        return tX;
+    }
+    public int getTargetY(){
+        return tY;
+    }
+    public Fixture getFixture() {
+        return fixture;
+    }
 
+    public boolean isEntrance() {
+        return entrance;
+    }
+    public void setEntrance(boolean b){
+        entrance = b;
+    }
 }

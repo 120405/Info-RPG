@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
-public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
+public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private final SpriteBatch batch;
     private Animator animator;
     private MapRender map;
@@ -44,6 +44,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
     private boolean tagged;
     private Stage stage;
     private MapInteraction mi;
+    private MapInteraction[] InteractionArray;
 
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
@@ -59,17 +60,13 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         pm = new PlayerMap();
         animator = new Animator();
         map = new MapRender(batch);
-        viewport = new FitViewport(Gdx.graphics.getWidth()/60f,Gdx.graphics.getHeight()/60f);
+        viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage(viewport);
         player = createPlayer();
 
-
-
         //npc = createNpc();
-
-
         body = map.b2dPlats(MapRender.layer1);
-        mi = new MapInteraction(80,90,map.world);
+        createContactsOverworld();
     }
 
     public void render(float delta) {
@@ -77,16 +74,28 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         handleInput();
         cameraUpdate(delta);
-
         map.renderBackground();
         animator.render();
         map.renderForeground();
-        mapCheck();
+        //mapCheck();
         map.world.step(1 / 60f, 6, 2);
+        enterCheck();
 
 
-
-
+    }
+    private void createContactsOverworld(){
+        InteractionArray = new MapInteraction[1];
+        InteractionArray[0] = new MapInteraction(81, 92, map.world, 55, 75);
+    }
+    private void createContactsInterior(){
+        InteractionArray = new MapInteraction[1];
+        InteractionArray[0] = new MapInteraction(55, 75, map.world, 81, 91);
+    }
+    private void deleteContacts(){
+        for (int i = 0;i < InteractionArray.length;i++) {
+            map.world.destroyBody(InteractionArray[i].pBody);
+            InteractionArray[i] = null;
+        }
     }
 
     public Body createPlayer() {
@@ -127,13 +136,27 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         if (!Interior) {
             map.NoC(body, MapRender.layer1);
             body = map.b2dPlats(MapRender.layer2);
+            deleteContacts();
+            createContactsInterior();
             Interior = true;
         } else {
             map.NoC(body, MapRender.layer2);
             body = map.b2dPlats(MapRender.layer1);
+            deleteContacts();
+            createContactsOverworld();
             Interior = false;
         }
     }
+
+    public void enterCheck() {
+        for (int i = 0; i < InteractionArray.length; i++) {
+            if (InteractionArray[i].isEntrance()&&Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                player.setTransform(InteractionArray[i].getTargetX(),InteractionArray[i].getTargetY(),0);
+                switchMap();
+            }
+        }
+    }
+
 
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
@@ -177,7 +200,6 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         player.setLinearVelocity(verticalForce * 5, player.getLinearVelocity().x);
 
 
-
         if (Gdx.input.isKeyPressed(Input.Keys.I)) {
             Spiel.INSTANCE.shopScreen();
 
@@ -194,32 +216,10 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         }
     }
 
-    public void mapCheck() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            if (!Interior) {
-
-
-                if ((player.getPosition().x > 80 && player.getPosition().x < 82) && (player.getPosition().y > 90 && player.getPosition().y < 92)) {
-
-                    switchMap();
-                    player.setTransform(55, 75, 0);
-                }
-
-            } else {
-                if ((player.getPosition().x > 54 && player.getPosition().x < 56) && (player.getPosition().y > 74 && player.getPosition().y < 76)) {
-                    switchMap();
-                    player.setTransform(81, 91, 0);
-                }
-
-            }
-        }
-    }
-
 
     public boolean getInterior() {
         return Interior;
     }
-
 
 
     public void cameraUpdate(float delta) {
@@ -237,6 +237,10 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         batch.dispose();
         map.dispose();
         animator.dispose();
+    }
+
+    public MapInteraction[] getInteractionArray() {
+        return InteractionArray;
     }
 
     public Body getPlayer() {
@@ -352,7 +356,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2>{
         return null;
     }
 
-    public Vector2 newVector(){
-        return  new Vector2();
+    public Vector2 newVector() {
+        return new Vector2();
     }
 }
