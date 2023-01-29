@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.game.items.Item;
 
 public class Buttons {
 
@@ -17,8 +18,10 @@ public class Buttons {
     private boolean isOpen = false;
     private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
     private Color color1;
+    private Spiel game;
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
+    	game = Spiel.INSTANCE;
         font = new BitmapFont();
         style = new TextButton.TextButtonStyle();
         style.font = font;
@@ -34,66 +37,100 @@ public class Buttons {
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
                 switch (action) {
                     case "game":
-                        Spiel.INSTANCE.gameScreen();
+                    	game.getInventoryGUI().getInventory().clear();
+                    	game.getDatabase().setGameID(0);
+                    	game.loadItems();
+                    	game.gameScreen();
                         break;
                     case "title":
-                        Spiel.INSTANCE.titleScreen();
+                    	game.titleScreen();
                         break;
                     case "shop":
-                        Spiel.INSTANCE.shopScreen();
+                    	game.shopScreen();
                         break;
-                    case "quit":
+                    case "quit":               	
+                    	if(game.saveEnabled) {
+                    		if(!game.getDatabase().doesGameExist()) {
+                    			game.getDatabase().setGameID(1);;
+                       	}
+                    		game.getDatabase().save(game.getItems(), game.fight.getHero().getLP(), game.fight.getMonster().getLP(), game.getMoney());
+                    	}
+                    	game.getDatabase().saveOptions();
                         System.exit(0);
                         break;
                     case "buySword":
-                        Item x = Spiel.INSTANCE.getInventory().getSword();
+                        Item x = game.getInventory().getSword();
                         int wx = x.getWorth();
-                        if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= wx) {
-                                Spiel.INSTANCE.buyItem(x, "weapon");
-                                Spiel.INSTANCE.moneyDown(wx);
+                        if (x != game.fight.getHero().getWeapon()) {
+                            if (game.getMoney() >= wx) {
+                            	game.buyItem(x, "weapon");
+                            	game.moneyDown(wx);
                                 accepted.play(0.5f);
                             }
                         }
                         break;
                     case "buyShield":
-                        Item y = Spiel.INSTANCE.getInventory().getShield();
+                        Item y = game.getInventory().getShield();
                         int wy = y.getWorth();
-                        if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
-                            if (Spiel.INSTANCE.getMoney() >= wy){
-                                Spiel.INSTANCE.buyItem(y, "shield");
-                                Spiel.INSTANCE.moneyDown(wy);
+                        if (y != game.fight.getHero().getShield()) {
+                            if (game.getMoney() >= wy){
+                            	game.buyItem(y, "shield");
+                            	game.moneyDown(wy);
                                 accepted.play(0.5f);
                         }
                         }
                         break;
                     case "buyDagger":
-                        Item z = Spiel.INSTANCE.getInventory().getDagger();
+                        Item z = game.getInventory().getDagger();
                         int wz = z.getWorth();
-                        if (z != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= wz){
-                                Spiel.INSTANCE.buyItem(z, "weapon");
-                                Spiel.INSTANCE.moneyDown(wz);
+                        if (z != game.fight.getHero().getWeapon()) {
+                            if (game.getMoney() >= wz){
+                            	game.buyItem(z, "weapon");
+                            	game.moneyDown(wz);
                                 accepted.play(0.5f);
                             }
                         }
                         break;
                     case "options":
-                        Spiel.INSTANCE.optionsScreen();
+                    	game.optionsScreen();
                         break;
                     case "fight":
-                        Spiel.INSTANCE.fightScreen();
+                    	game.fightScreen();
                         break;
                     case "showInv":
                         if(!isOpen) {
-                            Spiel.INSTANCE.getFightScreen().inventory.show();
+                        	game.getFightScreen().inventory.show();
                             isOpen = true;
                         } else {
-                            Spiel.INSTANCE.getFightScreen().inventory.hide();
+                        	game.getFightScreen().inventory.hide();
                             isOpen = false;
                         }
 
                        break;
+                    case "save":
+                    	if(game.saveEnabled == false) {
+                    		style.fontColor = Color.GREEN;
+                    		game.saveEnabled = true;
+                    	} else {
+                    		style.fontColor = Color.RED;
+                    		game.saveEnabled = false;
+                    	}
+                    	break;
+                    case "toGame":
+                    	if(!game.fight.getWinner().equals("")) {
+                    		game.gameScreen();
+                    	}
+                    	break;
+                    case "load":
+                    	game.selectScreen();
+                    	
+                    	break;
+                    case "loadGame":
+                    	game.getInventoryGUI().getInventory().clear();
+                    	game.getDatabase().setGameID(1);
+                    	game.loadItems();//in einen menüscreen überleiten,in welchem die befehle dann ausgeführt werden können
+                    	game.gameScreen();
+                    	break;
                     default:
                         break;
                 }
@@ -104,7 +141,8 @@ public class Buttons {
     public TextButton getButton() {
         return button;
     }
-    public  void setColor1(Color color){
-        color1 = color;
+    public void setText(String text) {
+    	button.setText(text);
     }
+
 }
