@@ -12,7 +12,7 @@ public class Fight {
 
     public String fight() {
         if (monster.getStatus() && hero.getStatus()) {
-            monster.getAttacked(hero.attack(), hero.getEffect());
+            monster.getAttacked(hero.attack(), hero.getEffectRd());
             hero.getAttacked(monster.attack());
         }
             if (!monster.getStatus()) {

@@ -1,5 +1,9 @@
 package com.game;
 
+import com.badlogic.gdx.math.*;
+
+import java.util.Random;
+
 public class Hero {
     private int LP = 0;
     private int random = 0;
@@ -9,6 +13,7 @@ public class Hero {
     private Item shield;
     private String name = "";
     private boolean alive = true;
+    private Random rr;
 
     public Hero(int LP, int fullLP, int ATK, String name) {
         this.LP = LP;
@@ -26,13 +31,19 @@ public class Hero {
         }
     }
 
-    public String getEffect(){
+    public String getEffectRd(){
+        int a = rr.nextInt(100);
         if(weapon == null) {
             return "";
         }else{
-            return weapon.getEffect();
+            if(a <=50) {
+                return weapon.getEffect();
+            }else{
+            return "";
+                }
+            }
         }
-    }
+
 
     public void getAttacked(int strength) {
         if(shield != null) {
