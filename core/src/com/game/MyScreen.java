@@ -48,6 +48,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private MapInteraction mi;
     private MapInteraction[] InteractionArray;
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
+    private Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
     //float delta;
 
     float maxLinearSpeed, maxLinearAcceleration;
@@ -68,6 +69,8 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         stage = new Stage(viewport);
         player = createPlayer();
         music.setVolume(0.1f);
+        music.play();
+        music2.setVolume(0.1f);
 
         //npc = createNpc();
         body = map.b2dPlats(MapRender.layer1);
@@ -85,7 +88,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         //mapCheck();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
-        musicUpdate();
+        //musicUpdate();
 
     }
 
@@ -113,7 +116,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
 
     }
 
-    public void musicFade() {
+    public void musicFadeOut(final Music music) {
         float delay = 0.2f;
         for (int i = 0; i < 13; i++) {
 
@@ -123,7 +126,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
                     @Override
                     public void run() {
                         music.setVolume(music.getVolume() - 0.007f);
-                        System.out.println("EE");
+
                     }
                 }, delay);
                 delay = delay + 0.2f;
@@ -138,6 +141,32 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
 
 
         }
+    public void musicFadeIn(final Music music) {
+        music.play();
+        float delay = 0.2f;
+        for (int i = 0; i < 13; i++) {
+
+            // seconds
+
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    music.setVolume(music.getVolume() + 0.007f);
+
+                }
+            }, delay);
+            delay = delay + 0.2f;
+        }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+            music.setVolume(0.1f);
+            }
+        }, 2.6f);
+
+
+
+    }
 
 
 
@@ -258,13 +287,26 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
             Spiel.INSTANCE.shopScreen();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            musicFade();
+            System.out.println(music.getVolume());
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            switchMusic(music,music2);
         }
     }
 
 
     public boolean getInterior() {
         return Interior;
+    }
+    public void switchMusic(final Music m1, final Music m2){
+        musicFadeOut(m1);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                m2.setVolume(0.00900001f);
+                musicFadeIn(m2);
+            }
+        }, 2.6f);
     }
 
 
