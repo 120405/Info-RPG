@@ -26,6 +26,14 @@ public class Hero {
         }
     }
 
+    public String getEffect(){
+        if(weapon == null) {
+            return "";
+        }else{
+            return weapon.getEffect();
+        }
+    }
+
     public void getAttacked(int strength) {
         if(shield != null) {
             strength = strength - shield.getDef();
