@@ -6,7 +6,7 @@ public class Inventory {
     private Item dagger;
 
     public Inventory(){
-        sword = new Item("", "Sword", 100, 20, 0, 50, "fire");
+        sword = new Item("", "Sword", 100, 10, 0, 50, "fire");
         shield = new Item("", "Shield", 100, 0, 20, 80, "");
         dagger = new Item("", "Dagger", 200, 15, 0, 100, "");
     }
