@@ -1,6 +1,7 @@
 package com.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Spiel extends Game {
@@ -55,7 +56,7 @@ public class Spiel extends Game {
 
     public void create() {
         inventory = new Inventory();
-        fight = new Fight(80, 80, 20, "Monster", 100, 100, 20, "Hero");
+        fight = new Fight(80, 80, 20, "Monster", 100, 100, 10, "Hero");
         SpriteBatch batch = new SpriteBatch();
         game = new MyScreen(batch);
         npc = new Npc(1f);
@@ -104,4 +105,5 @@ public class Spiel extends Game {
     public Npc getNpc() {
         return npc;
     }
+
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.utils.Location;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,9 +27,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
 public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private final SpriteBatch batch;
@@ -45,6 +46,9 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private Stage stage;
     private MapInteraction mi;
     private MapInteraction[] InteractionArray;
+    private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
+    private Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
+    //float delta;
 
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
@@ -63,8 +67,10 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage(viewport);
         player = createPlayer();
+        music.setVolume(0.1f);
+        music.play();
+        music2.setVolume(0.1f);
 
-        //npc = createNpc();
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
     }
@@ -80,23 +86,87 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         //mapCheck();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
-
+        //musicUpdate();
 
     }
-    private void createContactsOverworld(){
+
+    private void createContactsOverworld() {
         InteractionArray = new MapInteraction[1];
         InteractionArray[0] = new MapInteraction(81, 92, map.world, 55, 75);
     }
-    private void createContactsInterior(){
+
+    private void createContactsInterior() {
         InteractionArray = new MapInteraction[1];
         InteractionArray[0] = new MapInteraction(55, 75, map.world, 81, 91);
     }
-    private void deleteContacts(){
-        for (int i = 0;i < InteractionArray.length;i++) {
+
+    private void deleteContacts() {
+        for (int i = 0; i < InteractionArray.length; i++) {
             map.world.destroyBody(InteractionArray[i].pBody);
             InteractionArray[i] = null;
         }
     }
+
+    public void musicUpdate() {
+        if (!getInterior() && !music.isPlaying()) {
+            music.play();
+        }
+
+    }
+
+    public void musicFadeOut(final Music music) {
+        float delay = 0.2f;
+        for (int i = 0; i < 13; i++) {
+
+                // seconds
+
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        music.setVolume(music.getVolume() - 0.007f);
+
+                    }
+                }, delay);
+                delay = delay + 0.2f;
+            }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                music.stop();
+            }
+        }, 2.6f);
+
+
+
+        }
+    public void musicFadeIn(final Music music) {
+        music.play();
+        float delay = 0.2f;
+        for (int i = 0; i < 13; i++) {
+
+            // seconds
+
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    music.setVolume(music.getVolume() + 0.007f);
+
+                }
+            }, delay);
+            delay = delay + 0.2f;
+        }
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+            music.setVolume(0.1f);
+            }
+        }, 2.6f);
+
+
+
+    }
+
+
 
     public Body createPlayer() {
 
@@ -114,23 +184,6 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         return pBody;
 
     }
-
-    /*public Body createNpc() {
-
-        Body pBody;
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(82, 80);
-        def.fixedRotation = true;
-        pBody = map.world.createBody(def);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.9F, 0.9f);
-        pBody.createFixture(shape, 1.0f);
-        shape.dispose();
-
-        return pBody;
-
-    }*/
 
     public void switchMap() {
         if (!Interior) {
@@ -150,8 +203,8 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
 
     public void enterCheck() {
         for (int i = 0; i < InteractionArray.length; i++) {
-            if (InteractionArray[i].isEntrance()&&Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                player.setTransform(InteractionArray[i].getTargetX(),InteractionArray[i].getTargetY(),0);
+            if (InteractionArray[i].isEntrance() && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                player.setTransform(InteractionArray[i].getTargetX(), InteractionArray[i].getTargetY(), 0);
                 switchMap();
             }
         }
@@ -214,11 +267,27 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             Spiel.INSTANCE.shopScreen();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            System.out.println(music.getVolume());
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            switchMusic(music,music2);
+        }
     }
 
 
     public boolean getInterior() {
         return Interior;
+    }
+    public void switchMusic(final Music m1, final Music m2){
+        musicFadeOut(m1);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                m2.setVolume(0.00900001f);
+                musicFadeIn(m2);
+            }
+        }, 2.6f);
     }
 
 

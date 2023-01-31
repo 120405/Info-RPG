@@ -43,15 +43,19 @@ public class Monster {
             currentEffect = "";
         }
 
-        if(!effect.equals("")) {
+        if(!effect.equals("") || strength != 0) {
             currentEffect = effect;
         }
         if(currentEffect.equals("fire")){
-            effectDuration = 5;
-            damageModifier = 20;
+            if (strength != 0) {
+        	effectDuration = 5;
+            }
+            damageModifier = 100;
         }
         if(currentEffect.equals("poison")){
+        	if (strength != 0) {
             effectDuration = 5;
+        	}
             damageModifier = 5;
             attackModifier = -5;
         }

@@ -20,23 +20,28 @@ public class Hero {
         this.fullLP = fullLP;
         this.ATK = ATK;
         this.name = name;
+        rr = new Random();
     }
 
 
     public int attack() {
+    	int a = rr.nextInt(100);
+    	if(a <= 70) {
         if(weapon == null) {
             return ATK + random;
         }else{
             return ATK + random + weapon.getAtk();
         }
+    	}else {return 0;
+    	}
     }
 
     public String getEffectRd(){
-        int a = rr.nextInt(100);
+         int a = rr.nextInt(100);
         if(weapon == null) {
             return "";
         }else{
-            if(a <=50) {
+            if(a <=60) {
                 return weapon.getEffect();
             }else{
             return "";

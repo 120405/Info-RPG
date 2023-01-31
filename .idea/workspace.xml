@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Effects V1">
+    <list default="true" id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="Music and Music Fade">
+      <change afterPath="$PROJECT_DIR$/assets/Ship/ship.aseprite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/ship11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/ship15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/ship3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/ship7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/shipDown.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/shipLeft.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/shipRight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/shipUp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ship/sprPlayer_strip16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Fight.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Fight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Hero.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/game/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Fight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +60,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
@@ -63,7 +71,7 @@
     </option>
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="c129d875-fdc3-4c70-8435-255817c0aa06" />
+        <option name="accountId" value="6f3cced1-e12d-45bb-b531-2b74d3ba67eb" />
         <option name="url" value="https://github.com/120405/Info-RPG.git" />
       </UrlAndAccount>
     </option>
@@ -79,7 +87,6 @@
   </component>
   <component name="ProjectId" id="2KBx9uFXpiBpB8uiYZlnJ8L6mjc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -304,14 +311,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674758841606</updated>
     </task>
-    <task id="LOCAL-00026" summary="Effects V1">
-      <created>1675103710616</created>
+    <task id="LOCAL-00026" summary="New Interaction System">
+      <created>1674842735014</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1675103710616</updated>
+      <updated>1674842735014</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Music and Music Fade">
+      <created>1674857260482</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1674857260482</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,7 +364,8 @@
     <MESSAGE value="scale fix" />
     <MESSAGE value="zoom fix" />
     <MESSAGE value="Interaction test" />
-    <MESSAGE value="Effects V1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Effects V1" />
+    <MESSAGE value="New Interaction System" />
+    <MESSAGE value="Music and Music Fade" />
+    <option name="LAST_COMMIT_MESSAGE" value="Music and Music Fade" />
   </component>
 </project>
