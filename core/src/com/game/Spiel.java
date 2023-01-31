@@ -1,6 +1,7 @@
 package com.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Spiel extends Game {
@@ -104,4 +105,5 @@ public class Spiel extends Game {
     public Npc getNpc() {
         return npc;
     }
+
 }
