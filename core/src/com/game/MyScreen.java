@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import org.graalvm.compiler.phases.common.NodeCounterPhase;
 
 public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private final SpriteBatch batch;
@@ -71,6 +72,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         music.play();
         music2.setVolume(0.3f);
 
+        //npc = createNpc();
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
     }
@@ -185,6 +187,23 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         return pBody;
 
     }
+
+    /*public Body createNpc() {
+
+        Body pBody;
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(82, 80);
+        def.fixedRotation = true;
+        pBody = map.world.createBody(def);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(0.9F, 0.9f);
+        pBody.createFixture(shape, 1.0f);
+        shape.dispose();
+
+        return pBody;
+
+    }*/
 
     public void switchMap() {
         if (!Interior) {
