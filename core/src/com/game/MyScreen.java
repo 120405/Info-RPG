@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import org.graalvm.compiler.phases.common.NodeCounterPhase;
+
 
 public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private final SpriteBatch batch;
@@ -49,8 +49,6 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     private MapInteraction[] InteractionArray;
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
     private Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
-    //float delta;
-
     float maxLinearSpeed, maxLinearAcceleration;
     float maxAngularSpeed, maxAngularAcceleration;
 
@@ -71,8 +69,6 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         music.setVolume(0.3f);
         music.play();
         music2.setVolume(0.3f);
-
-        //npc = createNpc();
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
     }
@@ -85,12 +81,38 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         map.renderBackground();
         animator.render();
         map.renderForeground();
-        //mapCheck();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
-        //musicUpdate();
+    }
+
+    public void cameraUpdate(float delta) {
+        Camera cam = map.getCam();
+        Vector3 position = cam.position;
+        position.x = player.getPosition().x;
+        position.y = player.getPosition().y;
+
+        cam.position.set(position);
+
+        cam.update();
+    }
+
+    public Body createPlayer() {
+
+        Body pBody;
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(80, 80);
+        def.fixedRotation = true;
+        pBody = map.world.createBody(def);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(0.9F, 0.9f);
+        pBody.createFixture(shape, 1.0f);
+        shape.dispose();
+
+        return pBody;
 
     }
+
 
     private void createContactsOverworld() {
         InteractionArray = new MapInteraction[1];
@@ -109,11 +131,26 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         }
     }
 
-    public void musicUpdate() {
-        if (!getInterior() && !music.isPlaying()) {
-            music.play();
+    public void enterCheck() {
+        for (int i = 0; i < InteractionArray.length; i++) {
+            if (InteractionArray[i].isEntrance() && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                player.setTransform(InteractionArray[i].getTargetX(), InteractionArray[i].getTargetY(), 0);
+                switchMap();
+            }
         }
+    }
 
+
+
+    public void switchMusic(final Music m1, final Music m2) {
+        musicFadeOut(m1);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                musicFadeIn(m2);
+            }
+        }, 2.6f);
     }
 
     public void musicFadeOut(final Music music) {
@@ -138,8 +175,6 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
                 music.stop();
             }
         }, 2.6f);
-
-
     }
 
     public void musicFadeIn(final Music music) {
@@ -166,27 +201,11 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
                 music.setVolume(goal);
             }
         }, 2.6f);
-
-
     }
 
 
-    public Body createPlayer() {
 
-        Body pBody;
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(80, 80);
-        def.fixedRotation = true;
-        pBody = map.world.createBody(def);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.9F, 0.9f);
-        pBody.createFixture(shape, 1.0f);
-        shape.dispose();
 
-        return pBody;
-
-    }
 
     /*public Body createNpc() {
 
@@ -221,14 +240,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         }
     }
 
-    public void enterCheck() {
-        for (int i = 0; i < InteractionArray.length; i++) {
-            if (InteractionArray[i].isEntrance() && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-                player.setTransform(InteractionArray[i].getTargetX(), InteractionArray[i].getTargetY(), 0);
-                switchMap();
-            }
-        }
-    }
+
 
 
     public void handleInput() {
@@ -295,40 +307,7 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
         }
     }
 
-
-    public boolean getInterior() {
-        return Interior;
-    }
-
-    public void switchMusic(final Music m1, final Music m2){
-        musicFadeOut(m1);
-
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                musicFadeIn(m2);
-            }
-        }, 2.6f);
-    }
-
-
-    public void cameraUpdate(float delta) {
-        Camera cam = map.getCam();
-        Vector3 position = cam.position;
-        position.x = player.getPosition().x;
-        position.y = player.getPosition().y;
-
-        cam.position.set(position);
-
-        cam.update();
-    }
-
-    public void dispose() {
-        batch.dispose();
-        map.dispose();
-        animator.dispose();
-    }
-
+    public boolean getInterior() {return Interior;}
     public MapInteraction[] getInteractionArray() {
         return InteractionArray;
     }
@@ -449,4 +428,11 @@ public class MyScreen extends ScreenAdapter implements Steerable<Vector2> {
     public Vector2 newVector() {
         return new Vector2();
     }
+
+    public void dispose() {
+        batch.dispose();
+        map.dispose();
+        animator.dispose();
+    }
 }
+
