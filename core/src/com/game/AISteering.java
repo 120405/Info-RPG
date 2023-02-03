@@ -7,14 +7,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class AISteering{
     MapRender world;
-    MyScreen hero;
+    PlayerMap hero;
     Npc npc;
 
     public AISteering(){
         super();
 
         world = Spiel.INSTANCE.getMyScreen().getMap();
-        hero = Spiel.INSTANCE.getMyScreen();
+        hero = Spiel.INSTANCE.getMyScreen().getPlayer();
 
         Arrive<Vector2> arriveSB = new Arrive<Vector2>(npc, hero).setTimeToTarget(0.01f).setArrivalTolerance(2f).setDecelerationRadius(3);
     }

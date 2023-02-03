@@ -125,7 +125,7 @@ public class Animator implements ApplicationListener {
         moveUpdate();
         knight = new Sprite(currentFrame);
         knight.setOrigin(0,0);
-        knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().x-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getPosition().y-0.8f);
+        knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getXPos()-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getYPos()-0.8f);
         knight.setSize(3f,3f);
 
 
