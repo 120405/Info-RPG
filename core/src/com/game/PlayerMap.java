@@ -7,16 +7,13 @@ import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 
 public class PlayerMap implements Steerable<Vector2> {
     private final Body playerBody;
-    private Rectangle hitbox;
 
     public PlayerMap(World world) {
         playerBody = createPlayer(world);
@@ -92,17 +89,21 @@ public class PlayerMap implements Steerable<Vector2> {
         }
 
     }
-    public Body getPlayerBody(){
+
+    public Body getPlayerBody() {
         return playerBody;
     }
-    public float getXPos(){
+
+    public float getXPos() {
         return playerBody.getPosition().x;
     }
-    public float getYPos(){
+
+    public float getYPos() {
         return playerBody.getPosition().y;
     }
-    public void setPos(float x,float y) {
-        playerBody.setTransform(x,y,0);
+
+    public void setPos(float x, float y) {
+        playerBody.setTransform(x, y, 0);
     }
 
 

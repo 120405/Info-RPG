@@ -3,8 +3,6 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.ai.steer.Steerable;
-import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,25 +17,18 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 
-public class MyScreen extends ScreenAdapter{
+public class MyScreen extends ScreenAdapter {
     private final SpriteBatch batch;
     private Animator animator;
     private MapRender map;
     private PlayerMap player;
-    private Npc npc;
-    private PlayerMap pm;
     private Body[][] body;
     private boolean Interior;
-    float bR = 0;
     private Viewport viewport;
-    private boolean tagged;
     private Stage stage;
-    private MapInteraction mi;
     private MapInteraction[] InteractionArray;
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
     private Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
-    float maxLinearSpeed, maxLinearAcceleration;
-    float maxAngularSpeed, maxAngularAcceleration;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -62,7 +53,7 @@ public class MyScreen extends ScreenAdapter{
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-       player.handleInput();
+        player.handleInput();
         cameraUpdate(delta);
         map.renderBackground();
         animator.render();
@@ -81,8 +72,6 @@ public class MyScreen extends ScreenAdapter{
 
         cam.update();
     }
-
-
 
 
     private void createContactsOverworld() {
@@ -110,7 +99,6 @@ public class MyScreen extends ScreenAdapter{
             }
         }
     }
-
 
 
     public void switchMusic(final Music m1, final Music m2) {
@@ -212,7 +200,10 @@ public class MyScreen extends ScreenAdapter{
     }
 
 
-    public boolean getInterior() {return Interior;}
+    public boolean getInterior() {
+        return Interior;
+    }
+
     public MapInteraction[] getInteractionArray() {
         return InteractionArray;
     }
@@ -221,7 +212,8 @@ public class MyScreen extends ScreenAdapter{
     public MapRender getMap() {
         return map;
     }
-    public PlayerMap getPlayer(){
+
+    public PlayerMap getPlayer() {
         return player;
     }
 
