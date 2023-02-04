@@ -1,5 +1,6 @@
 package com.game;
 
+import java.util.Random;
 
 public class Monster {
    private int LP = 0;
@@ -12,6 +13,8 @@ public class Monster {
    private int damageModifier;
    private int effectDuration;
    private String currentEffect;
+   private Random rr;
+   private Item weapon;
 
     public Monster(int LP, int fullLP, int ATK, String name) {
     this.LP = LP;
@@ -25,8 +28,29 @@ public class Monster {
     }
 
     public int attack() {
-        return ATK + random + attackModifier;
+    	int a =(int) (Math.random()* 100);
+    	if(a <= 70) {
+        if(weapon == null) {
+            return ATK + random;
+        }else{
+            return ATK + random + weapon.getAtk();
+        }
+    	}else {return 0;
+    	}
     }
+    
+    public String getEffectRd(){
+    	int a =(int) (Math.random()* 100);
+       if(weapon == null) {
+           return "";
+       }else{
+           if(a <=60) {
+               return weapon.getEffect();
+           }else{
+           return "";
+               }
+           }
+       }
 
     public void getAttacked(int strength, String effect) {
         LP = LP - strength - damageModifier;

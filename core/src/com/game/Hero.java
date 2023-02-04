@@ -1,7 +1,6 @@
 package com.game;
 
 import com.badlogic.gdx.math.*;
-
 import java.util.Random;
 
 public class Hero {
@@ -14,6 +13,10 @@ public class Hero {
     private String name = "";
     private boolean alive = true;
     private Random rr;
+    private int attackModifier;
+    private int damageModifier;
+    private int effectDuration;
+    private String currentEffect;
 
     public Hero(int LP, int fullLP, int ATK, String name) {
         this.LP = LP;
@@ -25,7 +28,7 @@ public class Hero {
 
 
     public int attack() {
-    	int a = rr.nextInt(100);
+    	int a =(int) (Math.random()* 100);
     	if(a <= 70) {
         if(weapon == null) {
             return ATK + random;
@@ -37,7 +40,7 @@ public class Hero {
     }
 
     public String getEffectRd(){
-         int a = rr.nextInt(100);
+    	int a =(int) (Math.random()* 100);
         if(weapon == null) {
             return "";
         }else{
@@ -50,16 +53,36 @@ public class Hero {
         }
 
 
-    public void getAttacked(int strength) {
-        if(shield != null) {
-            strength = strength - shield.getDef();
+    public void getAttacked(int strength, String effect) {
+        LP = LP - strength - damageModifier;
+        if (LP < strength) {
+            LP = 0;
+            die();
         }
-        if (strength >= 0){
-            LP = LP - strength;
-            if (LP < strength) {
-                LP = 0;
-                die();
+        if (effectDuration > 0) {
+            effectDuration --;
+        }
+        if(effectDuration == 0){
+            attackModifier = 0;
+            damageModifier = 0;
+            currentEffect = "";
+        }
+
+        if(!effect.equals("") || strength != 0) {
+            currentEffect = effect;
+        }
+        if(currentEffect.equals("fire")){
+            if (strength != 0) {
+        	effectDuration = 5;
             }
+            damageModifier = 100;
+        }
+        if(currentEffect.equals("poison")){
+        	if (strength != 0) {
+            effectDuration = 5;
+        	}
+            damageModifier = 5;
+            attackModifier = -5;
         }
     }
 
