@@ -56,7 +56,7 @@ public class Spiel extends Game {
 
     public void create() {
         inventory = new Inventory();
-        fight = new Fight(80, 80, 20, "Monster", 100, 100, 10, "Hero");
+        fight = new Fight(80, 80, 20, "Monster","", 100, 100, 10, "Hero");
         SpriteBatch batch = new SpriteBatch();
         game = new MyScreen(batch);
         npc = new Npc(1f);
