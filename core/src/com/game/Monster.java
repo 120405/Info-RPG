@@ -8,6 +8,7 @@ public class Monster {
    private int fullLP = 0;
    private int ATK = 0;
    private String name = "";
+   private String type;
    private boolean alive = true;
    private int attackModifier;
    private int damageModifier;
@@ -15,12 +16,15 @@ public class Monster {
    private String currentEffect;
    private Random rr;
    private Item weapon;
+   private Item shield;
+   private Item armor;
 
-    public Monster(int LP, int fullLP, int ATK, String name) {
+    public Monster(int LP, int fullLP, int ATK, String name, String type) {
     this.LP = LP;
     this.fullLP = fullLP;
     this.ATK = ATK;
     this.name = name;
+    this.type = type;
     attackModifier = 0;
     damageModifier = 0;
     effectDuration = 0;
@@ -53,7 +57,14 @@ public class Monster {
        }
 
     public void getAttacked(int strength, String effect) {
-        LP = LP - strength - damageModifier;
+        int def = 0;
+        if (armor != null){
+            def = def + armor.getDef();
+        }
+        if (shield != null){
+            def = def + shield.getDef();
+        }
+        LP = LP - strength - damageModifier + def;
         if (LP < strength) {
             LP = 0;
             die();
@@ -143,5 +154,13 @@ public class Monster {
 
     public void setDamageModifier(int damageModifier) {
         this.damageModifier = damageModifier;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

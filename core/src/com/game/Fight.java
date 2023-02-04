@@ -5,8 +5,8 @@ public class Fight {
     private final Monster monster;
     private final Hero hero;
 
-    public Fight(int mLP,int mfullLP, int mATK, String mname, int hLP, int hfullLP, int hATK, String hname) {
-        monster = new Monster(mLP, mfullLP, mATK, mname);
+    public Fight(int mLP,int mfullLP, int mATK, String mname, String mtype, int hLP, int hfullLP, int hATK, String hname) {
+        monster = new Monster(mLP, mfullLP, mATK, mname, mtype);
         hero = new Hero(hLP, hfullLP, hATK, hname);
     }
 
