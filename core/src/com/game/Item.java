@@ -9,9 +9,10 @@ private int atk;
 private int def;
 private int worth;
 private String effect;
+private  String skill;
 
 
-public Item(String look, String name, int dur, int atk, int def, int worth, String effect) {
+public Item(String look, String name, int dur, int atk, int def, int worth, String effect, String skill) {
 	this.look = look;
 	this.name = name;
 	this.dur = dur;
@@ -19,6 +20,7 @@ public Item(String look, String name, int dur, int atk, int def, int worth, Stri
 	this.def = def;
 	this.worth = worth;
 	this.effect = effect;
+	this.skill = skill;
 }
 
 public String getLook(){
@@ -75,5 +77,13 @@ public void setDef(int x) {
 
 	public void setWorth(int worth) {
 		this.worth = worth;
+	}
+
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
 	}
 }

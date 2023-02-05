@@ -10,6 +10,7 @@ public class Hero {
     private int ATK = 0;
     private Item weapon;
     private Item shield;
+    private Item armor;
     private String name = "";
     private boolean alive = true;
     private Random rr;
@@ -54,7 +55,14 @@ public class Hero {
 
 
     public void getAttacked(int strength, String effect) {
-        LP = LP - strength - damageModifier;
+        int def = 0;
+        if (armor != null){
+            def = def + armor.getDef();
+        }
+        if (shield != null){
+            def = def + shield.getDef();
+        }
+        LP = LP - strength - damageModifier + def;
         if (LP < strength) {
             LP = 0;
             die();
