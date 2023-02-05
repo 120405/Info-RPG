@@ -56,7 +56,20 @@ public class Monster {
            }
        }
 
-    public void getAttacked(int strength, String effect) {
+    public String getSkillRd(){
+        int a =(int) (Math.random()* 100);
+        if(weapon == null) {
+            return "";
+        }else{
+            if(a <=60) {
+                return weapon.getSkill();
+            }else{
+                return "";
+            }
+        }
+    }
+
+    public void getAttacked(int strength, String effect, String weaponSkill) {
         int def = 0;
         if (armor != null){
             def = def + armor.getDef();
@@ -93,6 +106,9 @@ public class Monster {
         	}
             damageModifier = 5;
             attackModifier = -5;
+        }
+        if (weaponSkill.equals("doubleAttack")){
+            getAttacked(strength, effect, "");
         }
     }
 
