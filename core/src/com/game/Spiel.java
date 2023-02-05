@@ -106,4 +106,8 @@ public class Spiel extends Game {
         return npc;
     }
 
+    public  Fight getFight(){
+        return fight;
+    }
+
 }
