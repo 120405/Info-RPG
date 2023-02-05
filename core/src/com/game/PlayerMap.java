@@ -45,7 +45,7 @@ public class PlayerMap implements Steerable<Vector2> {
 
         int horizontalForce = 0;
         int verticalForce = 0;
-        float speed = 1.5f;
+        float speed = (float) (1.5f /*- (Spiel.INSTANCE.getFight().getHero().getWeight() / 6)*/);
         if ((Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))) {
             speed = 2f;
         }
