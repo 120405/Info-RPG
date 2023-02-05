@@ -8,17 +8,19 @@ private int dur;
 private int atk;
 private int def;
 private int worth;
-private String effect;
+private int weight;
+private Effect effect;
 private  String skill;
 
 
-public Item(String look, String name, int dur, int atk, int def, int worth, String effect, String skill) {
+public Item(String look, String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill) {
 	this.look = look;
 	this.name = name;
 	this.dur = dur;
 	this.atk = atk;
 	this.def = def;
 	this.worth = worth;
+	this.weight = weight;
 	this.effect = effect;
 	this.skill = skill;
 }
@@ -31,7 +33,7 @@ public String getName(){
 	return name;
 }
 
-public String getEffect(){
+public Effect getEffect(){
 	return effect;
 }
 
@@ -55,7 +57,7 @@ public void setName(String x) {
 	name=x;
 }
 
-public void setEffect(String x) {
+public void setEffect(Effect x) {
 	effect=x;
 }
 
@@ -85,5 +87,13 @@ public void setDef(int x) {
 
 	public void setSkill(String skill) {
 		this.skill = skill;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 }

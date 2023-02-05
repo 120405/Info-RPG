@@ -13,7 +13,8 @@ public class Monster {
    private int attackModifier;
    private int damageModifier;
    private int effectDuration;
-   private String currentEffect;
+   private Effect currentEffect;
+   private Effect blank;
    private Random rr;
    private Item weapon;
    private Item shield;
@@ -28,7 +29,8 @@ public class Monster {
     attackModifier = 0;
     damageModifier = 0;
     effectDuration = 0;
-    currentEffect = "";
+    blank = new Effect("",0,0,0);
+    currentEffect = blank;
     }
 
     public int attack() {
@@ -43,15 +45,15 @@ public class Monster {
     	}
     }
     
-    public String getEffectRd(){
+    public Effect getEffectRd(){
     	int a =(int) (Math.random()* 100);
        if(weapon == null) {
-           return "";
+           return blank;
        }else{
            if(a <=60) {
                return weapon.getEffect();
            }else{
-           return "";
+           return blank;
                }
            }
        }
@@ -69,7 +71,7 @@ public class Monster {
         }
     }
 
-    public void getAttacked(int strength, String effect, String weaponSkill) {
+    public void getAttacked(int strength, Effect effect, String weaponSkill) {
         int def = 0;
         if (armor != null){
             def = def + armor.getDef();
@@ -86,27 +88,17 @@ public class Monster {
             effectDuration --;
         }
         if(effectDuration == 0){
-            attackModifier = 0;
-            damageModifier = 0;
-            currentEffect = "";
+            currentEffect = blank;
+            damageModifier = currentEffect.getDamageModifier();
+            attackModifier = currentEffect.getAttackModifier();
         }
-
-        if(!effect.equals("") || strength != 0) {
             currentEffect = effect;
-        }
-        if(currentEffect.equals("fire")){
             if (strength != 0) {
-        	effectDuration = 5;
+                effectDuration = currentEffect.getEffectDuration();
+                damageModifier = currentEffect.getDamageModifier();
+                attackModifier = currentEffect.getAttackModifier();
             }
-            damageModifier = 100;
-        }
-        if(currentEffect.equals("poison")){
-        	if (strength != 0) {
-            effectDuration = 5;
-        	}
-            damageModifier = 5;
-            attackModifier = -5;
-        }
+
         if (weaponSkill.equals("doubleAttack")){
             getAttacked(strength, effect, "");
         }

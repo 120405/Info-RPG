@@ -17,7 +17,8 @@ public class Hero {
     private int attackModifier;
     private int damageModifier;
     private int effectDuration;
-    private String currentEffect;
+    private Effect currentEffect;
+    private Effect blank;
 
     public Hero(int LP, int fullLP, int ATK, String name) {
         this.LP = LP;
@@ -25,6 +26,8 @@ public class Hero {
         this.ATK = ATK;
         this.name = name;
         rr = new Random();
+        blank = new Effect("",0,0,0);
+        currentEffect = blank;
     }
 
 
@@ -40,15 +43,15 @@ public class Hero {
     	}
     }
 
-    public String getEffectRd(){
+    public Effect getEffectRd(){
     	int a =(int) (Math.random()* 100);
         if(weapon == null) {
-            return "";
+            return blank;
         }else{
             if(a <=60) {
                 return weapon.getEffect();
             }else{
-            return "";
+            return blank;
                 }
             }
         }
@@ -66,7 +69,7 @@ public class Hero {
         }
     }
 
-    public void getAttacked(int strength, String effect, String weaponSkill) {
+    public void getAttacked(int strength, Effect effect, String weaponSkill) {
         int def = 0;
         if (armor != null){
             def = def + armor.getDef();
@@ -83,26 +86,15 @@ public class Hero {
             effectDuration --;
         }
         if(effectDuration == 0){
-            attackModifier = 0;
-            damageModifier = 0;
-            currentEffect = "";
+            currentEffect = blank;
+            damageModifier = currentEffect.getDamageModifier();
+            attackModifier = currentEffect.getAttackModifier();
         }
-
-        if(!effect.equals("") || strength != 0) {
-            currentEffect = effect;
-        }
-        if(currentEffect.equals("fire")){
-            if (strength != 0) {
-        	effectDuration = 5;
-            }
-            damageModifier = 100;
-        }
-        if(currentEffect.equals("poison")){
-        	if (strength != 0) {
-            effectDuration = 5;
-        	}
-            damageModifier = 5;
-            attackModifier = -5;
+        currentEffect = effect;
+        if (strength != 0) {
+            effectDuration = currentEffect.getEffectDuration();
+            damageModifier = currentEffect.getDamageModifier();
+            attackModifier = currentEffect.getAttackModifier();
         }
 
         if (weaponSkill.equals("doubleAttack")){
@@ -112,6 +104,22 @@ public class Hero {
 
     public void die() {
         alive = false;
+    }
+
+    public int getWeight(){
+        int weight = 0;
+
+        if (weapon != null){
+            weight = weight + weapon.getWeight();
+        }
+        if (weapon != null){
+            weight = weight + shield.getWeight();
+        }
+        if (weapon != null){
+            weight = weight + armor.getWeight();
+        }
+
+        return  weight;
     }
 
     public void setLP(int LP) {
