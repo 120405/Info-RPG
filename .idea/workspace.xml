@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f16b283-b557-4e1d-b7dc-fb8c5f5c7e60" name="Changes" comment="Effects V4">
+    <list default="true" id="6f16b283-b557-4e1d-b7dc-fb8c5f5c7e60" name="Changes" comment="Armor and Item-skills">
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.lock" afterDir="false" />
@@ -12,9 +12,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/game/Fight.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Fight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/game/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/com/game/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/com/game/Spiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Spiel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +132,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="68199ebd-8d7e-4319-8308-ec7c8e80ca8a" name="Changes" comment="" />
+      <changelist id="6f16b283-b557-4e1d-b7dc-fb8c5f5c7e60" name="Changes" comment="Armor and Item-skills" />
       <created>1673461628238</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -349,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675504324017</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Armor and Item-skills">
+      <created>1675528372471</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1675528372471</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -365,7 +371,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Moved Map to own class" />
     <MESSAGE value="Physiscs to Tiledmap" />
     <MESSAGE value="Changed Spawnpoint" />
     <MESSAGE value="preparation for tiledmap switch" />
@@ -390,6 +395,7 @@
     <MESSAGE value="Music switch" />
     <MESSAGE value="Music fix" />
     <MESSAGE value="Effects V4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Effects V4" />
+    <MESSAGE value="Armor and Item-skills" />
+    <option name="LAST_COMMIT_MESSAGE" value="Armor and Item-skills" />
   </component>
 </project>

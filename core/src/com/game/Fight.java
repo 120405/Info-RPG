@@ -12,8 +12,8 @@ public class Fight {
 
     public String fight() {
         if (monster.getStatus() && hero.getStatus()) {
-            monster.getAttacked(hero.attack(), hero.getEffectRd());
-            hero.getAttacked(monster.attack(), monster.getEffectRd());
+            monster.getAttacked(hero.attack(), hero.getEffectRd(), hero.getSkillRd());
+            hero.getAttacked(monster.attack(), monster.getEffectRd(), monster.getSkillRd());
         }
             if (!monster.getStatus()) {
                 winner = "Hero";
