@@ -112,10 +112,10 @@ public class Hero {
         if (weapon != null){
             weight = weight + weapon.getWeight();
         }
-        if (weapon != null){
+        if (shield != null){
             weight = weight + shield.getWeight();
         }
-        if (weapon != null){
+        if (armor != null){
             weight = weight + armor.getWeight();
         }
 
