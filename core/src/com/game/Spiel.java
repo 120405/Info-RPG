@@ -16,7 +16,7 @@ public class Spiel extends Game {
     private Options options;
     private final String name;
     private Npc npc;
-    private Database db;
+   private Database db;
     public boolean saveEnabled;
     private GUI_Item[][] items;
 
