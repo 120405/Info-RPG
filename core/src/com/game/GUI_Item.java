@@ -2,17 +2,23 @@ package com.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.SnapshotArray;
 
 public class GUI_Item {
     private Stack stack;
     private Image background;
     private Image itemImage;
+    private String name;
+    private int durability;
     public GUI_Item() {
+        name = "";
+        durability = 0;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background);
     }
@@ -28,9 +34,18 @@ public class GUI_Item {
         return (Image) stack.getChild(1);
     }
     public boolean doesItemExist() {
-      //  return stack.getChild(1) != null;
-        //fehler: getChild(1) ist null; somit NullPointerException
-        return false;
+        boolean exist = false;
+        SnapshotArray<Actor> array = stack.getChildren();
+        if(((SnapshotArray<?>) array).size == 2) {
+            exist = true;
+        }
+        return exist;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setDurability(int durability) {
+        this.name = name;
     }
     public void buildListener(final Image img) {
         final float currentPosX = img.getX();
@@ -42,13 +57,14 @@ public class GUI_Item {
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Spiel.INSTANCE.getFightScreen().inventory.checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "", 0);
                 img.setVisible(false);
                 return true;
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-              Spiel.INSTANCE.getFightScreen().inventory.checkItems(x, y, img, background.getWidth(), background.getHeight(), stack);
+              Spiel.INSTANCE.getFightScreen().inventory.checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
                 img.setVisible(true);
             }
         });
