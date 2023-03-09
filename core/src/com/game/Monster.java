@@ -1,5 +1,6 @@
 package com.game;
 
+import java.util.List;
 import java.util.Random;
 
 public class Monster {
@@ -19,6 +20,7 @@ public class Monster {
    private Item weapon;
    private Item shield;
    private Item armor;
+   private List <Effect> effects;
 
     public Monster(int LP, int fullLP, int ATK, String name, String type) {
     this.LP = LP;
@@ -84,20 +86,28 @@ public class Monster {
             LP = 0;
             die();
         }
-        if (effectDuration > 0) {
-            effectDuration --;
-        }
-        if(effectDuration == 0){
-            currentEffect = blank;
-            damageModifier = currentEffect.getDamageModifier();
-            attackModifier = currentEffect.getAttackModifier();
-        }
-            currentEffect = effect;
-            if (strength != 0) {
-                effectDuration = currentEffect.getEffectDuration();
-                damageModifier = currentEffect.getDamageModifier();
-                attackModifier = currentEffect.getAttackModifier();
+        
+        if(!effects.isEmpty()) {
+         for(int i = 0; i < effects.size(); i++) {
+         
+         currentEffect = effects.get(i);
+         currentEffect.decreaseEffectDuration();
+         
+         if(currentEffect.getEffectDuration()== 0){
+             currentEffect = blank;
+             damageModifier = currentEffect.getDamageModifier();
+             attackModifier = currentEffect.getAttackModifier();
+             effects.remove(i);
+             i--;
+         }
+         currentEffect = effect;
+         if (strength != 0) {
+             effectDuration = currentEffect.getEffectDuration();
+             damageModifier = currentEffect.getDamageModifier();
+             attackModifier = currentEffect.getAttackModifier();
             }
+          }
+        }
 
         if (weaponSkill.equals("doubleAttack")){
             getAttacked(strength, effect, "");
