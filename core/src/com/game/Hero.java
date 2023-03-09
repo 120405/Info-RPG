@@ -30,7 +30,10 @@ public class Hero {
         rr = new Random();
         blank = new Effect("",0,0,0);
         currentEffect = blank;
+        createList();
+    }
 
+    public void createList(){
         effects = new List<Effect>() {
             @Override
             public int size() {
