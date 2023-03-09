@@ -29,7 +29,8 @@ public class MyScreen extends ScreenAdapter {
     private final Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
     private final Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
     private float volume;
-
+    private FitViewport viewport;
+    private Stage stage;
 
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
