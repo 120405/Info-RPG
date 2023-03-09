@@ -45,7 +45,6 @@ public class MyScreen extends ScreenAdapter {
         map = new MapRender(batch);
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage();
-
         player = new PlayerMap(getMap().world);
         music.setVolume(volume);
         music.play();
