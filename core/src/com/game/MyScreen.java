@@ -30,6 +30,7 @@ public class MyScreen extends ScreenAdapter {
     private float volume;
 
 
+
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
         create();
@@ -60,6 +61,9 @@ public class MyScreen extends ScreenAdapter {
         map.renderForeground();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
+        if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            map.handleCamInput();
+        }
     }
 
     public void cameraUpdate(float delta) {

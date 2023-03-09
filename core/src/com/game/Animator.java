@@ -22,7 +22,7 @@ public class Animator implements ApplicationListener {
     TextureRegion currentFrame;
     String orientation;
 
-
+    Compass compass;
     Sprite knight;
 
 
@@ -46,6 +46,7 @@ public class Animator implements ApplicationListener {
         RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
         RunRightAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 2);
         RunLeftAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 3);
+        compass =  new Compass(80,80);
     }
 
 
@@ -127,11 +128,8 @@ public class Animator implements ApplicationListener {
         knight.setOrigin(0,0);
         knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getXPos()-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getYPos()-0.8f);
         knight.setSize(3f,3f);
-
-
         batch.setProjectionMatrix(Spiel.INSTANCE.getMyScreen().getMap().getCam().combined);
         batch.begin();
-
         knight.draw(batch);
         ship.draw(batch);
 
