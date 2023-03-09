@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class MyScreen extends ScreenAdapter {
@@ -50,6 +50,7 @@ public class MyScreen extends ScreenAdapter {
         music2.setVolume(volume);
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
+        show();
     }
 
     public void render(float delta) {
@@ -62,9 +63,24 @@ public class MyScreen extends ScreenAdapter {
         map.renderForeground();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
-        if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            map.handleCamInput();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            if(!Spiel.INSTANCE.getInventory().isOpen()) {
+                Spiel.INSTANCE.getInventory().show();
+            } else {
+                Spiel.INSTANCE.getInventory().hide();
+            }
         }
+        if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            if(!Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+                if(!Spiel.INSTANCE.getInventory().isOpen()) {
+                    map.handleCamInput();
+                } else {
+                    stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
+                }
+            }
+
+        }
+
         stage.act(delta);
         stage.draw();
         Spiel.INSTANCE.createHealthBars(false);
@@ -230,6 +246,12 @@ public class MyScreen extends ScreenAdapter {
         batch.dispose();
         map.dispose();
         animator.dispose();
+    }
+    public void hide() {
+        stage.clear();
+    }
+    public void show() {
+        stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
     }
 }
 

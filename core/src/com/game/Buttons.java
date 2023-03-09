@@ -14,7 +14,6 @@ public class Buttons {
     private TextButton button;
     private TextButton.TextButtonStyle style;
     private BitmapFont font;
-    private boolean isOpen = false;
     private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
     private Color color1;
 
@@ -89,12 +88,10 @@ public class Buttons {
                         Spiel.INSTANCE.fightScreen();
                         break;
                     case "showInv":
-                        if(!isOpen) {
+                        if(!Spiel.INSTANCE.getInventory().isOpen()) {
                             Spiel.INSTANCE.getInventory().show();
-                            isOpen = true;
                         } else {
                             Spiel.INSTANCE.getInventory().hide();
-                            isOpen = false;
                         }
 
                        break;
