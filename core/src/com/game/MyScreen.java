@@ -25,11 +25,10 @@ public class MyScreen extends ScreenAdapter {
     private PlayerMap player;
     private Body[][] body;
     private boolean Interior;
-    private Viewport viewport;
-    private Stage stage;
     private MapInteraction[] InteractionArray;
-    private Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
-    private Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
+    private final Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
+    private final Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
+    private float volume;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -38,16 +37,17 @@ public class MyScreen extends ScreenAdapter {
     }
 
     public void create() {
+        volume = 0.3f;
         Interior = false;
         animator = new Animator();
         map = new MapRender(batch);
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
-        //stage = new Stage(viewport);
         stage = new Stage();
+
         player = new PlayerMap(getMap().world);
-        music.setVolume(0.3f);
+        music.setVolume(volume);
         music.play();
-        music2.setVolume(0.3f);
+        music2.setVolume(volume);
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
         show();
@@ -82,12 +82,12 @@ public class MyScreen extends ScreenAdapter {
 
     private void createContactsOverworld() {
         InteractionArray = new MapInteraction[1];
-        InteractionArray[0] = new MapInteraction(81, 92, map.world, 55, 75);
+        InteractionArray[0] = new MapInteraction(81, 92, map.world, 55, 75,"cave");
     }
 
     private void createContactsInterior() {
         InteractionArray = new MapInteraction[1];
-        InteractionArray[0] = new MapInteraction(55, 75, map.world, 81, 91);
+        InteractionArray[0] = new MapInteraction(55, 75, map.world, 81, 91,"world");
     }
 
     private void deleteContacts() {
@@ -101,6 +101,12 @@ public class MyScreen extends ScreenAdapter {
         for (int i = 0; i < InteractionArray.length; i++) {
             if (InteractionArray[i].isEntrance() && Gdx.input.isKeyJustPressed(Input.Keys.E)) {
                 player.setPos(InteractionArray[i].getTargetX(), InteractionArray[i].getTargetY());
+                if (InteractionArray[i].getDestination().equals("world")){
+                    switchMusic(getCurrentMusic(),music);
+                }
+                if (InteractionArray[i].getDestination().equals("cave")){
+                    switchMusic(getCurrentMusic(),music2);
+                }
                 switchMap();
             }
         }
@@ -138,18 +144,18 @@ public class MyScreen extends ScreenAdapter {
             @Override
             public void run() {
                 music.stop();
+                music.setVolume(volume);
             }
         }, 2.6f);
     }
 
     public void musicFadeIn(final Music music) {
-        final float goal = music.getVolume();
+        final float goal = volume;
         music.setVolume(goal / 4);
         music.play();
         float delay = 0.2f;
         for (float i = (goal * 10); i > 0; i -= goal) {
 
-            // seconds
 
             Timer.schedule(new Timer.Task() {
                 @Override
@@ -168,26 +174,6 @@ public class MyScreen extends ScreenAdapter {
         }, 2.6f);
     }
 
-
-
-
-
-    /*public Body createNpc() {
-
-        Body pBody;
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.DynamicBody;
-        def.position.set(82, 80);
-        def.fixedRotation = true;
-        pBody = map.world.createBody(def);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.9F, 0.9f);
-        pBody.createFixture(shape, 1.0f);
-        shape.dispose();
-
-        return pBody;
-
-    }*/
 
     public void switchMap() {
         if (!Interior) {
@@ -208,6 +194,16 @@ public class MyScreen extends ScreenAdapter {
 
     public boolean getInterior() {
         return Interior;
+    }
+
+    public Music getCurrentMusic() {
+        if (music.isPlaying()) {
+            return music;
+        } else if (music2.isPlaying()) {
+            return music2;
+        } else {
+            return null;
+        }
     }
 
     public MapInteraction[] getInteractionArray() {
