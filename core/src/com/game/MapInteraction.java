@@ -9,13 +9,15 @@ public class MapInteraction {
     private boolean entrance;
     int x;
     int y;
+    String destination;
     Body pBody;
     World world;
-    public MapInteraction(int x,int y,World world,int targetX,int targetY){
+    public MapInteraction(int x,int y,World world,int targetX,int targetY,String destination){
         createBox(x,y,world);
         tX = targetX;
         tY = targetY;
         entrance = false;
+        this.destination = destination;
     }
 
     public void createBox(int x, int y, World world){
@@ -45,6 +47,9 @@ public class MapInteraction {
     }
     public void hideBox(){
         world.destroyBody(pBody);
+    }
+    public String getDestination(){
+        return destination;
     }
     public int getTargetX(){
         return tX;

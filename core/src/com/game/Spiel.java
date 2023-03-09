@@ -16,11 +16,16 @@ public class Spiel extends Game {
     private Options options;
     private final String name;
     private Npc npc;
+   private Database db;
+    public boolean saveEnabled;
+    private GUI_Item[][] items;
 
     public Spiel(String name) {
+        saveEnabled = false;
         this.name = name;
         INSTANCE = this;
         money = 1000;
+        db = new Database();
     }
 
     public int getMoney() {
@@ -38,7 +43,9 @@ public class Spiel extends Game {
     public Inventory getInventory() {
         return inventory;
     }
-
+    public GUI_Item[][] getItems() {
+       return getFightScreen().inventory.getItems();
+    }
     public void buyItem(Item item, String type) {
         if (type.equals("weapon")) {
             if (fight.getHero().getWeapon() != null) {
