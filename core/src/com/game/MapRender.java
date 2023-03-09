@@ -2,6 +2,7 @@ package com.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -40,6 +41,7 @@ public class MapRender {
     private float elapsedSinceAnimation;
     private boolean waterframe;
 
+
     Box2DDebugRenderer debugRenderer;
 
 
@@ -51,7 +53,7 @@ public class MapRender {
         world = new World(new Vector2(0, 0), false);
         world.setContactListener(new ListenerClass());
         this.batch = new SpriteBatch();
-        tiledmap1 = new TmxMapLoader().load("1.tmx");
+        tiledmap1 = new TmxMapLoader().load("1 - Kopie.tmx");
         tiledmap2 = new TmxMapLoader().load("2.tmx");
 
         float unitScale = 1 / 8f;
@@ -67,6 +69,7 @@ public class MapRender {
         layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
         layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
         debugRenderer = new Box2DDebugRenderer();
+
 
 
 
@@ -143,7 +146,23 @@ public class MapRender {
     }
 
 
-    private void handleInput() {
+    public void handleCamInput() {
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean scrolled(float amountX, float amountY) {
+                if(amountY > 0) {
+                    if(cam.zoom<2) {
+                        cam.zoom = cam.zoom + 0.1f;
+                    }
+                }
+                if(amountY < 0) {
+                    if(cam.zoom>0.5) {
+                        cam.zoom = cam.zoom - 0.1f;
+                    }
+                }
+                return true;
+            }
+        });
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             cam.translate(-3, 0, 0);
@@ -154,12 +173,17 @@ public class MapRender {
             //If the RIGHT Key is pressed, translate the camera 3 units in the X-Axis
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            cam.translate(0, -3, 0);
-            //If the DOWN Key is pressed, translate the camera -3 units in the Y-Axis
+            if(cam.zoom>0.5f) {
+                cam.zoom = cam.zoom - 0.1f;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            cam.translate(0, 3, 0);
-            //If the UP Key is pressed, translate the camera 3 units in the Y-Axis
+            if(cam.zoom<2) {
+                cam.zoom = cam.zoom + 0.1f;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            System.out.print(cam.zoom);
         }
 
 

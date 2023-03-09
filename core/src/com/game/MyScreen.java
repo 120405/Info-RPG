@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -51,7 +50,6 @@ public class MyScreen extends ScreenAdapter {
         music2.setVolume(volume);
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
-        show();
     }
 
     public void render(float delta) {
@@ -64,6 +62,9 @@ public class MyScreen extends ScreenAdapter {
         map.renderForeground();
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
+        if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            map.handleCamInput();
+        }
         stage.act(delta);
         stage.draw();
         Spiel.INSTANCE.createHealthBars(false);
@@ -229,13 +230,6 @@ public class MyScreen extends ScreenAdapter {
         batch.dispose();
         map.dispose();
         animator.dispose();
-    }
-    public void show() {
-        new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
-        stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
-    }
-    public void hide() {
-        stage.clear();
     }
 }
 
