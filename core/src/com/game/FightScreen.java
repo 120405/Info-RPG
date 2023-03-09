@@ -24,11 +24,9 @@ public class FightScreen extends ScreenAdapter {
     private Hero hero;
     private Monster monster;
     private int healthMonster, healthHero;
-    private BitmapFont font;
-    private ShapeRenderer shapeRenderer;
     private Texture img;
     private Stage stage;
-    public GUI inventory;
+    private int atkH,atkM = 0;
 
     public FightScreen(SpriteBatch batch) {
         this.batch = batch;
@@ -38,15 +36,11 @@ public class FightScreen extends ScreenAdapter {
     public void create() {
         stage = new Stage();
         r = new Random();
-        inventory = new GUI();
         img = new Texture("Background.png");
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
         hero = Spiel.INSTANCE.fight.getHero();
         monster = Spiel.INSTANCE.fight.getMonster();
         healthHero = hero.getFullLP();
         healthMonster = monster.getFullLP();
-        shapeRenderer = new ShapeRenderer();
         HeroSprite = new Sprite(new Texture("Hero.png"));
         HeroSprite.setScale(2f);
         HeroSprite.setPosition(100, 90);
@@ -63,14 +57,14 @@ public class FightScreen extends ScreenAdapter {
         batch.begin();
         batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
-        createHealthBars();
+        Spiel.INSTANCE.createHealthBars(true);
         handleInput();
         batch.begin();
+        animate();
         HeroSprite.draw(batch);
         MonsterSprite.draw(batch);
-        font.draw(batch, hero.getName(), (int) (hero.getFullLP() / 2), 61);
-        font.draw(batch, monster.getName(), Gdx.graphics.getWidth() - (45 + (int) (monster.getFullLP() / 2)), 61);
-        animate();
+        Spiel.INSTANCE.getFont().draw(batch, hero.getName(), (int) (hero.getFullLP() / 2), 61);
+        Spiel.INSTANCE.getFont().draw(batch, monster.getName(), Gdx.graphics.getWidth() - (45 + (int) (monster.getFullLP() / 2)), 61);
         batch.end();
         stage.act(delta);
         stage.draw();
@@ -79,22 +73,9 @@ public class FightScreen extends ScreenAdapter {
     public void dispose() {
         batch.dispose();
         img.dispose();
-        font.dispose();
-        shapeRenderer.dispose();
     }
 
-    public void createHealthBars() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(20, 20, healthHero, 20);
-        shapeRenderer.rect(Gdx.graphics.getWidth() - (20 + monster.getFullLP()), 20, healthMonster, 20);
-        shapeRenderer.end();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(19, 19, hero.getFullLP() + 1, 21);
-        shapeRenderer.rect(Gdx.graphics.getWidth() - (19 + monster.getFullLP()), 19, monster.getFullLP() + 1, 21);
-        shapeRenderer.end();
-    }
+
 
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R) && hero.getRandom() == 0) {
@@ -104,13 +85,19 @@ public class FightScreen extends ScreenAdapter {
             Spiel.INSTANCE.gameScreen();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && hero.getStatus() && monster.getStatus()) {
+            atkH = hero.attack();
+            atkM = monster.attack();
             String winner = Spiel.INSTANCE.fight.fight();
             healthMonster = monster.getLP();
             healthHero = hero.getLP();
             if (winner.equals("Hero")) {
                 MonsterSprite.setAlpha(0);
+                //death animation
+                Spiel.INSTANCE.gameScreen();
             } else if (winner.equals("Monster")) {
                 HeroSprite.setAlpha(0);
+                //death animation
+                Spiel.INSTANCE.gameScreen();
             }
             hero.setRandom(0);
         }
@@ -118,14 +105,14 @@ public class FightScreen extends ScreenAdapter {
 
     public void animate() {
         //TODO wait:seconds & animation
-        font.draw(batch, "-" + monster.attack(), 200, 500);
-        font.draw(batch, "-" + hero.attack(), 500, 500);
+        Spiel.INSTANCE.getFont().draw(batch, "-" + atkM, 200, 500);
+        Spiel.INSTANCE.getFont().draw(batch, "-" + atkH, 500, 500);
     }
 
     public void show() {
 
         Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
-        stage.addActor(inventory.getInventory());
+        stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
 
     }
 

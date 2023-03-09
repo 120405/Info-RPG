@@ -30,7 +30,6 @@ public class MyScreen extends ScreenAdapter {
     private float volume;
 
 
-
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
         create();
@@ -64,6 +63,9 @@ public class MyScreen extends ScreenAdapter {
         if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             map.handleCamInput();
         }
+        stage.act(delta);
+        stage.draw();
+        Spiel.INSTANCE.createHealthBars(false);
     }
 
     public void cameraUpdate(float delta) {

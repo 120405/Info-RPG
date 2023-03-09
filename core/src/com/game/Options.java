@@ -41,7 +41,13 @@ public class Options extends ScreenAdapter {
     public void hide() {
         stage.clear();
     }
+
     public void show() {
-        Buttons options = new Buttons("Back", stage, "title", 2, 2.5, Color.BLACK);
+        new Buttons("Back", stage, "title", 2, 2.5, Color.BLACK);
+        Color color = Color.RED;
+        if (Spiel.INSTANCE.saveEnabled) {
+            color = Color.GREEN;
+        }
+        new Buttons("Saves", stage, "save", 4, 2.5, color);
     }
 }

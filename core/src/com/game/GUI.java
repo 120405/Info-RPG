@@ -13,13 +13,11 @@ import com.badlogic.gdx.utils.SnapshotArray;
 public class GUI {
     private final Window window;
     private Texture img;
-    private GUI_Item[][] items;
     private Table table;
     private Image renderImage;
 
     public GUI() {
         renderImage = null;
-        items = new GUI_Item[4][8];
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         window = new Window("", windowStyle);
@@ -27,12 +25,9 @@ public class GUI {
         window.setPosition(400, 400);
         window.setScale(3f);
          table = new Table();
-        addInventory(table, buildItems());
+        addInventory(table, Spiel.INSTANCE.getItems());
         window.setVisible(false);
 
-    }
-    public GUI_Item[][] getItems() {
-        return items;
     }
     public Window getInventory() {
         return window;
@@ -52,19 +47,6 @@ public class GUI {
 
     public void setPosition(int x, int y) {
         window.setPosition(x, y);
-    }
-
-    public GUI_Item[][] buildItems() {
-
-        for (int a = 0; a < 4; a++) {
-            for (int i = 0; i < 7; i++) {
-                items[a][i] = new GUI_Item();
-
-            }
-            Image img = new Image(new Texture("crystal.png"));
-            items[a][7] = new GUI_Item(img);
-        }
-        return items;
     }
 
     public void addInventory(Table table, GUI_Item[][] items) {

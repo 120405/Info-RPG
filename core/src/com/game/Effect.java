@@ -3,9 +3,9 @@ package com.game;
 public class Effect {
 
     private final String name;
-    private final int attackModifier;
-    private final int damageModifier;
-    private final int effectDuration;
+    private  int attackModifier;
+    private  int damageModifier;
+    private  int effectDuration;
     public Effect(String name, int aM, int dM, int eD){
         this.name = name;
         this.attackModifier = aM;
@@ -27,5 +27,10 @@ public class Effect {
 
     public int getEffectDuration() {
         return effectDuration;
+    }
+    public void decreaseEffectDuration() {
+    	if (effectDuration > 0) {
+            effectDuration --;
+        }
     }
 }
