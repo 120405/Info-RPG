@@ -1,8 +1,12 @@
 package com.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 
 public class Spiel extends Game {
     public static Spiel INSTANCE;
@@ -11,7 +15,7 @@ public class Spiel extends Game {
     private TitleScreen title;
     private MyScreen game;
     private Shop shop;
-    private Inventory inventory;
+    public Inventory inventory;
     private FightScreen fightScreen;
     private Options options;
     private final String name;
@@ -19,13 +23,17 @@ public class Spiel extends Game {
     private Database db;
     public boolean saveEnabled;
     private GUI_Item[][] items;
+    private ShapeRenderer shapeRenderer;
+    private SpriteBatch batch,batch2;
+    private BitmapFont font;
+    private GUI inventoryGUI;
 
     public Spiel(String name) {
-        saveEnabled = false;
+
         this.name = name;
         INSTANCE = this;
         money = 1000;
-        db = new Database();
+
     }
 
     public int getMoney() {
@@ -40,11 +48,8 @@ public class Spiel extends Game {
         money = money - x;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
     public GUI_Item[][] getItems() {
-       return getFightScreen().inventory.getItems();
+       return items;
     }
     public void buyItem(Item item, String type) {
         if (type.equals("weapon")) {
@@ -62,13 +67,20 @@ public class Spiel extends Game {
     }
 
     public void create() {
+        font = new BitmapFont();
+        font.setColor(Color.WHITE);
+        shapeRenderer = new ShapeRenderer();
         inventory = new Inventory();
         fight = new Fight(80, 80, 20, "Monster","", 100, 100, 10, "Hero");
-        SpriteBatch batch = new SpriteBatch();
+        batch = new SpriteBatch();
+        batch2 = new SpriteBatch();
+        db = new Database();
+        saveEnabled = db.isSaveFileEnabled();
+        items = db.loadItems(new GUI_Item[4][8], saveEnabled);
+        inventoryGUI = new GUI();
         game = new MyScreen(batch);
         npc = new Npc(1f);
         //player= new Player();
-
         shop = new Shop(batch);
         options = new Options(batch);
         title = new TitleScreen(batch, name);
@@ -80,7 +92,9 @@ public class Spiel extends Game {
         return game;
     }
 
-
+    public GUI getInventory() {
+        return inventoryGUI;
+    }
     public void gameScreen() {
         setScreen(game);
     }
@@ -116,5 +130,36 @@ public class Spiel extends Game {
     public  Fight getFight(){
         return fight;
     }
-
+    public void createHealthBars(boolean monster) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(20, 20, fight.getHero().getLP(), 20);
+        if (monster) {
+            shapeRenderer.rect(Gdx.graphics.getWidth() - (20 + fight.getMonster().getFullLP()), 20,
+                    fight.getMonster().getLP(), 20);
+        }
+        shapeRenderer.end();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect(19, 19, fight.getHero().getFullLP() + 1, 21);
+        if (monster) {
+            shapeRenderer.rect(Gdx.graphics.getWidth() - (19 + fight.getMonster().getFullLP()), 19,
+                    fight.getMonster().getFullLP() + 1, 21);
+        }
+        shapeRenderer.end();
+        batch2.begin();
+        font.draw(batch2, fight.getHero().getName(), (int) (fight.getHero().getFullLP() / 2), 61);
+        if (monster) {
+            font.draw(batch2, fight.getMonster().getName(),
+                    Gdx.graphics.getWidth() - (45 + (int) (fight.getMonster().getFullLP() / 2)), 61);
+        }
+        batch2.end();
+    }
+    public void dispose() {
+        shapeRenderer.dispose();
+        font.dispose();
+    }
+    public BitmapFont getFont() {
+        return font;
+    }
 }

@@ -35,7 +35,7 @@ public class Shop extends ScreenAdapter {
         xDagger = 2;
         this.batch = batch;
         img = new Texture(Gdx.files.internal("Albedo.png"));
-        inventory = Spiel.INSTANCE.getInventory();
+        inventory = Spiel.INSTANCE.inventory;
         fontSw = new BitmapFont();
         fontSw.setColor(Color.WHITE);
         fontSw.getData().setScale(3f);
@@ -56,18 +56,18 @@ public class Shop extends ScreenAdapter {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
         batch.draw(img, 0, 0);
+        Inventory inv = Spiel.INSTANCE.inventory;
+        fontSw.draw(batch, "Worth: " + inv.getSword().getWorth(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
+        fontSw.draw(batch, "ATK: " + inv.getSword().getAtk(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
+        fontSw.draw(batch, "Dur: " + inv.getSword().getDur(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
 
-        fontSw.draw(batch, "Worth: " + Spiel.INSTANCE.getInventory().getSword().getWorth(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
-        fontSw.draw(batch, "ATK: " + Spiel.INSTANCE.getInventory().getSword().getAtk(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
-        fontSw.draw(batch, "Dur: " + Spiel.INSTANCE.getInventory().getSword().getDur(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
+        fontSh.draw(batch, "Worth: " + inv.getShield().getWorth(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
+        fontSh.draw(batch, "DEF: " + inv.getShield().getDef(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
+        fontSh.draw(batch, "Dur: " + inv.getShield().getDur(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
 
-        fontSh.draw(batch, "Worth: " + Spiel.INSTANCE.getInventory().getShield().getWorth(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
-        fontSh.draw(batch, "DEF: " + Spiel.INSTANCE.getInventory().getShield().getDef(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
-        fontSh.draw(batch, "Dur: " + Spiel.INSTANCE.getInventory().getShield().getDur(), (int)(Gdx.graphics.getWidth()/xShield-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
-
-        fontDa.draw(batch, "Worth: " + Spiel.INSTANCE.getInventory().getDagger().getWorth(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
-        fontDa.draw(batch, "ATK: " + Spiel.INSTANCE.getInventory().getDagger().getAtk(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
-        fontDa.draw(batch, "Dur: " + Spiel.INSTANCE.getInventory().getDagger().getDur(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
+        fontDa.draw(batch, "Worth: " + inv.getDagger().getWorth(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
+        fontDa.draw(batch, "ATK: " + inv.getDagger().getAtk(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
+        fontDa.draw(batch, "Dur: " + inv.getDagger().getDur(), (int)(Gdx.graphics.getWidth()/xDagger-30)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.9));
 
         fontMo.draw(batch, "Money: " + Spiel.INSTANCE.getMoney(), (int)(Gdx.graphics.getWidth()/2)-fontSh.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.3));
 
@@ -84,15 +84,15 @@ public class Shop extends ScreenAdapter {
     }
 
     public void green(){
-        if(Spiel.INSTANCE.fight.getHero().getWeapon() == Spiel.INSTANCE.getInventory().getSword()){
+        if(Spiel.INSTANCE.fight.getHero().getWeapon() == Spiel.INSTANCE.inventory.getSword()){
             fontSw.setColor(Color.GREEN);
             fontDa.setColor(Color.WHITE);
         }
-        if(Spiel.INSTANCE.fight.getHero().getWeapon() == Spiel.INSTANCE.getInventory().getDagger()){
+        if(Spiel.INSTANCE.fight.getHero().getWeapon() == Spiel.INSTANCE.inventory.getDagger()){
             fontDa.setColor(Color.GREEN);
             fontSw.setColor(Color.WHITE);
         }
-        if(Spiel.INSTANCE.fight.getHero().getShield() == Spiel.INSTANCE.getInventory().getShield()){
+        if(Spiel.INSTANCE.fight.getHero().getShield() == Spiel.INSTANCE.inventory.getShield()){
             fontSh.setColor(Color.GREEN);
         }
     }

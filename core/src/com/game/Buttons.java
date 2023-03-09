@@ -46,7 +46,7 @@ public class Buttons {
                         System.exit(0);
                         break;
                     case "buySword":
-                        Item x = Spiel.INSTANCE.getInventory().getSword();
+                        Item x = Spiel.INSTANCE.inventory.getSword();
                         int wx = x.getWorth();
                         if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
                             if (Spiel.INSTANCE.getMoney() >= wx) {
@@ -57,7 +57,7 @@ public class Buttons {
                         }
                         break;
                     case "buyShield":
-                        Item y = Spiel.INSTANCE.getInventory().getShield();
+                        Item y = Spiel.INSTANCE.inventory.getShield();
                         int wy = y.getWorth();
                         if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
                             if (Spiel.INSTANCE.getMoney() >= wy){
@@ -68,7 +68,7 @@ public class Buttons {
                         }
                         break;
                     case "buyDagger":
-                        Item z = Spiel.INSTANCE.getInventory().getDagger();
+                        Item z = Spiel.INSTANCE.inventory.getDagger();
                         int wz = z.getWorth();
                         if (z != Spiel.INSTANCE.fight.getHero().getWeapon()) {
                             if (Spiel.INSTANCE.getMoney() >= wz){
@@ -86,10 +86,10 @@ public class Buttons {
                         break;
                     case "showInv":
                         if(!isOpen) {
-                            Spiel.INSTANCE.getFightScreen().inventory.show();
+                            Spiel.INSTANCE.getInventory().show();
                             isOpen = true;
                         } else {
-                            Spiel.INSTANCE.getFightScreen().inventory.hide();
+                            Spiel.INSTANCE.getInventory().hide();
                             isOpen = false;
                         }
 

@@ -54,17 +54,18 @@ public class GUI_Item {
         img.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Spiel.INSTANCE.getFightScreen().inventory.checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "", 0);
+                Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "Placeholder", 99);
                 img.setVisible(false);
                 return true;
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-              Spiel.INSTANCE.getFightScreen().inventory.checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
+              Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
                 img.setVisible(true);
             }
         });

@@ -1,6 +1,9 @@
 package com.game;
 
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 public class Database {
     private DatabaseConnector con;
     public Database() {
@@ -16,9 +19,10 @@ public class Database {
     }
 
     public boolean isSaveFileEnabled() {
-        exec("SELECT SaveFilesEnabled FROM System");
+        //exec("SELECT SaveFilesEnabled FROM System");
 
-        return 1 == Integer.parseInt(con.getCurrentQueryResult().getData()[0][0]);
+       // return 1 == Integer.parseInt(con.getCurrentQueryResult().getData()[0][0]);
+        return true;
     }
 
     public void saveOptions() {
@@ -31,7 +35,16 @@ public class Database {
     }
 
     public GUI_Item[][] loadItems(GUI_Item[][] guiItems, boolean saveEnabled) {
-        return null;
+        for (int a = 0; a < 4; a++) {
+            for (int i = 0; i < 7; i++) {
+                guiItems[a][i] = new GUI_Item();
+
+            }
+            Image img = new Image(new Texture("crystal.png"));
+            guiItems[a][7] = new GUI_Item(img);
+        }
+
+        return guiItems;
     }
 }
 
