@@ -28,6 +28,7 @@ public class MyScreen extends ScreenAdapter {
     private final Music music = Gdx.audio.newMusic(Gdx.files.internal("Beginning.mp3"));
     private final Music music2 = Gdx.audio.newMusic(Gdx.files.internal("Below the Surface.mp3"));
     private float volume;
+    private FitViewport viewport;
     private Stage stage;
 
 
@@ -41,8 +42,8 @@ public class MyScreen extends ScreenAdapter {
         Interior = false;
         animator = new Animator();
         map = new MapRender(batch);
-        Viewport viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
-        Stage stage = new Stage(viewport);
+        viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
+        stage = new Stage();
         player = new PlayerMap(getMap().world);
         music.setVolume(volume);
         music.play();
