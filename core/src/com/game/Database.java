@@ -14,8 +14,9 @@ public class Database {
     }
 
     public boolean doesGameExist() {
-        exec("SELECT GameID FROM Game");
-        return con.getCurrentQueryResult().getRowCount() != 0;
+      //  exec("SELECT GameID FROM Game");
+      //  return con.getCurrentQueryResult().getRowCount() != 0;
+        return true;
     }
 
     public boolean isSaveFileEnabled() {
@@ -35,16 +36,27 @@ public class Database {
     }
 
     public GUI_Item[][] loadItems(GUI_Item[][] guiItems, boolean saveEnabled) {
-        for (int a = 0; a < 4; a++) {
-            for (int i = 0; i < 7; i++) {
-                guiItems[a][i] = new GUI_Item();
+        if(saveEnabled) {
+            for (int a = 0; a < 4; a++) {
+                for (int i = 0; i < 7; i++) {
+                    guiItems[a][i] = new GUI_Item();
 
+                }
+                Image img = new Image(new Texture("crystal.png"));
+                guiItems[a][7] = new GUI_Item(img);
             }
-            Image img = new Image(new Texture("crystal.png"));
-            guiItems[a][7] = new GUI_Item(img);
-        }
+        } else {
+            for (int a = 0; a < 4; a++) {
+                for (int i = 0; i < 8; i++) {
+                    guiItems[a][i] = new GUI_Item();
 
+                }
+            }
+        }
         return guiItems;
     }
+    public void save() {
+
+            }
 }
 

@@ -43,6 +43,10 @@ public class Buttons {
                         Spiel.INSTANCE.shopScreen();
                         break;
                     case "quit":
+                        if(Spiel.INSTANCE.saveEnabled) {
+                            Spiel.INSTANCE.getDB().saveOptions();
+                            Spiel.INSTANCE.getDB().save();
+                        }
                         System.exit(0);
                         break;
                     case "buySword":
@@ -94,6 +98,15 @@ public class Buttons {
                         }
 
                        break;
+                    case "save":
+                        if (Spiel.INSTANCE.saveEnabled == false) {
+                            style.fontColor = Color.GREEN;
+                            Spiel.INSTANCE.saveEnabled = true;
+                        } else {
+                            style.fontColor = Color.RED;
+                            Spiel.INSTANCE.saveEnabled = false;
+                        }
+                        break;
                     default:
                         break;
                 }

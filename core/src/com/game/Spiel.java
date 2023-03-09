@@ -122,7 +122,9 @@ public class Spiel extends Game {
     public Shop getShop() {
         return shop;
     }
-
+    public Database getDB() {
+        return db;
+    }
     public Npc getNpc() {
         return npc;
     }
