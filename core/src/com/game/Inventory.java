@@ -2,6 +2,7 @@ package com.game;
 
 public class Inventory {
     private final Item sword;
+    private final Item baguette;
     private final Item shield;
     private final Item dagger;
     private final Item armor;
@@ -16,6 +17,7 @@ public class Inventory {
         ice = new Effect("Ice",-10, 5, 5);
         blank = new Effect("",0,0,0);
         sword = new Item("", "Sword", 100, 10, 0, 50, 3, fire, "");
+        baguette = new Item("", "Baguette", 10000, 100000, 1000, 3000, 1, blank, "");
         shield = new Item("", "Shield", 100, 0, 10, 80,5, blank, "");
         dagger = new Item("", "Dagger", 200, 15, 0, 100,1, poison, "doubleAttack");
         armor = new Item("", "Armor", 100, 0, 20, 300, 10, blank, "");

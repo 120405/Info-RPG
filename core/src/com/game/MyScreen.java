@@ -30,6 +30,7 @@ public class MyScreen extends ScreenAdapter {
     private float volume;
     private FitViewport viewport;
     private Stage stage;
+    private Compass compass;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -50,6 +51,7 @@ public class MyScreen extends ScreenAdapter {
         music2.setVolume(volume);
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
+        compass = new Compass(80,80);
     }
 
     public void render(float delta) {
@@ -68,6 +70,8 @@ public class MyScreen extends ScreenAdapter {
         stage.act(delta);
         stage.draw();
         Spiel.INSTANCE.createHealthBars(false);
+        compass.updateCompass();
+        Spiel.INSTANCE.getNpc().update(1f);
     }
 
     public void cameraUpdate(float delta) {
