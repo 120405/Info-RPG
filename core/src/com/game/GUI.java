@@ -15,8 +15,10 @@ public class GUI {
     private Texture img;
     private Table table;
     private Image renderImage;
+    private boolean isOpen;
 
     public GUI() {
+        isOpen = false;
         renderImage = null;
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
@@ -38,11 +40,13 @@ public class GUI {
      }*/
     public void show() {
         window.setVisible(true);
+        isOpen = true;
     }
 
     public void hide() {
         //disable if not visible: no invisible inventory during fight
         window.setVisible(false);
+        isOpen = false;
     }
 
     public void setPosition(int x, int y) {
@@ -63,7 +67,12 @@ public class GUI {
 
 
     }
-
+    public boolean isOpen() {
+        return isOpen;
+    }
+    public void isOpen(boolean open) {
+        isOpen = open;
+    }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
                            String name, int durability) {
         renderImage = img;

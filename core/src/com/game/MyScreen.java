@@ -5,16 +5,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class MyScreen extends ScreenAdapter {
@@ -31,10 +33,12 @@ public class MyScreen extends ScreenAdapter {
     private FitViewport viewport;
     private Stage stage;
     private Compass compass;
+    private Buttons inv;
 
 
     public MyScreen(SpriteBatch batch) {
         this.batch = batch;
+
         create();
     }
 
@@ -52,11 +56,22 @@ public class MyScreen extends ScreenAdapter {
         body = map.b2dPlats(MapRender.layer1);
         createContactsOverworld();
         compass = new Compass(80,80);
+        show();
     }
 
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            if(!Spiel.INSTANCE.getInventory().isOpen()) {
+                 inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
+                inv.hide();
+                Spiel.INSTANCE.getInventory().show();
+            } else {
+                Spiel.INSTANCE.getInventory().hide();
+                inv.delete();
+            }
+        }
         player.handleInput();
         cameraUpdate(delta);
         map.renderBackground();
@@ -65,7 +80,12 @@ public class MyScreen extends ScreenAdapter {
         map.world.step(1 / 60f, 6, 2);
         enterCheck();
         if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            map.handleCamInput();
+            if(!Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+                if(!Spiel.INSTANCE.getInventory().isOpen()) {
+                    map.handleCamInput();
+                }
+            }
+
         }
         stage.act(delta);
         stage.draw();
@@ -234,6 +254,14 @@ public class MyScreen extends ScreenAdapter {
         batch.dispose();
         map.dispose();
         animator.dispose();
+    }
+    public void hide() {
+        stage.clear();
+    }
+    public void show() {
+        Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
+        inv.hide();
+        stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
     }
 }
 
