@@ -13,6 +13,7 @@ public class Animator implements ApplicationListener {
     SpriteBatch batch;
     Texture knightWalk;
     Texture shipTexture;
+
     Sprite ship;
     float stateTime;
     Animation<TextureRegion> RunUpAnim;
@@ -21,9 +22,9 @@ public class Animator implements ApplicationListener {
     Animation<TextureRegion> RunRightAnim;
     TextureRegion currentFrame;
     String orientation;
+    Sprite knight;
 
     Compass compass;
-    Sprite knight;
 
 
     public Animator() {
@@ -32,12 +33,12 @@ public class Animator implements ApplicationListener {
 
 
     public void create() {
+        compass = new Compass(80,80);
         batch = new SpriteBatch();
         stateTime = 0f;
         orientation = "down";
         knightWalk = new Texture(Gdx.files.internal("Soldier Walk-Sheet.png"));
         shipTexture = new Texture(Gdx.files.internal("Ship/shipDown.png"));
-
         ship = new Sprite(shipTexture);
         ship.setSize(10f,10f);
         ship.setCenter(ship.getWidth()/2,ship.getHeight()/2);
@@ -46,7 +47,7 @@ public class Animator implements ApplicationListener {
         RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
         RunRightAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 2);
         RunLeftAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 3);
-        compass =  new Compass(80,80);
+
     }
 
 
@@ -128,10 +129,11 @@ public class Animator implements ApplicationListener {
         knight.setOrigin(0,0);
         knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getXPos()-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getYPos()-0.8f);
         knight.setSize(3f,3f);
+
         batch.setProjectionMatrix(Spiel.INSTANCE.getMyScreen().getMap().getCam().combined);
         batch.begin();
         knight.draw(batch);
-        ship.draw(batch);
+        //ship.draw(batch);
 
         batch.end();
     }
