@@ -23,7 +23,7 @@ public Npc(float sbR){
    // body = pBody;
     bR = sbR;
     this.steeringOutput = new SteeringAcceleration<Vector2>(new Vector2());
-    this.maxLinearSpeed = 5;
+    this.maxLinearSpeed = 10;
     this.maxLinearAcceleration = 50;
     this.maxAngularSpeed = 5;
     this.maxAngularAcceleration = 2;
