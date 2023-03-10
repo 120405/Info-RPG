@@ -117,4 +117,10 @@ public class Buttons {
     public  void setColor1(Color color){
         color1 = color;
     }
+    public void hide() {
+        button.setVisible(false);
+    }
+    public void delete() {
+        button.remove();
+    }
 }
