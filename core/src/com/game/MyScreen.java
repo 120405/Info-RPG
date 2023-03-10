@@ -71,6 +71,7 @@ public class MyScreen extends ScreenAdapter {
         stage.draw();
         Spiel.INSTANCE.createHealthBars(false);
         compass.updateCompass();
+        Spiel.INSTANCE.getNpc().update(1f);
     }
 
     public void cameraUpdate(float delta) {

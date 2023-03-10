@@ -5,10 +5,7 @@ import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class Npc implements Steerable<Vector2> {
 
@@ -25,19 +22,53 @@ public Npc(float sbR){
 
    // body = pBody;
     bR = sbR;
+    this.steeringOutput = new SteeringAcceleration<Vector2>(new Vector2());
+    this.maxLinearSpeed = 5;
+    this.maxLinearAcceleration = 50;
+    this.maxAngularSpeed = 5;
+    this.maxAngularAcceleration = 2;
     create();
 }
 
+public void update(float delta){
+    if(behavior != null){
+        behavior.calculateSteering(steeringOutput);
+        applySteering(delta);
+    }
+}
+
+private void applySteering(float delta){
+    boolean anyAcceleration = false;
+
+    if(!steeringOutput.linear.isZero()){
+        Vector2 force = steeringOutput.linear.scl(delta);
+        body.applyForceToCenter(force, true);
+        anyAcceleration = true;
+    }
+
+    if(anyAcceleration){
+        Vector2 velocity = body.getLinearVelocity();
+        float currentSpeedSquare = velocity.len2();
+        if(currentSpeedSquare > maxLinearSpeed * maxLinearSpeed){
+            body.setLinearVelocity(velocity.scl(maxLinearSpeed / (float) Math.sqrt(currentSpeedSquare)));
+        }
+    }
+}
+
 public void create(){
-    Body pBody;
     BodyDef def = new BodyDef();
     def.type = BodyDef.BodyType.DynamicBody;
     def.position.set(80, 80);
     def.fixedRotation = true;
-    pBody = Spiel.INSTANCE.getMyScreen().getMap().world.createBody(def);
+    body = Spiel.INSTANCE.getMyScreen().getMap().world.createBody(def);
     PolygonShape shape = new PolygonShape();
     shape.setAsBox(0.9F, 0.9f);
-    pBody.createFixture(shape, 1.0f);
+    FixtureDef fdef = new FixtureDef();
+    fdef.shape = shape;
+    fdef.density = 1f;
+    fdef.friction = 0.9f;
+
+    body.createFixture(fdef);
     shape.dispose();
 
 }
@@ -151,5 +182,14 @@ public void create(){
     return  new Vector2();
     }
 
+    public Body getBody(){ return body; }
+
+    public void setBehavior(SteeringBehavior<Vector2> behavior){
+    this.behavior = behavior;
+    }
+
+    public SteeringBehavior<Vector2> getbehavior(){
+    return behavior;
+    }
 
 }

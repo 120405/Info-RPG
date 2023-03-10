@@ -15,7 +15,9 @@ public class AISteering{
 
         world = Spiel.INSTANCE.getMyScreen().getMap();
         hero = Spiel.INSTANCE.getMyScreen().getPlayer();
+        npc = Spiel.INSTANCE.getNpc();
 
-        Arrive<Vector2> arriveSB = new Arrive<Vector2>(npc, hero).setTimeToTarget(0.01f).setArrivalTolerance(2f).setDecelerationRadius(3);
+        Arrive<Vector2> arriveSB = new Arrive<Vector2>(npc, hero).setTimeToTarget(0.01f).setArrivalTolerance(2f).setDecelerationRadius(20);
+        npc.setBehavior(arriveSB);
     }
 }

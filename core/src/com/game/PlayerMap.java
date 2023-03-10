@@ -3,6 +3,7 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.steer.Steerable;
+import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -13,10 +14,16 @@ import com.badlogic.gdx.physics.box2d.World;
 
 
 public class PlayerMap implements Steerable<Vector2> {
-    private final Body playerBody;
+    private final Body body;
+
+
+    boolean tagged;
+    float maxLinearSpeed, maxLinearAcceleration;
+    float maxAngularSpeed, maxAngularAcceleration;
+    float bR;
 
     public PlayerMap(World world) {
-        playerBody = createPlayer(world);
+        body = createPlayer(world);
     }
 
     public Body createPlayer(World world) {
@@ -39,8 +46,8 @@ public class PlayerMap implements Steerable<Vector2> {
     public void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            System.out.println(playerBody.getPosition().x);
-            System.out.println(playerBody.getPosition().y);
+            System.out.println(body.getPosition().x);
+            System.out.println(body.getPosition().y);
         }
 
         int horizontalForce = 0;
@@ -70,8 +77,8 @@ public class PlayerMap implements Steerable<Vector2> {
             verticalForce += speed;
 
         }
-        playerBody.setLinearVelocity(horizontalForce * 5, playerBody.getLinearVelocity().y);
-        playerBody.setLinearVelocity(verticalForce * 5, playerBody.getLinearVelocity().x);
+        body.setLinearVelocity(horizontalForce * 5, body.getLinearVelocity().y);
+        body.setLinearVelocity(verticalForce * 5, body.getLinearVelocity().x);
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.I)) {
@@ -91,45 +98,44 @@ public class PlayerMap implements Steerable<Vector2> {
     }
 
     public Body getPlayerBody() {
-        return playerBody;
+        return body;
     }
 
     public float getXPos() {
-        return playerBody.getPosition().x;
+        return body.getPosition().x;
     }
 
     public float getYPos() {
-        return playerBody.getPosition().y;
+        return body.getPosition().y;
     }
 
     public void setPos(float x, float y) {
-        playerBody.setTransform(x, y, 0);
+        body.setTransform(x, y, 0);
     }
-
 
     @Override
     public Vector2 getLinearVelocity() {
-        return null;
+        return body.getLinearVelocity();
     }
 
     @Override
     public float getAngularVelocity() {
-        return 0;
+        return body.getAngularVelocity();
     }
 
     @Override
     public float getBoundingRadius() {
-        return 0;
+        return bR;
     }
 
     @Override
     public boolean isTagged() {
-        return false;
+        return tagged;
     }
 
     @Override
     public void setTagged(boolean tagged) {
-
+        this.tagged = tagged;
     }
 
     @Override
@@ -144,52 +150,52 @@ public class PlayerMap implements Steerable<Vector2> {
 
     @Override
     public float getMaxLinearSpeed() {
-        return 0;
+        return maxLinearSpeed;
     }
 
     @Override
     public void setMaxLinearSpeed(float maxLinearSpeed) {
-
+        this.maxLinearSpeed = maxLinearSpeed;
     }
 
     @Override
     public float getMaxLinearAcceleration() {
-        return 0;
+        return maxLinearAcceleration;
     }
 
     @Override
     public void setMaxLinearAcceleration(float maxLinearAcceleration) {
-
+        this.maxAngularAcceleration = maxLinearAcceleration;
     }
 
     @Override
     public float getMaxAngularSpeed() {
-        return 0;
+        return maxAngularSpeed;
     }
 
     @Override
     public void setMaxAngularSpeed(float maxAngularSpeed) {
-
+        this.maxAngularSpeed = maxAngularSpeed;
     }
 
     @Override
     public float getMaxAngularAcceleration() {
-        return 0;
+        return maxAngularAcceleration;
     }
 
     @Override
     public void setMaxAngularAcceleration(float maxAngularAcceleration) {
-
+        this.maxAngularAcceleration = maxAngularAcceleration;
     }
 
     @Override
     public Vector2 getPosition() {
-        return null;
+        return body.getPosition();
     }
 
     @Override
     public float getOrientation() {
-        return 0;
+        return body.getAngle();
     }
 
     @Override
@@ -199,16 +205,20 @@ public class PlayerMap implements Steerable<Vector2> {
 
     @Override
     public float vectorToAngle(Vector2 vector) {
-        return 0;
+        return SteeringUtils.vectorToAngle(vector);
     }
 
     @Override
     public Vector2 angleToVector(Vector2 outVector, float angle) {
-        return null;
+        return SteeringUtils.angleToVector(outVector, angle);
     }
 
     @Override
     public Location<Vector2> newLocation() {
         return null;
+    }
+
+    public Vector2 newVector(){
+        return  new Vector2();
     }
 }

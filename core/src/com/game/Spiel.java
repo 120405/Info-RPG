@@ -27,6 +27,7 @@ public class Spiel extends Game {
     private SpriteBatch batch,batch2;
     private BitmapFont font;
     private GUI inventoryGUI;
+    private AISteering aiSteering;
 
     public Spiel(String name) {
 
@@ -79,7 +80,8 @@ public class Spiel extends Game {
         items = db.loadItems(new GUI_Item[4][8], saveEnabled);
         inventoryGUI = new GUI();
         game = new MyScreen(batch);
-        npc = new Npc(1f);
+        npc = new Npc(30f);
+        aiSteering = new AISteering();
         //player= new Player();
         shop = new Shop(batch);
         options = new Options(batch);
