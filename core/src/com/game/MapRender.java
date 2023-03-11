@@ -53,7 +53,7 @@ public class MapRender {
         world = new World(new Vector2(0, 0), false);
         world.setContactListener(new ListenerClass());
         this.batch = new SpriteBatch();
-        tiledmap1 = new TmxMapLoader().load("1 - Kopie.tmx");
+        tiledmap1 = new TmxMapLoader().load("2 - Kopie.tmx");
         tiledmap2 = new TmxMapLoader().load("2.tmx");
 
         float unitScale = 1 / 8f;

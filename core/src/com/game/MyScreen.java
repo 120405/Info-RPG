@@ -50,6 +50,7 @@ public class MyScreen extends ScreenAdapter {
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage();
         player = new PlayerMap(getMap().world);
+        player.setPos(80,280);
         music.setVolume(volume);
         music.play();
         music2.setVolume(volume);

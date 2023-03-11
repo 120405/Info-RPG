@@ -36,7 +36,6 @@ public class Compass {
 
     public float getRotation() {
         float radians = (float) Math.atan2(targetY - Spiel.INSTANCE.getMyScreen().getPlayer().getYPos(), targetX - Spiel.INSTANCE.getMyScreen().getPlayer().getXPos());
-        System.out.println((float) Math.toDegrees(radians));
         return ((float) Math.toDegrees(radians) - 90);
     }
 
