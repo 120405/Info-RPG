@@ -11,9 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -71,6 +69,9 @@ public class MyScreen extends ScreenAdapter {
             } else {
                 Spiel.INSTANCE.getInventory().hide();
                 inv.delete();
+                if(Spiel.INSTANCE.getInventory().getEquipWindow().isVisible()) {
+                    Spiel.INSTANCE.getInventory().getEquipWindow().setVisible(false);
+                }
             }
         }
         player.handleInput();
@@ -263,6 +264,7 @@ public class MyScreen extends ScreenAdapter {
         Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
         inv.hide();
         stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
+        stage.addActor(Spiel.INSTANCE.getInventory().getEquipWindow());
     }
 }
 

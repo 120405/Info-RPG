@@ -5,14 +5,14 @@ import com.badlogic.gdx.math.*;
 import java.util.*;
 
 public class Hero {
-    private int LP = 0;
+    private int LP;
     private int random = 0;
-    private int fullLP = 0;
-    private int ATK = 0;
+    private int fullLP;
+    private int ATK;
     private Item weapon;
     private Item shield;
     private Item armor;
-    private String name = "";
+    private String name;
     private boolean alive = true;
     private Random rr;
     private int attackModifier;

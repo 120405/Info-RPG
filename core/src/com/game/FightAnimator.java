@@ -14,19 +14,24 @@ import java.util.HashMap;
 public class FightAnimator implements ApplicationListener {
     private SpriteBatch batch;
     private HashMap<String, Animation<TextureRegion>> heroAnim;
-    private HashMap<String, Animation<TextureRegion>> monsterAnim;
-    private float stateTime;
+    private HashMap<Integer, HashMap<String, Animation<TextureRegion>>> monsters;
+    private float stateTimeHero,stateTimeMonster;
     private Sprite heroSprite,monsterSprite;
     private String currentHeroAnim, currentMonsterAnim;
-    public FightAnimator() {
-        heroAnim = new HashMap<String, Animation<TextureRegion>>();
-        monsterAnim = new HashMap<String, Animation<TextureRegion>>();
+    private int monsterType = 1;
+    public FightAnimator(int monsterType) {
+        this.monsterType = monsterType;
+        heroAnim = new HashMap<>();
+        monsters = new HashMap<>();
         create();
+
     }
     @Override
     public void create() {
     batch = new SpriteBatch();
-    stateTime = 0f;
+    stateTimeHero = 0f;
+    stateTimeMonster = 0f;
+    monsters.put(1,new HashMap<String, Animation<TextureRegion>>());
     createAnimationMaps();
     }
 
@@ -39,8 +44,10 @@ public class FightAnimator implements ApplicationListener {
         heroAnim.put("Idle", createAnim(new Texture(Gdx.files.internal("FightAnimations/Hero/Idle.png")), 1, 4, 0.2f));
         heroAnim.put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
 
-        monsterAnim.put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Attack.png")), 4, 4, 0.2f, 0));
-        monsterAnim.put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Idle.png")), 5, 4, 0.2f, 0));
+        monsters.get(1).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Attack1.png")), 1, 5, 0.2f, 0));
+        monsters.get(1).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Idle.png")), 1, 4, 0.2f, 0));
+        monsters.get(1).put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
+
         currentHeroAnim = "Idle";
         currentMonsterAnim = "Idle";
     }
@@ -72,29 +79,51 @@ public class FightAnimator implements ApplicationListener {
     }
     @Override
     public void render() {
-
-        stateTime += Gdx.graphics.getDeltaTime();
-        if(currentHeroAnim != "Dead") {
-            if (heroAnim.get(currentHeroAnim).isAnimationFinished(stateTime)) {
-                stateTime = 0f;
-                if (currentHeroAnim == "Attack") {
+        stateTimeHero += Gdx.graphics.getDeltaTime();
+        stateTimeMonster += Gdx.graphics.getDeltaTime();
+        if(!currentHeroAnim.equals("Dead")) {
+            if (heroAnim.get(currentHeroAnim).isAnimationFinished(stateTimeHero)) {
+                stateTimeHero = 0f;
+                if (currentHeroAnim.equals("Attack")) {
                     currentHeroAnim = "Idle";
+                    if(!currentMonsterAnim.equals("Dead")) {
+                        currentMonsterAnim = "Attack";
+                    }
+
+
                 }
             }
         }
-        heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTime, false));
-        heroSprite.setPosition(150,250);
-        heroSprite.setScale(4f);
-        monsterSprite = new Sprite(monsterAnim.get(currentMonsterAnim).getKeyFrame(stateTime, true));
-        monsterSprite.setScale(2f);
-        monsterSprite.setPosition(450,50);
-        monsterSprite.flip(true, false);
+
+        heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTimeHero, false));
+
+        if(!currentMonsterAnim.equals("Dead")) {
+            if(monsters.get(monsterType).get(currentMonsterAnim).isAnimationFinished(stateTimeMonster)) {
+                stateTimeMonster = 0f;
+                if(currentMonsterAnim.equals("Attack")) {
+                    currentMonsterAnim = "Idle";
+                    if(Spiel.INSTANCE.fight.getWinner().equals("Monster")) {
+                        currentHeroAnim = "Dead";
+                    }
+
+                }
+            }
+        }
+
+        monsterSprite = new Sprite(monsters.get(monsterType).get(currentMonsterAnim).getKeyFrame(stateTimeMonster, false));
+        position();
         batch.begin();
         heroSprite.draw(batch);
         monsterSprite.draw(batch);
         batch.end();
     }
-
+    public void position() {
+        heroSprite.setPosition(150,250);
+        heroSprite.setScale(4f);
+        monsterSprite.setScale(4f);
+        monsterSprite.setPosition(450,250);
+        monsterSprite.flip(true, false);
+    }
     @Override
     public void pause() {
     }
@@ -112,5 +141,9 @@ public class FightAnimator implements ApplicationListener {
     }
     public void setCurrentMonsterAnim(String anim) {
         currentMonsterAnim = anim;
+    }
+    public boolean fightAnimFinished() {
+        return ((!currentMonsterAnim.equals("Attack")) && !currentHeroAnim.equals("Attack")) || ((currentMonsterAnim.equals("Attack") && monsters.get(monsterType).get(currentMonsterAnim).isAnimationFinished(stateTimeMonster))
+                && (currentHeroAnim.equals("Attack") && heroAnim.get(currentHeroAnim).isAnimationFinished(stateTimeHero)));
     }
 }

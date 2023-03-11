@@ -3,12 +3,12 @@ package com.game;
 import java.util.*;
 
 public class Monster {
-   private int LP = 0;
+   private int LP;
    private int random = 0;
-   private int fullLP = 0;
-   private int ATK = 0;
-   private String name = "";
-   private String type;
+   private int fullLP;
+   private int ATK;
+   private String name;
+   private int type;
    private boolean alive = true;
    private int attackModifier;
    private int damageModifier;
@@ -21,7 +21,7 @@ public class Monster {
    private Item armor;
    private List <Effect> effects;
 
-    public Monster(int LP, int fullLP, int ATK, String name, String type) {
+    public Monster(int LP, int fullLP, int ATK, String name, int type) {
     this.LP = LP;
     this.fullLP = fullLP;
     this.ATK = ATK;
@@ -298,11 +298,11 @@ public class Monster {
         this.damageModifier = damageModifier;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 }
