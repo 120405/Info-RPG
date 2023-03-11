@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.SnapshotArray;
 
 public class GUI {
     private final Window window;
+    private final Window equipWindow;
     private Texture img;
     private Table table;
     private Image renderImage;
@@ -23,12 +24,18 @@ public class GUI {
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         window = new Window("", windowStyle);
+        equipWindow = new Window("", windowStyle);
         window.setSize(240, 120);
-        window.setPosition(400, 400);
+        equipWindow.setSize(60, 30);
+        equipWindow.setScale(3f);
+        window.setPosition(400, 200);
+        equipWindow.setPosition(600, 600);
         window.setScale(3f);
          table = new Table();
         addInventory(table, Spiel.INSTANCE.getItems());
         window.setVisible(false);
+        equipWindow.setVisible(false);
+
 
     }
     public Window getInventory() {
@@ -67,11 +74,11 @@ public class GUI {
 
 
     }
+    public Window getEquipWindow() {
+        return equipWindow;
+    }
     public boolean isOpen() {
         return isOpen;
-    }
-    public void isOpen(boolean open) {
-        isOpen = open;
     }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
                            String name, int durability) {
@@ -89,13 +96,16 @@ public class GUI {
                     if (a.size == 1) {
                         if (destination != current) {
                             current.removeActor(img);
+
                         }
                         destination.add(img);
-                        if (name != "") {
+                        if (name != "" && name != "Placeholder") {
                             GUI_Item it = findItem(destination);
                             it.setName(name);
                             it.setDurability(durability);
                         }
+                    } else if(destination == current && name != "Placeholder") {
+                        openEquipWindow();
                     }
 
                 }
@@ -119,6 +129,9 @@ public class GUI {
 
     public Table getTable() {
         return table;
+    }
+    public void openEquipWindow() {
+            equipWindow.setVisible(true);
     }
 
 }

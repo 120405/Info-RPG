@@ -92,6 +92,9 @@ public class Buttons {
                             Spiel.INSTANCE.getInventory().show();
                         } else {
                             Spiel.INSTANCE.getInventory().hide();
+                            if(Spiel.INSTANCE.getInventory().getEquipWindow().isVisible()) {
+                                Spiel.INSTANCE.getInventory().getEquipWindow().setVisible(false);
+                            }
                         }
 
                        break;

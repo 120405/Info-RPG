@@ -1,6 +1,5 @@
 package com.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -58,7 +57,7 @@ public class GUI_Item {
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "Placeholder", 99);
+               //Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "Placeholder", 99);
                 img.setVisible(false);
                 return true;
             }
@@ -69,6 +68,9 @@ public class GUI_Item {
                 img.setVisible(true);
             }
         });
+
+
+
     }
     public float getStackX() {
         return stack.getChild(0).getX();
