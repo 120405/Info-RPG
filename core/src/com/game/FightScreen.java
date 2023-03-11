@@ -82,13 +82,15 @@ public class FightScreen extends ScreenAdapter {
             healthMonster = monster.getLP();
             healthHero = hero.getLP();
             if (winner.equals("Hero")) {
-                fa.setCurrentHeroAnim("Dead");
+
 
             } else if (winner.equals("Monster")) {
                 //death animation
-
+                fa.setCurrentHeroAnim("Dead");
             }
             hero.setRandom(0);
+        } else {
+
         }
     }
 
