@@ -1,5 +1,7 @@
 package com.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.SnapshotArray;
 
 public class GUI_Item {
@@ -53,12 +56,13 @@ public class GUI_Item {
         img.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               //Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, "Placeholder", 99);
-                img.setVisible(false);
+
+                 stack.removeActor(img);
+                 stack.add(img);
+                 img.setVisible(false);
                 return true;
             }
             @Override
@@ -66,6 +70,19 @@ public class GUI_Item {
 
               Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
                 img.setVisible(true);
+            }
+            @Override
+            public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
+                if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+                    Spiel.INSTANCE.getInventory().openEquipWindow();
+                }
+
+            }
+            @Override
+            public void exit (InputEvent event, float x, float y, int pointer, @Null Actor toActor) {
+                if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+                    Spiel.INSTANCE.getInventory().closeEquipWindow();
+                }
             }
         });
 

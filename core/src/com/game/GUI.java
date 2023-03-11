@@ -14,7 +14,7 @@ public class GUI {
     private final Window window;
     private final Window equipWindow;
     private Texture img;
-    private Table table;
+    private Table table, equipTable;
     private Image renderImage;
     private boolean isOpen;
 
@@ -26,12 +26,15 @@ public class GUI {
         window = new Window("", windowStyle);
         equipWindow = new Window("", windowStyle);
         window.setSize(240, 120);
-        equipWindow.setSize(60, 30);
+        equipWindow.setSize(80, 120);
         equipWindow.setScale(3f);
         window.setPosition(400, 200);
-        equipWindow.setPosition(600, 600);
+        equipWindow.setPosition(1200, 200);
+        equipTable = new Table();
+        buildEquipMenu(equipWindow, equipTable);
         window.setScale(3f);
          table = new Table();
+
         addInventory(table, Spiel.INSTANCE.getItems());
         window.setVisible(false);
         equipWindow.setVisible(false);
@@ -53,9 +56,13 @@ public class GUI {
     public void hide() {
         //disable if not visible: no invisible inventory during fight
         window.setVisible(false);
+        equipWindow.setVisible(false);
         isOpen = false;
     }
-
+    public void buildEquipMenu(Window w, Table t) {
+        new Buttons("Close", t, "closeEquipWindow", 16, 16, Color.OLIVE);
+         w.add(t);
+    }
     public void setPosition(int x, int y) {
         window.setPosition(x, y);
     }
@@ -90,24 +97,20 @@ public class GUI {
             if (c.get(i).getActorX() <= (current.getX() + x)
                     && (current.getX() + x) <= (c.get(i).getActorX() + backgroundW)) {
                 if (c.get(i).getActorY() <= (current.getY() + y)
-                        && (current.getY() + y) <= (c.get(i).getActorY() + backgroundH)) {
+                    && (current.getY() + y) <= (c.get(i).getActorY() + backgroundH)) {
                     destination = (Stack) (c.get(i).getActor());
                     SnapshotArray<Actor> a = destination.getChildren();
                     if (a.size == 1) {
                         if (destination != current) {
                             current.removeActor(img);
-
                         }
                         destination.add(img);
-                        if (name != "" && name != "Placeholder") {
+                        if (name != "") {
                             GUI_Item it = findItem(destination);
                             it.setName(name);
                             it.setDurability(durability);
                         }
-                    } else if(destination == current && name != "Placeholder") {
-                        openEquipWindow();
                     }
-
                 }
             }
         }
@@ -131,7 +134,9 @@ public class GUI {
         return table;
     }
     public void openEquipWindow() {
-            equipWindow.setVisible(true);
+        equipWindow.setVisible(true);
     }
-
+    public void closeEquipWindow() {
+        equipWindow.setVisible(false);
+    }
 }
