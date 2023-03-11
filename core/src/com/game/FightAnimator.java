@@ -27,18 +27,22 @@ public class FightAnimator implements ApplicationListener {
     public void create() {
     batch = new SpriteBatch();
     stateTime = 0f;
-    heroAnim.put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Attack1.png")), 1, 5, 0.2f, 0));
-    heroAnim.put("Idle", createAnim(new Texture(Gdx.files.internal("FightAnimations/Hero/Idle.png")), 1, 4, 0.2f));
-    heroAnim.put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
-    monsterAnim.put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Attack.png")), 4, 4, 0.2f, 0));
-    monsterAnim.put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Idle.png")), 5, 4, 0.2f, 0));
-    currentHeroAnim = "Idle";
-    currentMonsterAnim = "Idle";
+    createAnimationMaps();
     }
 
     @Override
     public void resize(int width, int height) {
 
+    }
+    public void createAnimationMaps() {
+        heroAnim.put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Attack1.png")), 1, 5, 0.2f, 0));
+        heroAnim.put("Idle", createAnim(new Texture(Gdx.files.internal("FightAnimations/Hero/Idle.png")), 1, 4, 0.2f));
+        heroAnim.put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
+
+        monsterAnim.put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Attack.png")), 4, 4, 0.2f, 0));
+        monsterAnim.put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster/Idle.png")), 5, 4, 0.2f, 0));
+        currentHeroAnim = "Idle";
+        currentMonsterAnim = "Idle";
     }
     public Animation<TextureRegion> createAnimRow(Texture t, int row, int col, float frameTime, int col1) {
         Animation<TextureRegion> Anim = null;
@@ -70,17 +74,15 @@ public class FightAnimator implements ApplicationListener {
     public void render() {
 
         stateTime += Gdx.graphics.getDeltaTime();
-        if(currentHeroAnim.equals("Dead")) {
-            heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTime));
-        } else if(currentHeroAnim.equals("Attack")) {
-            heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTime, false));
-            if(heroAnim.get(currentHeroAnim).isAnimationFinished(stateTime)) {
-                currentHeroAnim = "Idle";
+        if(currentHeroAnim != "Dead") {
+            if (heroAnim.get(currentHeroAnim).isAnimationFinished(stateTime)) {
+                stateTime = 0f;
+                if (currentHeroAnim == "Attack") {
+                    currentHeroAnim = "Idle";
+                }
             }
-        } else {
-            heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTime, true));
         }
-
+        heroSprite = new Sprite(heroAnim.get(currentHeroAnim).getKeyFrame(stateTime, false));
         heroSprite.setPosition(150,250);
         heroSprite.setScale(4f);
         monsterSprite = new Sprite(monsterAnim.get(currentMonsterAnim).getKeyFrame(stateTime, true));
@@ -95,12 +97,10 @@ public class FightAnimator implements ApplicationListener {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
