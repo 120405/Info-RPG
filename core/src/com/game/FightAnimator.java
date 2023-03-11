@@ -32,6 +32,8 @@ public class FightAnimator implements ApplicationListener {
     stateTimeHero = 0f;
     stateTimeMonster = 0f;
     monsters.put(1,new HashMap<String, Animation<TextureRegion>>());
+    monsters.put(2,new HashMap<String, Animation<TextureRegion>>());
+    monsters.put(3,new HashMap<String, Animation<TextureRegion>>());
     createAnimationMaps();
     }
 
@@ -44,10 +46,17 @@ public class FightAnimator implements ApplicationListener {
         heroAnim.put("Idle", createAnim(new Texture(Gdx.files.internal("FightAnimations/Hero/Idle.png")), 1, 4, 0.2f));
         heroAnim.put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
 
-        monsters.get(1).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Attack1.png")), 1, 5, 0.2f, 0));
-        monsters.get(1).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Idle.png")), 1, 4, 0.2f, 0));
-        monsters.get(1).put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
+        monsters.get(1).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster1/Attack1.png")), 1, 5, 0.2f, 0));
+        monsters.get(1).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster1/Idle.png")), 1, 4, 0.2f, 0));
+        monsters.get(1).put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster1/Dead.png")), 1, 6, 0.2f, 0));
 
+        monsters.get(2).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Attack1.png")), 1, 4, 0.2f, 0));
+        monsters.get(2).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Idle.png")), 1, 7, 0.2f, 0));
+        monsters.get(2).put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster2/Dead.png")), 1, 5, 0.2f, 0));
+
+        monsters.get(3).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster3/Attack1.png")), 1, 5, 0.2f, 0));
+        monsters.get(3).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster3/Idle.png")), 1, 7, 0.2f, 0));
+        monsters.get(3).put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster3/Dead.png")), 1, 4, 0.2f, 0));
         currentHeroAnim = "Idle";
         currentMonsterAnim = "Idle";
     }
@@ -88,6 +97,7 @@ public class FightAnimator implements ApplicationListener {
                     currentHeroAnim = "Idle";
                     if(!currentMonsterAnim.equals("Dead")) {
                         currentMonsterAnim = "Attack";
+                        stateTimeMonster = 0f;
                     }
 
 
@@ -145,5 +155,9 @@ public class FightAnimator implements ApplicationListener {
     public boolean fightAnimFinished() {
         return ((!currentMonsterAnim.equals("Attack")) && !currentHeroAnim.equals("Attack")) || ((currentMonsterAnim.equals("Attack") && monsters.get(monsterType).get(currentMonsterAnim).isAnimationFinished(stateTimeMonster))
                 && (currentHeroAnim.equals("Attack") && heroAnim.get(currentHeroAnim).isAnimationFinished(stateTimeHero)));
+    }
+    public void setStateTime(float time) {
+        stateTimeHero = time;
+        stateTimeMonster = time;
     }
 }

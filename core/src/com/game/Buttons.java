@@ -1,12 +1,15 @@
 package com.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class Buttons {
@@ -28,6 +31,21 @@ public class Buttons {
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
         button.setPosition((int)(Gdx.graphics.getWidth()/x), (int)(Gdx.graphics.getHeight()/y));
+        addListener(action);
+    }
+    public Buttons(String displayedText, Table t, final String action, double x, double y, Color color) {
+        font = new BitmapFont();
+        style = new TextButton.TextButtonStyle();
+        style.font = font;
+        color1 = color;
+        style.fontColor = color1;
+        button = new TextButton(displayedText, style);
+        button.getLabel().setFontScale(5F);
+        button.setPosition((int)(Gdx.graphics.getWidth()/x), (int)(Gdx.graphics.getHeight()/y));
+        t.add(button).size(2, 2);
+        addListener(action);
+    }
+    public void addListener(final String action) {
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -67,7 +85,7 @@ public class Buttons {
                                 Spiel.INSTANCE.buyItem(y, "shield");
                                 Spiel.INSTANCE.moneyDown(wy);
                                 accepted.play(0.5f);
-                        }
+                            }
                         }
                         break;
                     case "buyDagger":
@@ -97,7 +115,7 @@ public class Buttons {
                             }
                         }
 
-                       break;
+                        break;
                     case "save":
                         if (Spiel.INSTANCE.saveEnabled == false) {
                             style.fontColor = Color.GREEN;
@@ -106,6 +124,9 @@ public class Buttons {
                             style.fontColor = Color.RED;
                             Spiel.INSTANCE.saveEnabled = false;
                         }
+                        break;
+                    case "closeEquipWindow":
+                        Spiel.INSTANCE.getInventory().closeEquipWindow();
                         break;
                     default:
                         break;

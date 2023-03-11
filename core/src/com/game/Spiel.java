@@ -72,7 +72,7 @@ public class Spiel extends Game {
         font.setColor(Color.WHITE);
         shapeRenderer = new ShapeRenderer();
         inventory = new Inventory();
-        fight = new Fight(80, 80, 20, "Monster",1, 100, 100, 10, "Hero");
+        fight = new Fight(80, 80, 20, "Monster",2, 100, 100, 10, "Hero");
         batch = new SpriteBatch();
         batch2 = new SpriteBatch();
         db = new Database();
