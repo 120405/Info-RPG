@@ -33,16 +33,16 @@ public class Buttons {
         button.setPosition((int)(Gdx.graphics.getWidth()/x), (int)(Gdx.graphics.getHeight()/y));
         addListener(action);
     }
-    public Buttons(String displayedText, Table t, final String action, double x, double y, Color color) {
+    public Buttons(String displayedText, Table t, final String action, double x, double y, Color color, int width, int height) {
         font = new BitmapFont();
         style = new TextButton.TextButtonStyle();
         style.font = font;
         color1 = color;
         style.fontColor = color1;
         button = new TextButton(displayedText, style);
-        button.getLabel().setFontScale(5F);
-        button.setPosition((int)(Gdx.graphics.getWidth()/x), (int)(Gdx.graphics.getHeight()/y));
-        t.add(button).size(2, 2);
+        button.getLabel().setFontScale(1F);
+        button.setPosition((int)(x), (int)(y));
+        t.add(button).size(width, height);
         addListener(action);
     }
     public void addListener(final String action) {
@@ -143,6 +143,9 @@ public class Buttons {
     }
     public void hide() {
         button.setVisible(false);
+    }
+    public void show() {
+        button.setVisible(true);
     }
     public void delete() {
         button.remove();

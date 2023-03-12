@@ -59,11 +59,11 @@ public class TitleScreen extends ScreenAdapter {
 
     public void show() {
         if(Spiel.INSTANCE.saveEnabled && Spiel.INSTANCE.getDB().doesGameExist()) {
-            Buttons start = new Buttons("Load Game", stage, "game", 2.21, 2.5, Color.OLIVE);
+            Buttons start = new Buttons("Lade Spiel", stage, "game", 2.21, 2.5, Color.OLIVE);
         } else {
-            Buttons start = new Buttons("Start", stage, "game", 2.21, 2.5, Color.OLIVE);
+            Buttons start = new Buttons("Starten", stage, "game", 2.21, 2.5, Color.OLIVE);
         }
-        Buttons options = new Buttons("Options", stage, "options", 2.21, 3, Color.OLIVE);
-        Buttons quit = new Buttons("Quit", stage, "quit", 2.21, 3.7, Color.OLIVE);
+        Buttons options = new Buttons("Optionen", stage, "options", 2.21, 3, Color.OLIVE);
+        Buttons quit = new Buttons("Schließen", stage, "quit", 2.21, 3.7, Color.OLIVE);
     }
 }

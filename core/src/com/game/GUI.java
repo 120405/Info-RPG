@@ -17,24 +17,25 @@ public class GUI {
     private Table table, equipTable;
     private Image renderImage;
     private boolean isOpen;
+    private Buttons equip, unequip, use;
 
     public GUI() {
         isOpen = false;
         renderImage = null;
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
+        Window.WindowStyle windowStyleEquip = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("Background_EquipInv.png"))));
         window = new Window("", windowStyle);
-        equipWindow = new Window("", windowStyle);
+        equipWindow = new Window("", windowStyleEquip);
         window.setSize(240, 120);
-        equipWindow.setSize(80, 120);
+        equipWindow.setSize(80, 80);
         equipWindow.setScale(3f);
         window.setPosition(400, 200);
         equipWindow.setPosition(1200, 200);
         equipTable = new Table();
         buildEquipMenu(equipWindow, equipTable);
         window.setScale(3f);
-         table = new Table();
-
+        table = new Table();
         addInventory(table, Spiel.INSTANCE.getItems());
         window.setVisible(false);
         equipWindow.setVisible(false);
@@ -60,8 +61,15 @@ public class GUI {
         isOpen = false;
     }
     public void buildEquipMenu(Window w, Table t) {
-        new Buttons("Close", t, "closeEquipWindow", 16, 16, Color.OLIVE);
-         w.add(t);
+        t.setFillParent(true);
+        equip =  new Buttons("Ausrüsten", t, "equip", 0, 0, Color.OLIVE, 80, 20);
+        t.row();
+        unequip = new Buttons("Ablegen", t, "unequip", 0, 0, Color.OLIVE, 80, 20);
+        t.row();
+        use = new Buttons("Benutzen", t, "use", 0, 0, Color.OLIVE, 80, 20);
+        t.row();
+        new Buttons("Schließen", t, "closeEquipWindow", 0, 0, Color.OLIVE, 80, 20);
+        w.add(t);
     }
     public void setPosition(int x, int y) {
         window.setPosition(x, y);
@@ -133,7 +141,17 @@ public class GUI {
     public Table getTable() {
         return table;
     }
-    public void openEquipWindow() {
+    public void openEquipWindow(boolean consumable, int x, int y) {
+        if(consumable) {
+        equip.hide();
+        unequip.hide();
+        use.show();
+        } else {
+            equip.show();
+            unequip.show();
+            use.hide();
+        }
+        equipWindow.setPosition(x,y);
         equipWindow.setVisible(true);
     }
     public void closeEquipWindow() {

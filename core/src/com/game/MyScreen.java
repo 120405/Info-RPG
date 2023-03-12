@@ -261,7 +261,7 @@ public class MyScreen extends ScreenAdapter {
         stage.clear();
     }
     public void show() {
-        Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
+        Buttons inv = new Buttons("Inventar", stage, "showInv", 16, 3, Color.OLIVE);
         inv.hide();
         stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
         stage.addActor(Spiel.INSTANCE.getInventory().getEquipWindow());

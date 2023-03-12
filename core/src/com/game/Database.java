@@ -43,7 +43,7 @@ public class Database {
 
                 }
                 Image img = new Image(new Texture("crystal.png"));
-                guiItems[a][7] = new GUI_Item(img);
+                guiItems[a][7] = new GUI_Item(img, false);
             }
         } else {
             for (int a = 0; a < 4; a++) {
@@ -53,6 +53,7 @@ public class Database {
                 }
             }
         }
+        guiItems[0][0] = new GUI_Item(new Image(new Texture("crystal.png")), true);
         return guiItems;
     }
     public void save() {
