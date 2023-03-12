@@ -9,9 +9,9 @@ public class Hero {
     private int random = 0;
     private int fullLP;
     private int ATK;
-    private Item weapon;
-    private Item shield;
-    private Item armor;
+    private GUI_Item weapon;
+    private GUI_Item shield;
+    private GUI_Item armor;
     private String name;
     private boolean alive = true;
     private Random rr;
@@ -304,19 +304,19 @@ public class Hero {
         return random;
     }
 
-    public void setWeapon(Item x){
+    public void setWeapon(GUI_Item x){
         weapon = x;
     }
 
-    public Item getWeapon() {
+    public GUI_Item getWeapon() {
         return weapon;
     }
 
-    public void setShield(Item x){
+    public void setShield(GUI_Item x){
         shield = x;
     }
 
-    public Item getShield() {
+    public GUI_Item getShield() {
         return shield;
     }
 }

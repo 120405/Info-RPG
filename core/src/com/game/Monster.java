@@ -16,9 +16,9 @@ public class Monster {
    private Effect currentEffect;
    private Effect blank;
    private Random rr;
-   private Item weapon;
-   private Item shield;
-   private Item armor;
+   private GUI_Item weapon;
+   private GUI_Item shield;
+   private GUI_Item armor;
    private List <Effect> effects;
 
     public Monster(int LP, int fullLP, int ATK, String name, int type) {

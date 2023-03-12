@@ -83,8 +83,10 @@ public class MyScreen extends ScreenAdapter {
         enterCheck();
         if(!Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             if(!Gdx.input.isKeyJustPressed(Input.Keys.F)) {
-                if(!Spiel.INSTANCE.getInventory().isOpen()) {
-                    map.handleCamInput();
+                if(!Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+                    if (!Spiel.INSTANCE.getInventory().isOpen()) {
+                        map.handleCamInput();
+                    }
                 }
             }
 

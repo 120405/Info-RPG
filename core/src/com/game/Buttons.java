@@ -67,7 +67,7 @@ public class Buttons {
                         System.exit(0);
                         break;
                     case "buySword":
-                        Item x = Spiel.INSTANCE.inventory.getSword();
+                        GUI_Item x = Spiel.INSTANCE.inventory.getSword();
                         int wx = x.getWorth();
                         if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
                             if (Spiel.INSTANCE.getMoney() >= wx) {
@@ -78,7 +78,7 @@ public class Buttons {
                         }
                         break;
                     case "buyShield":
-                        Item y = Spiel.INSTANCE.inventory.getShield();
+                        GUI_Item y = Spiel.INSTANCE.inventory.getShield();
                         int wy = y.getWorth();
                         if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
                             if (Spiel.INSTANCE.getMoney() >= wy){
@@ -89,7 +89,7 @@ public class Buttons {
                         }
                         break;
                     case "buyDagger":
-                        Item z = Spiel.INSTANCE.inventory.getDagger();
+                        GUI_Item z = Spiel.INSTANCE.inventory.getDagger();
                         int wz = z.getWorth();
                         if (z != Spiel.INSTANCE.fight.getHero().getWeapon()) {
                             if (Spiel.INSTANCE.getMoney() >= wz){
