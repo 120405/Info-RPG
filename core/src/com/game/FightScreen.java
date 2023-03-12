@@ -41,7 +41,6 @@ public class FightScreen extends ScreenAdapter {
         monster = game.getFight().getMonster();
         show();
     }
-
     public void render(float delta) {
         sec += delta;
         ScreenUtils.clear(0, 0, 0, 1);

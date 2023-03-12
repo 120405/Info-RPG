@@ -1,5 +1,6 @@
 package com.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,7 +25,7 @@ public class GUI {
         renderImage = null;
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
-        Window.WindowStyle windowStyleEquip = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("Background_EquipInv.png"))));
+        Window.WindowStyle windowStyleEquip = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("transparent_background.png"))));
         window = new Window("", windowStyle);
         equipWindow = new Window("", windowStyleEquip);
         window.setSize(240, 120);
@@ -62,13 +63,13 @@ public class GUI {
     }
     public void buildEquipMenu(Window w, Table t) {
         t.setFillParent(true);
-        equip =  new Buttons("Ausrüsten", t, "equip", 0, 0, Color.OLIVE, 80, 20);
+        equip =  new Buttons("Ausrüsten", t, "equip", 0, 0, Color.BLACK, 80, 20);
         t.row();
-        unequip = new Buttons("Ablegen", t, "unequip", 0, 0, Color.OLIVE, 80, 20);
+        unequip = new Buttons("Ablegen", t, "unequip", 0, 0, Color.BLACK, 80, 20);
         t.row();
-        use = new Buttons("Benutzen", t, "use", 0, 0, Color.OLIVE, 80, 20);
+        use = new Buttons("Benutzen", t, "use", 0, 0, Color.BLACK, 80, 20);
         t.row();
-        new Buttons("Schließen", t, "closeEquipWindow", 0, 0, Color.OLIVE, 80, 20);
+        new Buttons("Schließen", t, "closeEquipWindow", 0, 0, Color.BLACK, 80, 20);
         w.add(t);
     }
     public void setPosition(int x, int y) {
@@ -151,7 +152,7 @@ public class GUI {
             unequip.show();
             use.hide();
         }
-        equipWindow.setPosition(x,y);
+        equipWindow.setPosition(x+10, Gdx.graphics.getHeight() - y+10);
         equipWindow.setVisible(true);
     }
     public void closeEquipWindow() {
