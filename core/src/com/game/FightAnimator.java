@@ -35,6 +35,7 @@ public class FightAnimator implements ApplicationListener {
     monsters.put(2,new HashMap<String, Animation<TextureRegion>>());
     monsters.put(3,new HashMap<String, Animation<TextureRegion>>());
     createAnimationMaps();
+
     }
 
     @Override
@@ -46,6 +47,7 @@ public class FightAnimator implements ApplicationListener {
         heroAnim.put("Idle", createAnim(new Texture(Gdx.files.internal("FightAnimations/Hero/Idle.png")), 1, 4, 0.2f));
         heroAnim.put("Dead",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Dead.png")), 1, 6, 0.2f, 0));
         heroAnim.put("Hurt",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Hurt.png")), 1, 2, 0.2f, 0));
+        heroAnim.put("Walk",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Hero/Walk.png")), 1, 8, 0.2f, 0));
 
         monsters.get(1).put("Attack",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster1/Attack1.png")), 1, 5, 0.2f, 0));
         monsters.get(1).put("Idle",createAnimRow(new Texture(Gdx.files.internal("FightAnimations/Monster1/Idle.png")), 1, 4, 0.2f, 0));
@@ -189,4 +191,17 @@ public class FightAnimator implements ApplicationListener {
     public void setStateTimeHero(float time) {
         stateTimeHero = time;
     }
+    public float getMonsterX() {
+      return monsterSprite.getX();
+    }
+    public float getMonsterY() {
+        return monsterSprite.getY()-190;
+    }
+    public float getMonsterWidth() {
+        return monsterSprite.getX();
+    }
+    public float getMonsterHeight() {
+        return monsterSprite.getTexture().getHeight()+70;
+    }
+
 }
