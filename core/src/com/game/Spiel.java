@@ -52,7 +52,7 @@ public class Spiel extends Game {
     public GUI_Item[][] getItems() {
        return items;
     }
-    public void buyItem(Item item, String type) {
+    public void buyItem(GUI_Item item, String type) {
         if (type.equals("weapon")) {
             if (fight.getHero().getWeapon() != null) {
                 moneyUp(fight.getHero().getWeapon().getWorth());

@@ -18,8 +18,14 @@ public class GUI_Item {
     private Image background;
     private Image itemImage;
     private String name;
+    private int atk;
     private int durability;
     private boolean consumable = false;
+    private int def;
+    private int worth;
+    private int weight;
+    private Effect effect;
+    private  String skill;
     public GUI_Item() {
         name = "";
         durability = 0;
@@ -27,6 +33,20 @@ public class GUI_Item {
         stack = new Stack(background);
     }
     public GUI_Item(Image itemImage, boolean consumable) {
+        this.consumable = consumable;
+        background = new Image(new Texture("Inventory_background.png"));
+        stack = new Stack(background,itemImage);
+        buildListener(itemImage);
+    }
+    public GUI_Item(String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable) {
+        this.name = name;
+        durability = dur;
+        this.atk = atk;
+        this.def = def;
+        this.worth = worth;
+        this.weight = weight;
+        this.effect = effect;
+        this.skill = skill;
         this.consumable = consumable;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background,itemImage);
@@ -100,5 +120,66 @@ public class GUI_Item {
     }
     public Image getBackgroundImage() {
         return background;
+    }
+    public String getName(){
+        return name;
+    }
+
+    public Effect getEffect(){
+        return effect;
+    }
+
+    public int getDur(){
+        return durability;
+    }
+
+    public int getAtk(){
+        return atk;
+    }
+
+    public int getDef(){
+        return def;
+    }
+
+
+
+    public void setEffect(Effect x) {
+        effect=x;
+    }
+
+    public void setDur(int x) {
+        durability=x;
+    }
+
+    public void setAtk(int x) {
+        atk=x;
+    }
+
+    public void setDef(int x) {
+        def=x;
+    }
+
+    public int getWorth() {
+        return worth;
+    }
+
+    public void setWorth(int worth) {
+        this.worth = worth;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
