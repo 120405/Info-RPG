@@ -3,6 +3,7 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -18,13 +19,15 @@ public class GUI_Item {
     private Image itemImage;
     private String name;
     private int durability;
+    private boolean consumable = false;
     public GUI_Item() {
         name = "";
         durability = 0;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background);
     }
-    public GUI_Item(Image itemImage) {
+    public GUI_Item(Image itemImage, boolean consumable) {
+        this.consumable = consumable;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background,itemImage);
         buildListener(itemImage);
@@ -74,7 +77,7 @@ public class GUI_Item {
             @Override
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-                    Spiel.INSTANCE.getInventory().openEquipWindow();
+                    Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY());
                 }
 
             }

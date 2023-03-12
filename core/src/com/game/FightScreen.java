@@ -20,11 +20,11 @@ public class FightScreen extends ScreenAdapter {
     private Monster monster;
     private Texture img;
     private Stage stage;
-    private int atkH,atkM = 0;
    private FightAnimator fightAnimator;
    private Spiel game;
    private float sec = 0;
    private boolean fight = false;
+   private boolean heroDMG,monsterDMG = false;
 
     public FightScreen(SpriteBatch batch) {
         this.batch = batch;
@@ -37,8 +37,8 @@ public class FightScreen extends ScreenAdapter {
         stage = new Stage();
         r = new Random();
         img = new Texture("Background.png");
-        hero = game.fight.getHero();
-        monster = game.fight.getMonster();
+        hero = game.getFight().getHero();
+        monster = game.getFight().getMonster();
         show();
     }
 
@@ -57,9 +57,16 @@ public class FightScreen extends ScreenAdapter {
         stage.draw();
         if(sec > 5f && fight) {
             if(game.fight.getWinner().equals("Monster")) {
-                hero.setLP(hero.getFullLP());
+                game.gameScreen();
+                fightAnimator.setCurrentHeroAnim("Idle");
+                fightAnimator.setCurrentMonsterAnim("Idle");
+                game.getFight().reset();
+                sec = 0f;
+                fight = false;
             }
             game.gameScreen();
+            sec = 0f;
+            fight = false;
         }
 
     }
@@ -79,10 +86,13 @@ public class FightScreen extends ScreenAdapter {
             game.gameScreen();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && hero.getStatus() && monster.getStatus() && fightAnimator.fightAnimFinished()) {
+            int healthHero = hero.getLP();
+            int healthMonster = monster.getLP();
+            fightAnimator.setStateTimeHero(0f);
             fightAnimator.setCurrentHeroAnim("Attack");
-            atkH = hero.attack();
-            atkM = monster.attack();
             String winner = game.fight.fight();
+            heroDMG = hero.getLP() < healthHero;
+            monsterDMG = monster.getLP() < healthMonster;
             if (winner.equals("Hero")) {
                 fightAnimator.setCurrentMonsterAnim("Dead");
                 hero.setLP(hero.getLP()+1);
@@ -102,7 +112,7 @@ public class FightScreen extends ScreenAdapter {
     }
 
     public void show() {
-        new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
+        new Buttons("Inventar", stage, "showInv", 16, 3, Color.OLIVE);
         stage.addActor(game.getInventory().getInventory());
         stage.addActor(game.getInventory().getEquipWindow());
 
@@ -111,5 +121,10 @@ public class FightScreen extends ScreenAdapter {
     public void hide() {
         stage.clear();
     }
-
+    public boolean getHeroDMG() {
+        return heroDMG;
+    }
+    public boolean getMonsterDMG() {
+        return monsterDMG;
+    }
 }

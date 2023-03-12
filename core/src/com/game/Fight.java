@@ -34,4 +34,11 @@ public class Fight {
     public String getWinner() {
         return winner;
     }
+    public void reset() {
+        winner = "";
+        hero.setStatus(true);
+        monster.setStatus(true);
+        monster.setLP(monster.getFullLP());
+        hero.setLP(hero.getFullLP());
+    }
 }
