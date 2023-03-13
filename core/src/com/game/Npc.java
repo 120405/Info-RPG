@@ -4,6 +4,7 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -58,7 +59,7 @@ private void applySteering(float delta){
 public void create(){
     BodyDef def = new BodyDef();
     def.type = BodyDef.BodyType.DynamicBody;
-    def.position.set(80, 80);
+    def.position.set(80, 280);
     def.fixedRotation = true;
     body = Spiel.INSTANCE.getMyScreen().getMap().world.createBody(def);
     PolygonShape shape = new PolygonShape();
@@ -71,6 +72,26 @@ public void create(){
     body.createFixture(fdef);
     shape.dispose();
 
+}
+public String npcOrientation() {
+    Vector2 v = getLinearVelocity();
+    if (v.x * v.x > v.y * v.y) {
+        if (v.x > 0) {
+        return "right";
+        }
+       else {
+        return "left";
+        }
+    }
+    else if (v.x * v.x < v.y * v.y) {
+        if (v.y > 0) {
+            return "up";
+        }
+        else {
+            return "down";
+        }
+    }
+    else return "down";
 }
 
     @Override
