@@ -76,8 +76,6 @@ public class GUI_Item {
         this.name = name;
     }
     public void buildListener(final Image img) {
-        final float currentPosX = img.getX();
-        final float currentPosY = img.getY();
         img.setTouchable(Touchable.enabled);
         img.addListener(new ClickListener() {
             @Override
@@ -96,7 +94,7 @@ public class GUI_Item {
                 if(owner) {
                     Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
                 } else {
-                    Spiel.INSTANCE.getInventory().checkItems(img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), name, durability, atk, def, worth, weight, effect, skill, owner);
+                    Spiel.INSTANCE.getInventory().checkItemsShop(img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), name, durability, atk, def, worth, weight, effect, skill, owner);
                 }
 
                 img.setVisible(true);

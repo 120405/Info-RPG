@@ -3,6 +3,8 @@ package com.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+import java.util.HashMap;
+
 public class Inventory {
     private final GUI_Item sword;
     private final GUI_Item baguette;
@@ -13,8 +15,10 @@ public class Inventory {
     private Effect poison;
     private Effect blank;
     private  Effect ice;
+    private HashMap<Integer, GUI_Item> itemHashMap;
 
     public Inventory(){
+        itemHashMap = new HashMap<>();
         fire = new Effect("Fire", 0, 100, 2);
         poison = new Effect("Poison", -5, 10, 5);
         ice = new Effect("Ice",-10, 5, 5);
@@ -24,6 +28,11 @@ public class Inventory {
         shield = new GUI_Item("Shield", 100, 0, 10, 80,5, blank, "", new Image(new Texture("crystal.png")), false, false);
         dagger = new GUI_Item("Dagger", 200, 15, 0, 100,1, poison, "doubleAttack", new Image(new Texture("crystal.png")), false, false);
         armor = new GUI_Item("Armor", 100, 0, 20, 300, 10, blank, "", new Image(new Texture("crystal.png")), false, false);
+        itemHashMap.put(0,sword);
+        itemHashMap.put(1,baguette);
+        itemHashMap.put(2,shield);
+        itemHashMap.put(3,dagger);
+        itemHashMap.put(4,armor);
     }
 
     public GUI_Item getSword() {
@@ -40,5 +49,8 @@ public class Inventory {
 
     public GUI_Item getArmor() {
         return armor;
+    }
+    public HashMap getItemHashMap() {
+        return itemHashMap;
     }
 }

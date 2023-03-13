@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+import java.util.HashMap;
+
 public class ShopWindow {
     private Window window;
     private Table table;
@@ -15,7 +17,11 @@ public class ShopWindow {
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("transparent_background.png"))));
         window = new Window("", windowStyle);
         table = new Table();
-        table.add(Spiel.INSTANCE.inventory.getSword().getItemStack()).size(30, 30);;
+        HashMap<Integer, GUI_Item> map = Spiel.INSTANCE.inventory.getItemHashMap();
+        for(int i = 0; i < map.size(); i++) {
+        table.add(map.get(i).getItemStack()).size(30, 30);
+        }
+
         window.add(table);
         window.setPosition(400, 700);
         window.setVisible(true);
@@ -23,4 +29,5 @@ public class ShopWindow {
     public Window getWindow() {
         return window;
     }
+
 }

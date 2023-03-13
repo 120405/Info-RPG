@@ -8,9 +8,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.SnapshotArray;
+
+import java.awt.*;
 
 public class GUI {
     private final Window window;
@@ -20,8 +24,11 @@ public class GUI {
     private Image renderImage;
     private boolean isOpen;
     private Buttons equip, unequip, use;
+    private int width, height;
 
     public GUI() {
+        width = 30;
+        height = 30;
         isOpen = false;
         renderImage = null;
         img = new Texture("Inventory.png");
@@ -84,7 +91,7 @@ public class GUI {
             for (int i = 0; i < 8; i++) {
 
                 //  table.add(items[a][i].getItemStack().getChild(0)).size(30, 30); just background
-                table.add(items[a][i].getItemStack()).size(30, 30);
+                table.add(items[a][i].getItemStack()).size(width, height);
             }
             table.row();
         }
@@ -137,30 +144,32 @@ public class GUI {
             }
         }
     }
-    public void checkItems(Image img, int x, int y, String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
+    public void checkItemsShop(Image img, int x, int y, String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
         @SuppressWarnings("rawtypes")
         Array<Cell> c = table.getCells();
         for(int i = 0; i < c.size; i++) {
             if(((int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).x) <= x) &&
-              (((int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).x) + 90) >= x)) {
+              (((int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).x) + width*(height/10)) >= x)) {
             if((Gdx.graphics.getHeight() - (int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).y) <= y) &&
                (Gdx.graphics.getHeight() - (int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).y) + 90 >= y)) {
                  Stack s = (Stack) (c.get(i).getActor());
                 SnapshotArray<Actor> a = s.getChildren();
                  if(a.size == 1) {
-                     s.add(img);
-                     if (name != "") {
-
-                         GUI_Item it = findItem(img);
-                         it.setName(name);
-                         it.setDurability(durability);
-                         it.setAtk(atk);
-                         it.setDef(def);
-                         it.setEffect(effect);
-                         it.setSkill(skill);
-                         it.setWeight(weight);
-                         it.setWorth(worth);
-                         it.setOwner(owner);
+                     GUI_Item it = findItem(img);
+                     if (it.getWorth() <= Spiel.INSTANCE.getMoney()) {
+                         s.add(img);
+                         if (name != "") {
+                             it.setName(name);
+                             it.setDurability(durability);
+                             it.setAtk(atk);
+                             it.setDef(def);
+                             it.setEffect(effect);
+                             it.setSkill(skill);
+                             it.setWeight(weight);
+                             it.setWorth(worth);
+                             it.setOwner(owner);
+                             Spiel.INSTANCE.getItems()[findItemPosition(s).x][findItemPosition(s).y] = it;
+                         }
                      }
                  }
            }
@@ -192,6 +201,18 @@ public class GUI {
         }
         return item;
 
+    }
+    public Point findItemPosition(Stack stack) {
+        Point p = new Point();
+        for (int a = 0; a < 4; a++) {
+            for (int i = 0; i < 8; i++) {
+                if (Spiel.INSTANCE.getItems()[a][i].getItemStack() == stack) {
+                    p.x = a;
+                    p.y = i;
+                }
+            }
+        }
+        return p;
     }
 
 
