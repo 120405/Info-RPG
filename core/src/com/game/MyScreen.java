@@ -74,6 +74,7 @@ public class MyScreen extends ScreenAdapter {
             }
         }
         player.handleInput();
+        System.out.println(Spiel.INSTANCE.getNpc().getLinearVelocity());
         cameraUpdate(delta);
         map.renderBackground();
         animator.render();
