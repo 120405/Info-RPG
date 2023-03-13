@@ -83,7 +83,7 @@ public class GUI_Item {
             }
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
+                Spiel.INSTANCE.getInventory().closeEquipWindow();
                  stack.removeActor(img);
                  stack.add(img);
                  img.setVisible(false);
@@ -101,6 +101,7 @@ public class GUI_Item {
             }
             @Override
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
+
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
                     Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY(), name);
                 }
