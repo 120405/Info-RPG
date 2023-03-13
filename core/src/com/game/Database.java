@@ -44,6 +44,7 @@ public class Database {
                 }
                 Image img = new Image(new Texture("crystal.png"));
                 guiItems[a][7] = new GUI_Item(img, false);
+                guiItems[a][7].setOwner(true);
             }
         } else {
             for (int a = 0; a < 4; a++) {
@@ -54,6 +55,7 @@ public class Database {
             }
         }
         guiItems[0][0] = new GUI_Item(new Image(new Texture("crystal.png")), true);
+        guiItems[0][0].setOwner(true);
         return guiItems;
     }
     public void save() {

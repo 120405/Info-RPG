@@ -15,7 +15,7 @@ public class ShopWindow {
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("transparent_background.png"))));
         window = new Window("", windowStyle);
         table = new Table();
-        table.add(Spiel.INSTANCE.inventory.getSword().getItem()).size(30, 30);
+        table.add(Spiel.INSTANCE.inventory.getSword().getItemStack()).size(30, 30);;
         window.add(table);
         window.setPosition(400, 700);
         window.setVisible(true);
