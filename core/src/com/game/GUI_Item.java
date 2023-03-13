@@ -3,6 +3,7 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -61,7 +62,7 @@ public class GUI_Item {
     public boolean doesItemExist() {
         boolean exist = false;
         SnapshotArray<Actor> array = stack.getChildren();
-        if(((SnapshotArray<?>) array).size == 2) {
+        if(array.size == 2) {
             exist = true;
         }
         return exist;
@@ -90,8 +91,12 @@ public class GUI_Item {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            System.out.println(img.localToScreenCoordinates(new Vector2(x, y)).x);
+                System.out.println(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y);
 
-              Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
+                System.out.println(img.localToScreenCoordinates(new Vector2(img.getX(), img.getY())).x);
+                System.out.println(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(img.getX(), img.getY())).y);
+              Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill);
                 img.setVisible(true);
             }
             @Override

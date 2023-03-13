@@ -97,8 +97,9 @@ public class GUI {
         return isOpen;
     }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
-                           String name, int durability) {
+                           String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill) {
         renderImage = img;
+
         Stack destination = current;
         @SuppressWarnings("rawtypes")
         Array<Cell> c = table.getCells();
@@ -112,12 +113,21 @@ public class GUI {
                     if (a.size == 1) {
                         if (destination != current) {
                             current.removeActor(img);
+
                         }
                         destination.add(img);
+
                         if (name != "") {
-                            GUI_Item it = findItem(destination);
+
+                           GUI_Item it = findItem(destination);
                             it.setName(name);
                             it.setDurability(durability);
+                            it.setAtk(atk);
+                            it.setDef(def);
+                            it.setEffect(effect);
+                            it.setSkill(skill);
+                            it.setWeight(weight);
+                            it.setWorth(worth);
                         }
                     }
                 }
@@ -136,7 +146,19 @@ public class GUI {
         return item;
 
     }
+    public GUI_Item findItem(Image img) {
+        GUI_Item item = null;
+        for (int a = 0; a < 4; a++) {
+            for (int i = 0; i < 8; i++) {
+                SnapshotArray<Actor> e = Spiel.INSTANCE.getItems()[a][i].getItemStack().getChildren();
+                if (e.size > 1 && e.items[1] == img) {
+                    item = Spiel.INSTANCE.getItems()[a][i];
+                }
+            }
+        }
+        return item;
 
+    }
 
 
     public Table getTable() {

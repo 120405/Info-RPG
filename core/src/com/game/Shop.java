@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class Shop extends ScreenAdapter {
 
     private SpriteBatch batch;
-    private Texture img;
     private Inventory inventory;
     private Stage stage;
     private BitmapFont fontSw;
@@ -34,7 +33,6 @@ public class Shop extends ScreenAdapter {
         xSword = 3;
         xDagger = 2;
         this.batch = batch;
-        img = new Texture(Gdx.files.internal("Albedo.png"));
         inventory = Spiel.INSTANCE.inventory;
         fontSw = new BitmapFont();
         fontSw.setColor(Color.WHITE);
@@ -55,7 +53,6 @@ public class Shop extends ScreenAdapter {
         ScreenUtils.clear(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         batch.begin();
-        batch.draw(img, 0, 0);
         Inventory inv = Spiel.INSTANCE.inventory;
         fontSw.draw(batch, "Worth: " + inv.getSword().getWorth(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.7));
         fontSw.draw(batch, "ATK: " + inv.getSword().getAtk(), (int)(Gdx.graphics.getWidth()/xSword - 30)-fontSw.getData().padRight*15, (int)(Gdx.graphics.getHeight()/1.8));
@@ -99,7 +96,6 @@ public class Shop extends ScreenAdapter {
 
     public void dispose() {
         if(batch != null) {batch.dispose();}
-        if(img != null) {img.dispose();}
     }
 
     public void hide() {
