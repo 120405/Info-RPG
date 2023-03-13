@@ -3,6 +3,7 @@ package com.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -26,6 +27,7 @@ public class GUI_Item {
     private int weight;
     private Effect effect;
     private  String skill;
+    private boolean owner;
     public GUI_Item() {
         name = "";
         durability = 0;
@@ -38,7 +40,7 @@ public class GUI_Item {
         stack = new Stack(background,itemImage);
         buildListener(itemImage);
     }
-    public GUI_Item(String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable) {
+    public GUI_Item(String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable, boolean owner) {
         this.name = name;
         durability = dur;
         this.atk = atk;
@@ -47,6 +49,7 @@ public class GUI_Item {
         this.weight = weight;
         this.effect = effect;
         this.skill = skill;
+        this.owner = owner;
         this.consumable = consumable;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background,itemImage);
@@ -61,7 +64,7 @@ public class GUI_Item {
     public boolean doesItemExist() {
         boolean exist = false;
         SnapshotArray<Actor> array = stack.getChildren();
-        if(((SnapshotArray<?>) array).size == 2) {
+        if(array.size == 2) {
             exist = true;
         }
         return exist;
@@ -90,14 +93,18 @@ public class GUI_Item {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if(owner) {
+                    Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
+                } else {
+                    Spiel.INSTANCE.getInventory().checkItems(img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), name, durability, atk, def, worth, weight, effect, skill, owner);
+                }
 
-              Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability);
                 img.setVisible(true);
             }
             @Override
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-                    Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY());
+                    Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY(), name);
                 }
 
             }
@@ -181,5 +188,11 @@ public class GUI_Item {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+    public void setOwner(boolean owner) {
+        this.owner = owner;
+    }
+    public boolean getOwner() {
+        return owner;
     }
 }

@@ -32,6 +32,7 @@ public class MyScreen extends ScreenAdapter {
     private Stage stage;
     private Compass compass;
     private Buttons inv;
+    private ShopWindow sw;
 
 
     public MyScreen(SpriteBatch batch) {
@@ -41,6 +42,7 @@ public class MyScreen extends ScreenAdapter {
     }
 
     public void create() {
+        sw  = new ShopWindow();
         volume = 0.3f;
         Interior = false;
         animator = new Animator();
@@ -268,6 +270,7 @@ public class MyScreen extends ScreenAdapter {
         inv.hide();
         stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
         stage.addActor(Spiel.INSTANCE.getInventory().getEquipWindow());
+        stage.addActor(sw.getWindow());
     }
 }
 

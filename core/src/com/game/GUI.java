@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -71,6 +72,7 @@ public class GUI {
         t.row();
         new Buttons("Schließen", t, "closeEquipWindow", 0, 0, Color.BLACK, 80, 20);
         w.add(t);
+
     }
     public void setPosition(int x, int y) {
         window.setPosition(x, y);
@@ -97,8 +99,9 @@ public class GUI {
         return isOpen;
     }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
-                           String name, int durability) {
+                           String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
         renderImage = img;
+
         Stack destination = current;
         @SuppressWarnings("rawtypes")
         Array<Cell> c = table.getCells();
@@ -112,17 +115,58 @@ public class GUI {
                     if (a.size == 1) {
                         if (destination != current) {
                             current.removeActor(img);
+
                         }
                         destination.add(img);
+
                         if (name != "") {
-                            GUI_Item it = findItem(destination);
+
+                           GUI_Item it = findItem(destination);
                             it.setName(name);
                             it.setDurability(durability);
+                            it.setAtk(atk);
+                            it.setDef(def);
+                            it.setEffect(effect);
+                            it.setSkill(skill);
+                            it.setWeight(weight);
+                            it.setWorth(worth);
+                            it.setOwner(owner);
                         }
                     }
                 }
             }
         }
+    }
+    public void checkItems(Image img, int x, int y, String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
+        @SuppressWarnings("rawtypes")
+        Array<Cell> c = table.getCells();
+        for(int i = 0; i < c.size; i++) {
+            if(((int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).x) <= x) &&
+              (((int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).x) + 90) >= x)) {
+            if((Gdx.graphics.getHeight() - (int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).y) <= y) &&
+               (Gdx.graphics.getHeight() - (int)(table.localToScreenCoordinates(new Vector2(c.get(i).getActor().getX(),c.get(i).getActor().getY())).y) + 90 >= y)) {
+                 Stack s = (Stack) (c.get(i).getActor());
+                SnapshotArray<Actor> a = s.getChildren();
+                 if(a.size == 1) {
+                     s.add(img);
+                     if (name != "") {
+
+                         GUI_Item it = findItem(img);
+                         it.setName(name);
+                         it.setDurability(durability);
+                         it.setAtk(atk);
+                         it.setDef(def);
+                         it.setEffect(effect);
+                         it.setSkill(skill);
+                         it.setWeight(weight);
+                         it.setWorth(worth);
+                         it.setOwner(owner);
+                     }
+                 }
+           }
+            }
+        }
+
     }
     public GUI_Item findItem(Stack s) {
         GUI_Item item = null;
@@ -136,13 +180,25 @@ public class GUI {
         return item;
 
     }
+    public GUI_Item findItem(Image img) {
+        GUI_Item item = null;
+        for (int a = 0; a < 4; a++) {
+            for (int i = 0; i < 8; i++) {
+                SnapshotArray<Actor> e = Spiel.INSTANCE.getItems()[a][i].getItemStack().getChildren();
+                if (e.size > 1 && e.items[1] == img) {
+                    item = Spiel.INSTANCE.getItems()[a][i];
+                }
+            }
+        }
+        return item;
 
+    }
 
 
     public Table getTable() {
         return table;
     }
-    public void openEquipWindow(boolean consumable, int x, int y) {
+    public void openEquipWindow(boolean consumable, int x, int y, String name) {
         if(consumable) {
         equip.hide();
         unequip.hide();
@@ -154,6 +210,8 @@ public class GUI {
         }
         equipWindow.setPosition(x+10, Gdx.graphics.getHeight() - y+10);
         equipWindow.setVisible(true);
+        System.out.println(name);
+
     }
     public void closeEquipWindow() {
         equipWindow.setVisible(false);
