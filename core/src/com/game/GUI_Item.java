@@ -35,7 +35,8 @@ public class GUI_Item {
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background);
     }
-    public GUI_Item(Image itemImage, boolean consumable) {
+    public GUI_Item(Image itemImage, boolean consumable, String type) {
+    	this.type = type;
         this.consumable = consumable;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background,itemImage);
@@ -93,11 +94,11 @@ public class GUI_Item {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(owner) {
-                    Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
-                } else {
+               // if(owner) {
+               //     Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
+               // } else {
                    owner = Spiel.INSTANCE.getInventory().checkItemsShop(stack, img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), type, name, durability, atk, def, worth, weight, effect, skill, owner);
-                }
+             //   }
 
                 img.setVisible(true);
             }
@@ -105,7 +106,7 @@ public class GUI_Item {
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
 
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-                    Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY(), name);
+                    Spiel.INSTANCE.getInventory().openEquipWindow(img, consumable, Gdx.input.getX(),Gdx.input.getY(), name);
                 }
 
             }

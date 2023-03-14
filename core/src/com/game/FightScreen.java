@@ -89,7 +89,7 @@ public class FightScreen extends ScreenAdapter {
             int healthMonster = monster.getLP();
             fightAnimator.setStateTimeHero(0f);
             fightAnimator.setCurrentHeroAnim("Attack");
-            String winner = game.fight.fight();
+            String winner = game.getFight().fight();
             heroDMG = hero.getLP() < healthHero;
             monsterDMG = monster.getLP() < healthMonster;
             if (winner.equals("Hero")) {
