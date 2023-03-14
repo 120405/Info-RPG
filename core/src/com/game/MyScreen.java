@@ -75,11 +75,11 @@ public class MyScreen extends ScreenAdapter {
                 inv.delete();
                 if(Spiel.INSTANCE.getInventory().getEquipWindow().isVisible()) {
                     Spiel.INSTANCE.getInventory().getEquipWindow().setVisible(false);
+                    Spiel.INSTANCE.getInventory().getStatsWindow().setVisible(false);
                 }
             }
         }
         player.handleInput();
-        System.out.println(Spiel.INSTANCE.getNpc().getLinearVelocity());
         cameraUpdate(delta);
         map.renderBackground();
         animator.render();
@@ -276,6 +276,7 @@ public class MyScreen extends ScreenAdapter {
         stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
         stage.addActor(Spiel.INSTANCE.getInventory().getEquipWindow());
         stage.addActor(sw.getWindow());
+        stage.addActor(Spiel.INSTANCE.getInventory().getStatsWindow());
     }
 }
 

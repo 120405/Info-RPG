@@ -86,9 +86,6 @@ public class PlayerMap implements Steerable<Vector2> {
         body.setLinearVelocity(verticalForce * 5, body.getLinearVelocity().x);
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.I)) {
-            Spiel.INSTANCE.shopScreen();
-        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Spiel.INSTANCE.titleScreen();
@@ -96,9 +93,7 @@ public class PlayerMap implements Steerable<Vector2> {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             Spiel.INSTANCE.fightScreen();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-            Spiel.INSTANCE.shopScreen();
-        }
+
 
     }
 

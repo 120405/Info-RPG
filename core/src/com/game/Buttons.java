@@ -55,48 +55,12 @@ public class Buttons {
                     case "title":
                         Spiel.INSTANCE.titleScreen();
                         break;
-                    case "shop":
-                        Spiel.INSTANCE.shopScreen();
-                        break;
                     case "quit":
-                        if(Spiel.INSTANCE.saveEnabled) {
+                        if (Spiel.INSTANCE.saveEnabled) {
                             Spiel.INSTANCE.getDB().saveOptions();
                             Spiel.INSTANCE.getDB().save();
                         }
                         System.exit(0);
-                        break;
-                    case "buySword":
-                        GUI_Item x = Spiel.INSTANCE.inventory.getSword();
-                        int wx = x.getWorth();
-                        if (x != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= wx) {
-                                Spiel.INSTANCE.buyItem(x, "weapon");
-                                Spiel.INSTANCE.moneyDown(wx);
-
-                            }
-                        }
-                        break;
-                    case "buyShield":
-                        GUI_Item y = Spiel.INSTANCE.inventory.getShield();
-                        int wy = y.getWorth();
-                        if (y != Spiel.INSTANCE.fight.getHero().getShield()) {
-                            if (Spiel.INSTANCE.getMoney() >= wy){
-                                Spiel.INSTANCE.buyItem(y, "shield");
-                                Spiel.INSTANCE.moneyDown(wy);
-
-                            }
-                        }
-                        break;
-                    case "buyDagger":
-                        GUI_Item z = Spiel.INSTANCE.inventory.getDagger();
-                        int wz = z.getWorth();
-                        if (z != Spiel.INSTANCE.fight.getHero().getWeapon()) {
-                            if (Spiel.INSTANCE.getMoney() >= wz){
-                                Spiel.INSTANCE.buyItem(z, "weapon");
-                                Spiel.INSTANCE.moneyDown(wz);
-
-                            }
-                        }
                         break;
                     case "options":
                         Spiel.INSTANCE.optionsScreen();
@@ -105,18 +69,18 @@ public class Buttons {
                         Spiel.INSTANCE.fightScreen();
                         break;
                     case "showInv":
-                        if(!Spiel.INSTANCE.getInventory().isOpen()) {
+                        if (!Spiel.INSTANCE.getInventory().isOpen()) {
                             Spiel.INSTANCE.getInventory().show();
                         } else {
                             Spiel.INSTANCE.getInventory().hide();
-                            if(Spiel.INSTANCE.getInventory().getEquipWindow().isVisible()) {
+                            if (Spiel.INSTANCE.getInventory().getEquipWindow().isVisible()) {
                                 Spiel.INSTANCE.getInventory().getEquipWindow().setVisible(false);
                             }
                         }
 
                         break;
                     case "save":
-                        if (Spiel.INSTANCE.saveEnabled == false) {
+                        if (!Spiel.INSTANCE.saveEnabled) {
                             style.fontColor = Color.GREEN;
                             Spiel.INSTANCE.saveEnabled = true;
                         } else {
@@ -127,10 +91,50 @@ public class Buttons {
                     case "closeEquipWindow":
                         Spiel.INSTANCE.getInventory().closeEquipWindow();
                         break;
+                    case "equip":
+                        switch (Spiel.INSTANCE.getInventory().getCurrentItem().getType()) {
+                            case "weapon":
+                                Spiel.INSTANCE.getHero().setWeapon(Spiel.INSTANCE.getInventory().getCurrentItem());
+                                Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                break;
+                            case "shield":
+                                Spiel.INSTANCE.getHero().setShield(Spiel.INSTANCE.getInventory().getCurrentItem());
+                                Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                break;
+                            case "armor":
+                                Spiel.INSTANCE.getHero().setArmor(Spiel.INSTANCE.getInventory().getCurrentItem());
+                                Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "unequip":
+
+                            switch (Spiel.INSTANCE.getInventory().getCurrentItem().getType()) {
+                                case "weapon":
+                                    Spiel.INSTANCE.getHero().setWeapon(null);
+                                    Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                    break;
+                                case "shield":
+                                    Spiel.INSTANCE.getHero().setShield(null);
+                                    Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                    break;
+                                case "armor":
+                                    Spiel.INSTANCE.getHero().setArmor(null);
+                                    Spiel.INSTANCE.getInventory().closeEquipWindow();
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        break;
+                    case "use":
+
+                        break;
                     default:
                         break;
                 }
-
             }
         });
     }

@@ -14,7 +14,6 @@ public class Spiel extends Game {
     private int money;
     private TitleScreen title;
     private MyScreen game;
-    private Shop shop;
     public Inventory inventory;
     private FightScreen fightScreen;
     private Options options;
@@ -27,6 +26,7 @@ public class Spiel extends Game {
     private SpriteBatch batch,batch2;
     private BitmapFont font;
     private GUI inventoryGUI;
+    private Hero hero;
     private AISteering aiSteering;
 
     public Spiel(String name) {
@@ -54,16 +54,22 @@ public class Spiel extends Game {
     }
     public void buyItem(GUI_Item item, String type) {
         if (type == "weapon") {
-            if (fight.getHero().getWeapon() != null) {
-                moneyUp(fight.getHero().getWeapon().getWorth());
+            if (getHero().getWeapon() != null) {
+                moneyUp(getHero().getWeapon().getWorth());
             }
-            fight.getHero().setWeapon(item);
+            getHero().setWeapon(item);
         }
         if (type == "shield") {
-            if (fight.getHero().getShield() != null) {
-                moneyUp(fight.getHero().getShield().getWorth());
+            if (getHero().getShield() != null) {
+                moneyUp(getHero().getShield().getWorth());
             }
-            fight.getHero().setShield(item);
+            getHero().setShield(item);
+        }
+        if(type == "armor") {
+            if (getHero().getShield() != null) {
+                moneyUp(getHero().getArmor().getWorth());
+            }
+            getHero().setArmor(item);
         }
     }
 
@@ -72,7 +78,8 @@ public class Spiel extends Game {
         font.setColor(Color.WHITE);
         shapeRenderer = new ShapeRenderer();
         inventory = new Inventory();
-        fight = new Fight(80, 80, 20, "Monster",2, 100, 100, 10, "Hero");
+        hero = new Hero(100, 100, 10, "Hero");
+        fight = new Fight(80, 80, 20, "Monster",3, hero);
         batch = new SpriteBatch();
         batch2 = new SpriteBatch();
         db = new Database();
@@ -83,7 +90,6 @@ public class Spiel extends Game {
         npc = new Npc(30f);
         aiSteering = new AISteering();
         //player= new Player();
-        shop = new Shop(batch);
         options = new Options(batch);
         title = new TitleScreen(batch, name);
         fightScreen = new FightScreen(batch);
@@ -101,9 +107,6 @@ public class Spiel extends Game {
         setScreen(game);
     }
 
-    public void shopScreen() {
-        setScreen(shop);
-    }
 
     public void titleScreen() {
         setScreen(title);
@@ -121,9 +124,6 @@ public class Spiel extends Game {
         return fightScreen;
     }
 
-    public Shop getShop() {
-        return shop;
-    }
     public Database getDB() {
         return db;
     }
@@ -137,22 +137,22 @@ public class Spiel extends Game {
     public void createHealthBars(boolean monster) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(20, 20, fight.getHero().getLP(), 20);
+        shapeRenderer.rect(20, 20, getHero().getLP(), 20);
         if (monster) {
-            shapeRenderer.rect(Gdx.graphics.getWidth() - (20 + fight.getMonster().getFullLP()), 20,
+            shapeRenderer.rect(Gdx.graphics.getWidth() - (20 + getFight().getMonster().getFullLP()), 20,
                     fight.getMonster().getLP(), 20);
         }
         shapeRenderer.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(19, 19, fight.getHero().getFullLP() + 1, 21);
+        shapeRenderer.rect(19, 19, getHero().getFullLP() + 1, 21);
         if (monster) {
-            shapeRenderer.rect(Gdx.graphics.getWidth() - (19 + fight.getMonster().getFullLP()), 19,
-                    fight.getMonster().getFullLP() + 1, 21);
+            shapeRenderer.rect(Gdx.graphics.getWidth() - (19 + getFight().getMonster().getFullLP()), 19,
+                    getFight().getMonster().getFullLP() + 1, 21);
         }
         shapeRenderer.end();
         batch2.begin();
-        font.draw(batch2, fight.getHero().getName(), (int) (fight.getHero().getFullLP() / 2), 61);
+        font.draw(batch2, getHero().getName(), (int) (getHero().getFullLP() / 2), 61);
         if (monster) {
             font.draw(batch2, fight.getMonster().getName(),
                     Gdx.graphics.getWidth() - (45 + (int) (fight.getMonster().getFullLP() / 2)), 61);
@@ -165,5 +165,8 @@ public class Spiel extends Game {
     }
     public BitmapFont getFont() {
         return font;
+    }
+    public Hero getHero() {
+        return hero;
     }
 }

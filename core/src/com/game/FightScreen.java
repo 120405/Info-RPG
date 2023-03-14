@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -37,7 +38,7 @@ public class FightScreen extends ScreenAdapter {
         stage = new Stage();
         r = new Random();
         img = new Texture("Background.png");
-        hero = game.getFight().getHero();
+        hero = game.getHero();
         monster = game.getFight().getMonster();
         show();
     }
@@ -88,7 +89,7 @@ public class FightScreen extends ScreenAdapter {
             int healthHero = hero.getLP();
             int healthMonster = monster.getLP();
             fightAnimator.setStateTimeHero(0f);
-            fightAnimator.setCurrentHeroAnim("Attack");
+            fightAnimator.setCurrentHeroAnim("Attack" + MathUtils.random(1,3));
             String winner = game.getFight().fight();
             heroDMG = hero.getLP() < healthHero;
             monsterDMG = monster.getLP() < healthMonster;
@@ -114,7 +115,7 @@ public class FightScreen extends ScreenAdapter {
         new Buttons("Inventar", stage, "showInv", 16, 3, Color.OLIVE);
         stage.addActor(game.getInventory().getInventory());
         stage.addActor(game.getInventory().getEquipWindow());
-
+        stage.addActor(Spiel.INSTANCE.getInventory().getStatsWindow());
     }
 
     public void hide() {
