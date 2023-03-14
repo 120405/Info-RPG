@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -19,25 +21,30 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class GUI {
-    private final Window window;
-    private final Window equipWindow;
+    private final Window window,equipWindow,statsWindow;
     private Texture img;
     private Table table, equipTable;
     private boolean isOpen;
     private Buttons equip, unequip, use;
     private int width, height;
     private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
+    private GUI_Item currentItem;
+    private Label.LabelStyle style;
+    private HashMap<Integer,Label> label;
 
     public GUI() {
-
+        currentItem = null;
         width = 30;
         height = 30;
         isOpen = false;
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         Window.WindowStyle windowStyleEquip = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("transparent_background.png"))));
+        style = new Label.LabelStyle(new BitmapFont(), Color.BLACK);
         window = new Window("", windowStyle);
         equipWindow = new Window("", windowStyleEquip);
+        statsWindow = new Window("", windowStyleEquip);
+        buildStatsWindow(statsWindow);
         window.setSize(240, 120);
         equipWindow.setSize(80, 80);
         equipWindow.setScale(3f);
@@ -45,12 +52,14 @@ public class GUI {
         equipWindow.setPosition(1200, 200);
         equipTable = new Table();
         buildEquipMenu(equipWindow, equipTable);
+        statsWindow.setSize(300, 200);
         window.setScale(3f);
+        statsWindow.setScale(1.5f);
         table = new Table();
         addInventory(table, Spiel.INSTANCE.getItems());
         window.setVisible(false);
         equipWindow.setVisible(false);
-
+        statsWindow.setVisible(false);
 
     }
     public Window getInventory() {
@@ -86,6 +95,9 @@ public class GUI {
     public void setPosition(int x, int y) {
         window.setPosition(x, y);
     }
+    public Window getStatsWindow() {
+        return statsWindow;
+    }
 
     public void addInventory(Table table, GUI_Item[][] items) {
         table.setFillParent(true);
@@ -106,6 +118,24 @@ public class GUI {
     }
     public boolean isOpen() {
         return isOpen;
+    }
+    public void buildStatsWindow(Window window) {
+        label = new HashMap<>();
+        Table table = new Table();
+        label.put(0,new Label("Name: ", style));
+        label.put(1,new Label("Haltbarkeit:", style));
+        label.put(2,new Label("Schaden: ", style));
+        label.put(3,new Label("Verteidigung: ", style));
+        label.put(4,new Label("Wert: ", style));
+        label.put(5,new Label("Gewicht: ", style));
+        label.put(6,new Label("Effekt: ", style));
+        label.put(7,new Label("Fähigkeit: ", style));
+
+        for(int i = 0; i < label.size(); i++) {
+            table.add(label.get(i)).left().padRight(150);
+            table.row();
+        }
+        window.add(table);
     }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
                            String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
@@ -160,9 +190,10 @@ public class GUI {
                      GUI_Item it = findItem(img);
 
                     if ((worth <= Spiel.INSTANCE.getMoney())) {
-                        if(Spiel.INSTANCE.getFight().getHero().hasItem(type)) {
-                            if(Spiel.INSTANCE.getFight().getHero().getItem(type) != name) {
+                        if(Spiel.INSTANCE.getHero().hasItem(type)) {
+                            if(Spiel.INSTANCE.getHero().getItem(type) != name) {
                                 it.setName(name);
+                                it.setType(type);
                                 it.setDurability(durability);
                                 it.setAtk(atk);
                                 it.setDef(def);
@@ -175,6 +206,7 @@ public class GUI {
                         } else {
                             if (name != "") {
                                 it.setName(name);
+                                it.setType(type);
                                 it.setDurability(durability);
                                 it.setAtk(atk);
                                 it.setDef(def);
@@ -203,7 +235,7 @@ public class GUI {
             }
         }
     return owner;
-        //owner führt zu checkItems -> fehler, da anfangs stack noch im shop!!!!!!!!!!!!!!
+
     }
     public GUI_Item findItem(Stack s) {
         GUI_Item item = null;
@@ -255,31 +287,60 @@ public class GUI {
     public Table getTable() {
         return table;
     }
-    public void openEquipWindow(Image img,boolean consumable, int x, int y, String name) {
-    	GUI_Item item = null;
+    public void openEquipWindow(Image img,boolean consumable, int x, int y, String name, boolean owner) {
     	 if(findItem(img)  != null) {
-    		 item = findItem(img);
+             currentItem  = findItem(img);
     	 } else if(findItemHashMap(name) != null){
-    		 item = findItemHashMap(name);
+             currentItem  = findItemHashMap(name);
     	 }
-    	 if(item != null) {
-    		 //
-    	 }
-        if(consumable) {
-        equip.hide();
-        unequip.hide();
-        use.show();
-        } else {
-            equip.show();
-            unequip.show();
-            use.hide();
-        }
-        equipWindow.setPosition(x+10, Gdx.graphics.getHeight() - y+10);
-        equipWindow.setVisible(true);
-         
+         if(owner) {
+             if (consumable) {
+                 equip.hide();
+                 unequip.hide();
+                 use.show();
+             } else {
 
+                 if (Spiel.INSTANCE.getHero().hasItem(currentItem.getType()) && name == Spiel.INSTANCE.getHero().getItem(currentItem.getType())) {
+                     unequip.show();
+                     equip.hide();
+                 } else {
+                     unequip.hide();
+                     equip.show();
+                 }
+                 use.hide();
+             }
+             equipWindow.setPosition(x+10, Gdx.graphics.getHeight() - y+10);
+             equipWindow.setVisible(true);
+         } else {
+             openStatsWindow(x+20, Gdx.graphics.getHeight() - y-20, currentItem);
+
+
+
+         }
+    }
+    public void openStatsWindow(int x, int y, GUI_Item item) {
+        if(item != null) {
+            label.get(0).setText("Name: " + item.getName());
+            label.get(1).setText("Haltbarkeit: " + item.getDur());
+            label.get(2).setText("Schaden: " + item.getAtk());
+            label.get(3).setText("Verteidigung: " + item.getDef());
+            label.get(4).setText("Wert: " + item.getWorth());
+            label.get(5).setText("Gewicht: " + item.getWeight());
+            label.get(6).setText("Effekt: " + item.getEffect().getName());
+            label.get(7).setText("Fähigkeit: " + item.getSkill());
+        }
+        statsWindow.setPosition(x, y);
+        statsWindow.setVisible(true);
     }
     public void closeEquipWindow() {
         equipWindow.setVisible(false);
+        statsWindow.setVisible(false);
+        for(int i = 0; i < label.size(); i++) {
+            label.get(i).setText("");
+        }
     }
+    public GUI_Item getCurrentItem() {
+        return currentItem;
+    }
+
 }

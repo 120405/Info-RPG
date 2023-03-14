@@ -319,15 +319,19 @@ public class Hero {
     public GUI_Item getShield() {
         return shield;
     }
+    public void setArmor(GUI_Item armor) {
+        this.armor = armor;
+    }
+    public GUI_Item getArmor() {
+        return armor;
+    }
     public String getItem(String type) {
 
-        if (armor.getType() == type) {
+        if (armor != null && armor.getType() == type) {
             return armor.getName();
-        } else if (shield.getType() == type) {
+        } else if (shield != null && shield.getType() == type) {
             return shield.getName();
-
-
-        } else if(weapon.getType() == type) {
+        } else if(weapon  != null && weapon.getType() == type) {
             return weapon.getName();
         } else {
             return "";

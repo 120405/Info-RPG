@@ -106,7 +106,7 @@ public class GUI_Item {
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
 
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-                    Spiel.INSTANCE.getInventory().openEquipWindow(img, consumable, Gdx.input.getX(),Gdx.input.getY(), name);
+                    Spiel.INSTANCE.getInventory().openEquipWindow(img, consumable, Gdx.input.getX(),Gdx.input.getY(), name, owner);
                 }
 
             }
