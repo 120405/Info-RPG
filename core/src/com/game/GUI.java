@@ -1,6 +1,7 @@
 package com.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,16 +22,16 @@ public class GUI {
     private final Window equipWindow;
     private Texture img;
     private Table table, equipTable;
-    private Image renderImage;
     private boolean isOpen;
     private Buttons equip, unequip, use;
     private int width, height;
+    private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
 
     public GUI() {
+
         width = 30;
         height = 30;
         isOpen = false;
-        renderImage = null;
         img = new Texture("Inventory.png");
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(img)));
         Window.WindowStyle windowStyleEquip = new Window.WindowStyle(new BitmapFont(), Color.WHITE, new SpriteDrawable(new Sprite(new Texture("transparent_background.png"))));
@@ -107,7 +108,6 @@ public class GUI {
     }
     public void checkItems(float x, float y, Image img, float backgroundW, float backgroundH, Stack current,
                            String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
-        renderImage = img;
 
         Stack destination = current;
         @SuppressWarnings("rawtypes")
@@ -144,7 +144,7 @@ public class GUI {
             }
         }
     }
-    public void checkItemsShop(Image img, int x, int y, String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
+    public boolean checkItemsShop(Stack stack, Image img, int x, int y, String type, String name, int durability, int atk, int def, int worth,int weight, Effect effect, String skill, boolean owner) {
         @SuppressWarnings("rawtypes")
         Array<Cell> c = table.getCells();
         for(int i = 0; i < c.size; i++) {
@@ -155,27 +155,53 @@ public class GUI {
                  Stack s = (Stack) (c.get(i).getActor());
                 SnapshotArray<Actor> a = s.getChildren();
                  if(a.size == 1) {
+                     s.add(img);
                      GUI_Item it = findItem(img);
-                     if (it.getWorth() <= Spiel.INSTANCE.getMoney()) {
-                         s.add(img);
-                         if (name != "") {
-                             it.setName(name);
-                             it.setDurability(durability);
-                             it.setAtk(atk);
-                             it.setDef(def);
-                             it.setEffect(effect);
-                             it.setSkill(skill);
-                             it.setWeight(weight);
-                             it.setWorth(worth);
-                             it.setOwner(owner);
-                             Spiel.INSTANCE.getItems()[findItemPosition(s).x][findItemPosition(s).y] = it;
-                         }
+
+                    if ((worth <= Spiel.INSTANCE.getMoney())) {
+                        if(Spiel.INSTANCE.getFight().getHero().hasItem(type)) {
+                            if(Spiel.INSTANCE.getFight().getHero().getItem(type) != name) {
+                                it.setName(name);
+                                it.setDurability(durability);
+                                it.setAtk(atk);
+                                it.setDef(def);
+                                it.setEffect(effect);
+                                it.setSkill(skill);
+                                it.setWeight(weight);
+                                it.setWorth(worth);
+                                it.setOwner(true);
+                                owner = true;
+                            }
+                        } else {
+                            if (name != "") {
+                                it.setName(name);
+                                it.setDurability(durability);
+                                it.setAtk(atk);
+                                it.setDef(def);
+                                it.setEffect(effect);
+                                it.setSkill(skill);
+                                it.setWeight(weight);
+                                it.setWorth(worth);
+                                it.setOwner(true);
+                                owner = true;
+                            }
+                        }
+
+
+                        Spiel.INSTANCE.buyItem(it, it.getType());
+                        Spiel.INSTANCE.moneyDown(it.getWorth());
+                        accepted.play(0.5f);
+                        Spiel.INSTANCE.getItems()[findItemPosition(s).x][findItemPosition(s).y] = it;
+                     } else {
+                        s.removeActor(img);
+                         stack.add(img);
                      }
                  }
            }
             }
         }
-
+    return owner;
+        //owner führt zu checkItems -> fehler, da anfangs stack noch im shop!!!!!!!!!!!!!!
     }
     public GUI_Item findItem(Stack s) {
         GUI_Item item = null;

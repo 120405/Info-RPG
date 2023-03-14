@@ -28,6 +28,7 @@ public class GUI_Item {
     private Effect effect;
     private  String skill;
     private boolean owner;
+    private String type;
     public GUI_Item() {
         name = "";
         durability = 0;
@@ -40,7 +41,8 @@ public class GUI_Item {
         stack = new Stack(background,itemImage);
         buildListener(itemImage);
     }
-    public GUI_Item(String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable, boolean owner) {
+    public GUI_Item(String type, String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable, boolean owner) {
+        this.type = type;
         this.name = name;
         durability = dur;
         this.atk = atk;
@@ -94,7 +96,7 @@ public class GUI_Item {
                 if(owner) {
                     Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
                 } else {
-                    Spiel.INSTANCE.getInventory().checkItemsShop(img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), name, durability, atk, def, worth, weight, effect, skill, owner);
+                   owner = Spiel.INSTANCE.getInventory().checkItemsShop(stack, img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), type, name, durability, atk, def, worth, weight, effect, skill, owner);
                 }
 
                 img.setVisible(true);
@@ -193,5 +195,11 @@ public class GUI_Item {
     }
     public boolean getOwner() {
         return owner;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 }

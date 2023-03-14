@@ -23,11 +23,11 @@ public class Inventory {
         poison = new Effect("Poison", -5, 10, 5);
         ice = new Effect("Ice",-10, 5, 5);
         blank = new Effect("",0,0,0);
-        sword = new GUI_Item("Sword", 100, 10, 0, 50, 3, fire, "", new Image(new Texture("crystal.png")), false, false);
-        baguette = new GUI_Item("Baguette", 10000, 100000, 1000, 3000, 1, blank, "", new Image(new Texture("crystal.png")), false, false);
-        shield = new GUI_Item("Shield", 100, 0, 10, 80,5, blank, "", new Image(new Texture("crystal.png")), false, false);
-        dagger = new GUI_Item("Dagger", 200, 15, 0, 100,1, poison, "doubleAttack", new Image(new Texture("crystal.png")), false, false);
-        armor = new GUI_Item("Armor", 100, 0, 20, 300, 10, blank, "", new Image(new Texture("crystal.png")), false, false);
+        sword = new GUI_Item("weapon","Sword", 100, 10, 0, 50, 3, fire, "", new Image(new Texture("crystal.png")), false, false);
+        baguette = new GUI_Item("weapon","Baguette", 10000, 100000, 1000, 3000, 1, blank, "", new Image(new Texture("crystal.png")), false, false);
+        shield = new GUI_Item("shield","Shield", 100, 0, 10, 80,5, blank, "", new Image(new Texture("crystal.png")), false, false);
+        dagger = new GUI_Item("weapon","Dagger", 200, 15, 0, 100,1, poison, "doubleAttack", new Image(new Texture("crystal.png")), false, false);
+        armor = new GUI_Item("armor","Armor", 100, 0, 20, 300, 10, blank, "", new Image(new Texture("crystal.png")), false, false);
         itemHashMap.put(0,sword);
         itemHashMap.put(1,baguette);
         itemHashMap.put(2,shield);
