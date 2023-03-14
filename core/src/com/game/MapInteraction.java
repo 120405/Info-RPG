@@ -12,15 +12,16 @@ public class MapInteraction {
     String destination;
     Body pBody;
     World world;
-    public MapInteraction(int x,int y,World world,int targetX,int targetY,String destination){
-        createBox(x,y,world);
+
+    public MapInteraction(int x, int y, World world, int targetX, int targetY, String destination) {
+        createBox(x, y, world);
         tX = targetX;
         tY = targetY;
         entrance = false;
         this.destination = destination;
     }
 
-    public void createBox(int x, int y, World world){
+    public void createBox(int x, int y, World world) {
 
 
         BodyDef def = new BodyDef();
@@ -42,21 +43,27 @@ public class MapInteraction {
 
 
     }
-    public void showBox(){
-        createBox(x,y,world);
+
+    public void showBox() {
+        createBox(x, y, world);
     }
-    public void hideBox(){
+
+    public void hideBox() {
         world.destroyBody(pBody);
     }
-    public String getDestination(){
+
+    public String getDestination() {
         return destination;
     }
-    public int getTargetX(){
+
+    public int getTargetX() {
         return tX;
     }
-    public int getTargetY(){
+
+    public int getTargetY() {
         return tY;
     }
+
     public Fixture getFixture() {
         return fixture;
     }
@@ -64,7 +71,8 @@ public class MapInteraction {
     public boolean isEntrance() {
         return entrance;
     }
-    public void setEntrance(boolean b){
+
+    public void setEntrance(boolean b) {
         entrance = b;
     }
 }

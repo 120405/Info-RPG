@@ -7,10 +7,7 @@ import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 
 public class PlayerMap implements Steerable<Vector2> {
@@ -33,10 +30,18 @@ public class PlayerMap implements Steerable<Vector2> {
         def.type = BodyDef.BodyType.DynamicBody;
         def.position.set(80, 80);
         def.fixedRotation = true;
+        
         pBody = world.createBody(def);
         PolygonShape shape = new PolygonShape();
+        
         shape.setAsBox(0.9F, 0.9f);
-        pBody.createFixture(shape, 1.0f);
+        FixtureDef fixDef = new FixtureDef();
+        fixDef.shape = shape;
+        fixDef.friction = 1f;
+        //fixDef.restitution = 1f;
+        fixDef.isSensor = true;
+        Fixture fixture = pBody.createFixture(fixDef);
+        //pBody.createFixture(shape, 1.0f);
         shape.dispose();
 
         return pBody;
@@ -54,7 +59,7 @@ public class PlayerMap implements Steerable<Vector2> {
         int verticalForce = 0;
         float speed = (float) (1.5f /*- (Spiel.INSTANCE.getFight().getHero().getWeight() / 6)*/);
         if ((Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))) {
-            speed = 2f;
+            speed = 8f;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
@@ -218,7 +223,7 @@ public class PlayerMap implements Steerable<Vector2> {
         return null;
     }
 
-    public Vector2 newVector(){
-        return  new Vector2();
+    public Vector2 newVector() {
+        return new Vector2();
     }
 }

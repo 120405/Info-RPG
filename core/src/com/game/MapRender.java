@@ -18,9 +18,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class MapRender {
     static TiledMapTileLayer layer1;
     static TiledMapTileLayer layer2;
+    private TiledMapTileLayer layerFire;
     static float tileSize;
     static ChainShape cs;
     static TiledMap tiledmap1;
@@ -31,15 +35,17 @@ public class MapRender {
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
     public Body b1[][];
-    private final int[] foregroundOverworld= {5};
-    private final int[] backgroundOverworld= {0,1,4};
-    private final int[] backgroundOverworld2= {4};
-    private final int[] foregroundInterior= {3};
-    private final int[] backgroundInterior= {0,1,2};
+    private final int[] foregroundOverworld = {5};
+    private final int[] backgroundOverworld = {0, 1, 4};
+    private final int[] backgroundOverworld2 = {4};
+    private final int[] foregroundInterior = {3};
+    private final int[] backgroundInterior = {0, 1, 2};
     private int[] water1 = {3};
     private int[] water2 = {2};
     private float elapsedSinceAnimation;
     private boolean waterframe;
+    private HashMap<Integer, FireAnimation> fireMap;
+    private float stateTime;
 
 
     Box2DDebugRenderer debugRenderer;
@@ -48,6 +54,7 @@ public class MapRender {
     // Methode, um automatisch die art der Texture zu erkennen und dementsprechende
     // Collisions zu erstellen
     public MapRender(SpriteBatch batch) {
+        fireMap = new HashMap<>();
         waterframe = true;
         elapsedSinceAnimation = 0f;
         world = new World(new Vector2(0, 0), false);
@@ -65,11 +72,12 @@ public class MapRender {
 
         cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
         cam.update();
-        cam.setToOrtho(false,Gdx.graphics.getWidth()/60f,Gdx.graphics.getHeight()/60f);
+        cam.setToOrtho(false, Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         layer1 = (TiledMapTileLayer) tiledmap1.getLayers().get("Col");
         layer2 = (TiledMapTileLayer) tiledmap2.getLayers().get("Col");
+        layerFire = (TiledMapTileLayer) tiledmap1.getLayers().get("fire");
+        placeFire(layerFire);
         debugRenderer = new Box2DDebugRenderer();
-
 
 
 
@@ -124,6 +132,28 @@ public class MapRender {
         return b1;
     }
 
+    public void placeFire(TiledMapTileLayer layer) {
+        tileSize = layer.getTileWidth() / 8f;
+        // layers durchgehen
+        int i = 0;
+        for (int row = 0; row < layer.getHeight(); row++) {
+            for (int col = 0; col < layer.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+
+                if (cell == null) {
+                    continue;
+                }
+                if (cell.getTile() == null) {
+                    continue;
+                }
+
+                FireAnimation fire = new FireAnimation((col-0.15f) * tileSize, (row+0.45f) * tileSize);
+                fireMap.put(i, fire);
+                i++;
+            }
+        }
+    }
+
     public void NoC(Body[][] b, TiledMapTileLayer layer) {
         tileSize = layer.getTileWidth() / 8f;
 
@@ -150,13 +180,13 @@ public class MapRender {
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean scrolled(float amountX, float amountY) {
-                if(amountY > 0) {
-                    if(cam.zoom<2) {
+                if (amountY > 0) {
+                    if (cam.zoom < 2) {
                         cam.zoom = cam.zoom + 0.1f;
                     }
                 }
-                if(amountY < 0) {
-                    if(cam.zoom>0.5) {
+                if (amountY < 0) {
+                    if (cam.zoom > 0.5) {
                         cam.zoom = cam.zoom - 0.1f;
                     }
                 }
@@ -173,12 +203,12 @@ public class MapRender {
             //If the RIGHT Key is pressed, translate the camera 3 units in the X-Axis
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            if(cam.zoom>0.5f) {
+            if (cam.zoom > 0.5f) {
                 cam.zoom = cam.zoom - 0.1f;
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if(cam.zoom<2) {
+            if (cam.zoom < 2) {
                 cam.zoom = cam.zoom + 0.1f;
             }
         }
@@ -203,6 +233,8 @@ public class MapRender {
 
         //handleInput();
         batch.setProjectionMatrix(cam.combined);
+
+
         cam.update();
         if (!Spiel.INSTANCE.getMyScreen().getInterior()) {
             tmr.setView(cam);
@@ -211,12 +243,20 @@ public class MapRender {
             tmr2.setView(cam);
             tmr2.render(foregroundInterior);
         }
+        for (int i = 0; Spiel.INSTANCE.getMyScreen().getMap().getFireMap().size()-1 >= i; i++) {
 
-       // Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+            Spiel.INSTANCE.getMyScreen().getMap().getFireMap().get(i).render();
+            batch.begin();
+            Spiel.INSTANCE.getMyScreen().getMap().getFireMap().get(i).getFire().draw(batch);
+            batch.end();
+        }
+
+        // Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
         debugRenderer.render(world, cam.combined);
 
 
     }
+
     public void renderBackground() {
 
         cam.update();
@@ -233,6 +273,8 @@ public class MapRender {
             tmr2.render(backgroundInterior);
         }
     }
+
+
     public void renderWater() {
         elapsedSinceAnimation += Gdx.graphics.getDeltaTime();
 
@@ -240,15 +282,16 @@ public class MapRender {
             waterframe = !waterframe;
             elapsedSinceAnimation = 0.0f;
         }
-        if(waterframe){
+        if (waterframe) {
             tmr.render(water1);
-        }
-        else {
+        } else {
             tmr.render(water2);
         }
     }
 
-
+    public HashMap<Integer, FireAnimation> getFireMap() {
+        return fireMap;
+    }
 
     public void dispose() {
         tmr.dispose();

@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -43,14 +45,14 @@ public class MyScreen extends ScreenAdapter {
 
     public void create() {
         sw  = new ShopWindow();
-        volume = 0.3f;
+        volume = 0.0f;
         Interior = false;
         animator = new Animator();
         map = new MapRender(batch);
         viewport = new FitViewport(Gdx.graphics.getWidth() / 60f, Gdx.graphics.getHeight() / 60f);
         stage = new Stage();
         player = new PlayerMap(getMap().world);
-        player.setPos(80,280);
+        player.setPos(111, 675);
         music.setVolume(volume);
         music.play();
         music2.setVolume(volume);
@@ -77,6 +79,7 @@ public class MyScreen extends ScreenAdapter {
             }
         }
         player.handleInput();
+        System.out.println(Spiel.INSTANCE.getNpc().getLinearVelocity());
         cameraUpdate(delta);
         map.renderBackground();
         animator.render();
@@ -227,6 +230,9 @@ public class MyScreen extends ScreenAdapter {
     public boolean getInterior() {
         return Interior;
     }
+    public Animator getAnimator(){
+        return animator;
+    }
 
     public Music getCurrentMusic() {
         if (music.isPlaying()) {
@@ -265,7 +271,7 @@ public class MyScreen extends ScreenAdapter {
         stage.clear();
     }
     public void show() {
-        Buttons inv = new Buttons("Inventar", stage, "showInv", 16, 3, Color.OLIVE);
+        Buttons inv = new Buttons("Inventory", stage, "showInv", 16, 3, Color.OLIVE);
         inv.hide();
         stage.addActor(Spiel.INSTANCE.getInventory().getInventory());
         stage.addActor(Spiel.INSTANCE.getInventory().getEquipWindow());
