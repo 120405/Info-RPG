@@ -319,4 +319,30 @@ public class Hero {
     public GUI_Item getShield() {
         return shield;
     }
+    public String getItem(String type) {
+
+        if (armor.getType() == type) {
+            return armor.getName();
+        } else if (shield.getType() == type) {
+            return shield.getName();
+
+
+        } else if(weapon.getType() == type) {
+            return weapon.getName();
+        } else {
+            return "";
+        }
+    }
+    public boolean hasItem(String type) {
+        switch(type) {
+            case "weapon":
+                return weapon != null;
+            case "shield":
+                return shield != null;
+            case "armor":
+                return armor != null;
+            default:
+                return false;
+        }
+    }
 }

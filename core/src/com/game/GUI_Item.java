@@ -28,19 +28,22 @@ public class GUI_Item {
     private Effect effect;
     private  String skill;
     private boolean owner;
+    private String type;
     public GUI_Item() {
         name = "";
         durability = 0;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background);
     }
-    public GUI_Item(Image itemImage, boolean consumable) {
+    public GUI_Item(Image itemImage, boolean consumable, String type) {
+    	this.type = type;
         this.consumable = consumable;
         background = new Image(new Texture("Inventory_background.png"));
         stack = new Stack(background,itemImage);
         buildListener(itemImage);
     }
-    public GUI_Item(String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable, boolean owner) {
+    public GUI_Item(String type, String name, int dur, int atk, int def, int worth,int weight, Effect effect, String skill, Image itemImage, boolean consumable, boolean owner) {
+        this.type = type;
         this.name = name;
         durability = dur;
         this.atk = atk;
@@ -91,11 +94,11 @@ public class GUI_Item {
             }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(owner) {
-                    Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
-                } else {
-                    Spiel.INSTANCE.getInventory().checkItemsShop(img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), name, durability, atk, def, worth, weight, effect, skill, owner);
-                }
+               // if(owner) {
+               //     Spiel.INSTANCE.getInventory().checkItems(x, y, img, background.getWidth(), background.getHeight(), stack, name, durability, atk, def, worth, weight, effect, skill, owner);
+               // } else {
+                   owner = Spiel.INSTANCE.getInventory().checkItemsShop(stack, img,(int)img.localToScreenCoordinates(new Vector2(x, y)).x, (int)(Gdx.graphics.getHeight() - img.localToScreenCoordinates(new Vector2(x, y)).y), type, name, durability, atk, def, worth, weight, effect, skill, owner);
+             //   }
 
                 img.setVisible(true);
             }
@@ -103,7 +106,7 @@ public class GUI_Item {
             public void enter (InputEvent event, float x, float y, int pointer, @Null Actor fromActor) {
 
                 if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-                    Spiel.INSTANCE.getInventory().openEquipWindow(consumable, Gdx.input.getX(),Gdx.input.getY(), name);
+                    Spiel.INSTANCE.getInventory().openEquipWindow(img, consumable, Gdx.input.getX(),Gdx.input.getY(), name);
                 }
 
             }
@@ -193,5 +196,11 @@ public class GUI_Item {
     }
     public boolean getOwner() {
         return owner;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 }

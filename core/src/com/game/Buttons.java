@@ -17,7 +17,6 @@ public class Buttons {
     private TextButton button;
     private TextButton.TextButtonStyle style;
     private BitmapFont font;
-    private final Sound accepted = Gdx.audio.newSound(Gdx.files.internal("alarm.mp3"));
     private Color color1;
 
     public Buttons(String displayedText, Stage stage, final String action, double x, double y, Color color) {
@@ -73,7 +72,7 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wx) {
                                 Spiel.INSTANCE.buyItem(x, "weapon");
                                 Spiel.INSTANCE.moneyDown(wx);
-                                accepted.play(0.5f);
+
                             }
                         }
                         break;
@@ -84,7 +83,7 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wy){
                                 Spiel.INSTANCE.buyItem(y, "shield");
                                 Spiel.INSTANCE.moneyDown(wy);
-                                accepted.play(0.5f);
+
                             }
                         }
                         break;
@@ -95,7 +94,7 @@ public class Buttons {
                             if (Spiel.INSTANCE.getMoney() >= wz){
                                 Spiel.INSTANCE.buyItem(z, "weapon");
                                 Spiel.INSTANCE.moneyDown(wz);
-                                accepted.play(0.5f);
+
                             }
                         }
                         break;
