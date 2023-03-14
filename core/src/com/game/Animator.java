@@ -35,7 +35,7 @@ public class Animator implements ApplicationListener {
 
 
     public void create() {
-        compass = new Compass(80,80);
+        compass = new Compass(80, 80);
         batch = new SpriteBatch();
         stateTime = 0f;
         orientation = "down";
@@ -43,9 +43,9 @@ public class Animator implements ApplicationListener {
         npcWalk = new Texture(Gdx.files.internal("Soldier Walk-Sheet.png"));
         shipTexture = new Texture(Gdx.files.internal("Ship/shipDown.png"));
         ship = new Sprite(shipTexture);
-        ship.setSize(10f,10f);
-        ship.setCenter(ship.getWidth()/2,ship.getHeight()/2);
-        ship.setPosition(54,85);
+        ship.setSize(10f, 10f);
+        ship.setCenter(ship.getWidth() / 2, ship.getHeight() / 2);
+
         RunDownAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 0);
         RunUpAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 1);
         RunRightAnim = CreateAnimRow(knightWalk, 5, 6, 0.2f, 2);
@@ -122,6 +122,7 @@ public class Animator implements ApplicationListener {
             }
         }
     }
+
     public void npcUpdate() {
         switch (Spiel.INSTANCE.getNpc().npcOrientation()) {
             case "down": {
@@ -148,7 +149,6 @@ public class Animator implements ApplicationListener {
     }
 
 
-
     @Override
     public void render() {
         stateTime += Gdx.graphics.getDeltaTime();
@@ -156,18 +156,23 @@ public class Animator implements ApplicationListener {
         npcUpdate();
         knight = new Sprite(currentFrame);
         npc = new Sprite(currentFrameNpc);
-        npc.setOrigin(0,0);
-        knight.setOrigin(0,0);
-        npc.setPosition(Spiel.INSTANCE.getNpc().getPosition().x-1.5f,Spiel.INSTANCE.getNpc().getPosition().y-0.8f);
-        knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getXPos()-1.5f,Spiel.INSTANCE.getMyScreen().getPlayer().getYPos()-0.8f);
-        npc.setSize(3f,3f);
-        knight.setSize(3f,3f);
+        npc.setOrigin(0, 0);
+        knight.setOrigin(0, 0);
+        npc.setPosition(Spiel.INSTANCE.getNpc().getPosition().x - 1.5f, Spiel.INSTANCE.getNpc().getPosition().y - 0.8f);
+        knight.setPosition(Spiel.INSTANCE.getMyScreen().getPlayer().getXPos() - 1.5f, Spiel.INSTANCE.getMyScreen().getPlayer().getYPos() - 0.8f);
+        npc.setSize(3f, 3f);
+        knight.setSize(3f, 3f);
+        ship.setPosition(80, 280);
         batch.setProjectionMatrix(Spiel.INSTANCE.getMyScreen().getMap().getCam().combined);
         batch.begin();
+
         knight.draw(batch);
         npc.draw(batch);
-        //ship.draw(batch);
+        ship.draw(batch);
         batch.end();
+    }
+    public SpriteBatch getBatch(){
+        return batch;
     }
 
     @Override

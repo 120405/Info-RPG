@@ -5,7 +5,86 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f16b283-b557-4e1d-b7dc-fb8c5f5c7e60" name="Changes" comment="Map Update">
-      <change afterPath="$PROJECT_DIR$/assets/2 - Kopie.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Grass Corners.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Path 2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/guide.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/end/burning_end_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/end/burning_end_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/end/burning_end_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/end/burning_end_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/end/burning_end_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/loops/burning_loop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/loops/burning_loop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/loops/burning_loop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/loops/burning_loop_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/loops/burning_loop_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/start/burning_start_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/start/burning_start_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/start/burning_start_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/start/burning_start_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/blue/start/burning_start_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/end/burning_end_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/end/burning_end_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/end/burning_end_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/end/burning_end_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/end/burning_end_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/loops/burning_loop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/loops/burning_loop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/loops/burning_loop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/loops/burning_loop_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/loops/burning_loop_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/start/burning_start_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/start/burning_start_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/start/burning_start_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/start/burning_start_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/green/start/burning_start_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/end/burning_end_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/end/burning_end_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/end/burning_end_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/end/burning_end_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/end/burning_end_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/loops/burning_loop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/loops/burning_loop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/loops/burning_loop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/loops/burning_loop_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/loops/burning_loop_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/start/burning_start_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/start/burning_start_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/start/burning_start_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/start/burning_start_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/orange/start/burning_start_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/end/burning_end_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/end/burning_end_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/end/burning_end_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/end/burning_end_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/end/burning_end_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/loops/burning_loop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/loops/burning_loop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/loops/burning_loop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/loops/burning_loop_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/loops/burning_loop_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/start/burning_start_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/start/burning_start_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/start/burning_start_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/start/burning_start_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/purple/start/burning_start_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/end/burning_end_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/end/burning_end_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/end/burning_end_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/end/burning_end_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/end/burning_end_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/loops/burning_loop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/loops/burning_loop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/loops/burning_loop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/loops/burning_loop_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/loops/burning_loop_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/start/burning_start_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/start/burning_start_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/start/burning_start_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/start/burning_start_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/png/white/start/burning_start_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fire_fx_v1.0/readme.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/game/FireAnimation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -14,8 +93,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/2 - Kopie.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/2 - Kopie.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/AISteering.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/AISteering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Animator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Animator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/MapInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MapInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/MapRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MapRender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/MyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/Npc.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/Npc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/com/game/PlayerMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/com/game/PlayerMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/desktop/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +168,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/core/src/com/game/Hero.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/core/src/com/game/Item.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -402,7 +488,28 @@
       <option name="project" value="LOCAL" />
       <updated>1678463691826</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Map Update">
+      <created>1678486398861</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1678486398861</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Map Update">
+      <created>1678564046384</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1678564046384</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Map Update">
+      <created>1678729942396</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1678729942396</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
